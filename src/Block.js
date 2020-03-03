@@ -7,7 +7,15 @@ render(){
     return(
         <div>
             <div>
-                <label>Texte du block</label> <textarea></textarea>
+                <label>Titre du block</label> <textarea></textarea>
+                <label>Contenu du block</label> <textarea></textarea>
+            </div>
+            <div>
+                <p>Numéro du block : 1</p>
+                <p>Numéro du block suivant: 2</p>
+            </div>
+            <div>
+                <button>Valider</button> <button>Ajouter une action(création d'un new block)</button>
             </div>
         </div>
     )
