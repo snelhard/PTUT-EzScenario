@@ -4,7 +4,7 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import Block from './Block';
 
-ReactDOM.render(<Block/>, document.getElementById('root'));
+ReactDOM.render( < Block / > , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
