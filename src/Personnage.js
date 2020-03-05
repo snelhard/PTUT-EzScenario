@@ -4,7 +4,7 @@ import './App.css';
 
 class Personnage extends React.Component{
     state = {
-        nom: "Test"
+        nom: ""
     }
 
     setNom = (event) => {
