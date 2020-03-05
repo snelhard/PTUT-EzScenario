@@ -9,7 +9,7 @@ class Page extends React.Component{
     render(){
         return(
         <div className="game">
-            <p>{this.state.titre}</p>
+            <h1>{this.state.titre}</h1>
             <div className="game-board">
                 <Block />
             </div>
