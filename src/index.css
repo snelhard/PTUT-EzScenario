@@ -11,3 +11,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+textarea{
+  resize: vertical;
+}
+
+.block{
+  width: 350px;
+  padding: 10px;
+  filter: drop-shadow(1px 1px 5px #0000004f);
+  background-color: rgb(240, 240, 240);
+  border-radius: 3px;
+}
+
+.blockTitle{
+  display: flex;
+  flex-flow: column;
+}
+
+.choixContainer{
+  display: flex;
+  flex-direction: column;
+  filter: drop-shadow(1px 1px 2px #00000028);
+  background-color: rgb(240, 240, 240);
+  padding: 8px;
+  border-radius: 3px;
+}
