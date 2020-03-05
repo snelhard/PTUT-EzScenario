@@ -22,6 +22,7 @@ textarea{
   filter: drop-shadow(1px 1px 5px #0000004f);
   background-color: rgb(240, 240, 240);
   border-radius: 3px;
+  margin: 15px;
 }
 
 .blockTitle{
@@ -33,7 +34,14 @@ textarea{
   display: flex;
   flex-direction: column;
   filter: drop-shadow(1px 1px 2px #00000028);
-  background-color: rgb(240, 240, 240);
+  background-color: rgb(217, 214, 214);
   padding: 8px;
   border-radius: 3px;
+  margin-bottom: 11px;
+  border: solid 1px #0000001a;
+}
+
+.game-board{
+  display: flex;
+  flex-direction:row;
 }
