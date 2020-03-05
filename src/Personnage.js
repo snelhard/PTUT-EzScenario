@@ -5,6 +5,7 @@ class Personnage extends React.Component{
 
 
     downloadJsonFile = () => {
+        const element = document.createElement("a");
         // Définie le contenu qui va être dans le fichier JSON
         var debug = {nom: document.getElementById('myInput').value};
 
@@ -26,6 +27,10 @@ class Personnage extends React.Component{
         });
         // Renvoyer le resultat de la lecture du fichier sous forme txt
         reader.readAsText(file);
+        element.href = URL.createObjectURL(file);
+        element.download = "myFile.json";
+        document.body.appendChild(element); // Required for this to work in FireFox
+        element.click();
       }
 
     render() {
