@@ -22,9 +22,10 @@ export default function BasicExample() {
   return (
     <Router>
       <div>
+      
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">Acceuil</Link>
           </li>
           <li>
             <Link to="/Page">Page</Link>
@@ -62,7 +63,7 @@ export default function BasicExample() {
 function Menu() {
     return (
       <div>
-        <h2>Home</h2>
+        <h2>Bienvenue</h2>
       </div>
     );
   }

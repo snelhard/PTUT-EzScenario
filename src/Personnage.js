@@ -16,6 +16,7 @@ class Personnage extends React.Component{
         return(
             <div>
                 <label>Nom du personnage </label> <input onChange={this.setNom} value={this.state.nom}/>
+                    <button>Valider</button>
             </div>
         )
     }
