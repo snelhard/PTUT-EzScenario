@@ -10,11 +10,13 @@ class ChoixScene extends React.Component{
      handleChangeTexteNouveauChoix = (event) => {
         const value = event.currentTarget.value;
         this.setState({texte : value});
+        this.sendData(1)
         console.log(this.state.texte);
     }
     handleChangeidSuivant = (event) => {
         const value = event.currentTarget.value;
         this.setState({idSuivant : value});
+        this.sendData(2)
         console.log(this.state.idSuivant);
     }
     render(){
@@ -29,6 +31,14 @@ class ChoixScene extends React.Component{
             </div>
 
         )
+    }
+    sendData = (indice) => {
+        if (indice === 1) {
+            this.props.parentCallback(this.state.texte);
+        }
+        if (indice === 2){
+            this.props.parentCallback(this.state.idSuivant);
+        }
     }
 }
 
