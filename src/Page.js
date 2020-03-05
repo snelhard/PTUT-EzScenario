@@ -4,7 +4,7 @@ import Block from './Block.js'
 
 class Page extends React.Component{
     state = {
-        titre: "LA PAGE",
+        titre: "La page",
     }
     render(){
         return(
@@ -12,11 +12,6 @@ class Page extends React.Component{
             <p>{this.state.titre}</p>
             <div className="game-board">
                 <Block />
-                <button>Créer</button>
-            </div>
-            <div className="game-info">
-                <div><Block /></div>
-                <ol>{/* TODO */}</ol>
             </div>
         </div>
         )
