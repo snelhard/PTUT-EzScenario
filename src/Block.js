@@ -6,10 +6,10 @@ class Block extends React.Component{
     state = { //scene
         scene:
         {
-             id: 1,
-             titre: "",
-             texte: "",
-             scenesSuivantes: [
+            id: 1,
+            titre: "",
+            texte: "",
+            scenesSuivantes: [
                 {texte: "", id: 2},
                 {texte: "", id: 3}
             ]
@@ -39,17 +39,18 @@ class Block extends React.Component{
                                 <ChoixScene details={choixScene} key={choixScene.id}/>
                             ))}
                         </div>
-                    <button onClick={()=>this.ajouterChoix()}>Ajouter un choix</button>
+                    <button onClick={() => this.ajouterChoix()}>Ajouter un choix</button>
                 </div>
             </div>
         )
     }
     ajouterChoix(){
-        const choixScene = this.state.scene.scenesSuivantes.slice();
-        const id = new Date().getTime();
-        choixScene.push( {texte: "", id: id});
-        this.setState({scenesSuivantes : choixScene});
-        console.log(choixScene);
+        this.setState(prevState => {
+            let scene = { ...prevState.scene };;  // creating copy of state variable jasper
+            const id = Math.random();
+            scene.scenesSuivantes.push({texte: "", id: id});                     // update the name property, assign a new value                 
+            return { scene };                                 // return new object jasper object
+          })
     }
 }
 
