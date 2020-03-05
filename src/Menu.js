@@ -28,10 +28,10 @@ export default function BasicExample() {
             <Link to="/">Acceuil</Link>
           </li>
           <li>
-            <Link to="/Page">Page</Link>
+            <Link to="/Page">Création histoire</Link>
           </li>
           <li>
-              <Link to="/Personnage">Personnage</Link>
+              <Link to="/Personnage">Jouer l'histoire</Link>
           </li>
         </ul>
 
