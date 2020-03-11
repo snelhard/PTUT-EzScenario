@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import ChoixScene from './ChoixScene.js'
 
+
 class Block extends React.Component{
-    IdChoixScene = 1; //variable des id des choix.
     state = { //scene
         scene:
         {
@@ -17,6 +17,7 @@ class Block extends React.Component{
     setTitre = (event) => {
         const value = event.currentTarget.value;
         this.setState({titre : value});
+        console.log(value);
     }
     handleSubmitChoix = (event) => {
 		event.preventDefault();
@@ -28,14 +29,14 @@ class Block extends React.Component{
             <div className="block">
                 <h2>Id block: {this.state.scene.id}</h2>
                 <div className="blockTitle">
-                    <label>Titre du block</label> <input onChange={this.setTitre} value={this.state.titre}/>
+                    <label>Titre du block</label> <input onChange={this.setTitre} />
                     <label>Contenu du block</label> <textarea rows="3"></textarea>
                 </div>
                 <div>
                     <h2>Liste des choix</h2>
                        <div>
                             {this.state.scene.scenesSuivantes.map((choixScene) => (
-                                <ChoixScene parentCallback ={this.recuperationDataChoixScene} details={choixScene} key={choixScene.id}/>
+                                <ChoixScene parentCallback ={this.recuperationDataChoixScene} details={choixScene} key={choixScene.idSuivant}/>
                             ))}
                         </div>
                     <button onClick={() => this.ajouterChoix()}>Ajouter un choix</button>
