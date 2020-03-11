@@ -53,8 +53,9 @@ class Block extends React.Component{
             let scene = {...prevState.scene};;
             const sceneSuivante = scenesSuivantes[index]
             console.log(index)
-            scene.scenesSuivantes.splice(sceneSuivante,sceneSuivante+1,{id :sceneSuivante,texte : choixSceneData.texte, idSuivant: choixSceneData.idSuivant});
-           // scene.scenesSuivantes.push({id :sceneSuivante,texte : choixSceneData.texte, idSuivant: choixSceneData.idSuivant})
+            // scene.scenesSuivantes.splice(sceneSuivante,sceneSuivante+1,{id :sceneSuivante,texte : choixSceneData.texte, idSuivant: choixSceneData.idSuivant});
+            scene.scenesSuivantes.splice(index, 1, {id :sceneSuivante,texte : choixSceneData.texte, idSuivant: choixSceneData.idSuivant})
+            // scene.scenesSuivantes.push({id :sceneSuivante,texte : choixSceneData.texte, idSuivant: choixSceneData.idSuivant})
             return {scene};
           })
     }
