@@ -17,8 +17,19 @@ class Block extends React.Component{
     }
     setTitre = (event) => {
         const value = event.currentTarget.value;
-        this.setState({titre : value});
-        console.log(value);
+        this.setState((prevState) => {
+            let scene = {...prevState.scene};;
+            scene.titre = value;
+            return {scene};
+        })
+    }
+    setTexte = (event) => {
+        const value = event.currentTarget.value;
+        this.setState((prevState) => {
+            let scene = {...prevState.scene};;
+            scene.texte = value;
+            return {scene};
+        })
     }
     handleSubmitChoix = (event) => {
 		event.preventDefault();
@@ -30,14 +41,14 @@ class Block extends React.Component{
             <div className="block">
                 <h2>Id block: {this.state.scene.id}</h2>
                 <div className="blockTitle">
-                    <label>Titre du block</label> <input onChange={this.setTitre} />
-                    <label>Contenu du block</label> <textarea rows="3"></textarea>
+                    <label>Titre du block</label> <input onChange={this.setTitre} value={this.state.scene.titre}/>
+                    <label>Contenu du block</label> <textarea rows="3" onChange={this.setTexte}>{this.state.scene.texte}</textarea>
                 </div>
                 <div>
                     <h2>Liste des choix</h2>
                        <div>
                             {this.state.scene.scenesSuivantes.map((choixScene) => (
-                                <ChoixScene parentCallback ={this.recuperationDataChoixScene} details={choixScene} key={choixScene.idSuivant}/>
+                                <ChoixScene parentCallback ={this.recuperationDataChoixScene} details={choixScene} key={this.state.scene.scenesSuivantes.id}/>
                             ))}
                         </div>
                     <button onClick={() => this.ajouterChoix()}>Ajouter un choix</button>
@@ -57,7 +68,8 @@ class Block extends React.Component{
             const sceneSuivante = scenesSuivantes[index]
             console.log(index+" :index")
             // scene.scenesSuivantes.splice(sceneSuivante,sceneSuivante+1,{id :sceneSuivante,texte : choixSceneData.texte, idSuivant: choixSceneData.idSuivant});
-            scene.scenesSuivantes.splice(index, 1, {id :sceneSuivante,texte : choixSceneData.texte, idSuivant: choixSceneData.idSuivant})
+            scene.scenesSuivantes.splice(index, 1, {id :this.state.IdChoixScene,texte : choixSceneData.texte, idSuivant: choixSceneData.idSuivant})
+            this.state.IdChoixScene += 1;
             // scene.scenesSuivantes.push({id :sceneSuivante,texte : choixSceneData.texte, idSuivant: choixSceneData.idSuivant})
             return {scene};
           })
