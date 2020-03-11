@@ -11,6 +11,7 @@
     "meteor-node-stubs": "^1.0.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-file-reader": "^1.1.4",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0"
   },
@@ -36,6 +37,7 @@
     ]
   },
   "devDependencies": {
+    "json-loader": "^0.5.7",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5"
   }

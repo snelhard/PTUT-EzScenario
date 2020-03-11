@@ -1,16 +1,17 @@
 import React from 'react';
 import './App.css';
 import ChoixScene from './ChoixScene.js'
-
+import jsonfile from 'jsonfile';
 
 class Block extends React.Component{
     state = { //scene
         scene:
         {
             id: 1,
-            titre: "",
-            texte: "",
-            scenesSuivantes: [
+            titre: "unVraiTitre",
+            texte: "UnVraiContenu",
+            scenesSuivantes: [ {id: 1, texte:"Choix1", idSuivant: "1"},{id: 2, texte:"Choix2", idSuivant: "2"},
+            {id: 3, texte:"Choix3", idSuivant: "3"},{id: 4, texte:"Choix4", idSuivant: "4"}
             ]
         }
     }
@@ -23,14 +24,13 @@ class Block extends React.Component{
 		event.preventDefault();
 
     }
-
     render(){
         return(
-            <div className="block">
+            <div className="block" id="divBlockGlobal">
                 <h2>Id block: {this.state.scene.id}</h2>
-                <div className="blockTitle">
-                    <label>Titre du block</label> <input onChange={this.setTitre} />
-                    <label>Contenu du block</label> <textarea rows="3"></textarea>
+                <div className="blockTitle" id="divTitle">
+                    <label id="titre">Titre du block</label> <input onChange={this.setTitre} />
+                    <label id="contenu">Contenu du block</label> <textarea rows="3" onChange={this.setContenu}></textarea>
                 </div>
                 <div>
                     <h2>Liste des choix</h2>
@@ -40,6 +40,7 @@ class Block extends React.Component{
                             ))}
                         </div>
                     <button onClick={() => this.ajouterChoix()}>Ajouter un choix</button>
+                    <button onClick={() => this.downloadJsonFile()}>Créer le fichier json</button>
                 </div>
             </div>
         )
@@ -69,6 +70,25 @@ class Block extends React.Component{
           })
           //console.log(this.state)
     }
+    downloadJsonFile = () => {
+        const element = document.createElement("a");
+        // Définie le contenu qui va être dans le fichier JSON
+        Array debug = ['{ "blockID": "'+this.state.scene.id+'", "blockName": "'+this.state.scene.titre+'", "blockContenu": "'+this.state.scene.texte+'"'];
+        const nbScenes = this.state.scene.scenesSuivantes;
+        for (let i=0; i<nbScenes.length; i++) {
+            debug += '{ "ChoixTexte": "'+this.state.scene.scenesSuivantes[i].texte+'", "ChoixIdSuivant": "'+this.state.scene.scenesSuivantes[i].idSuivant + '" }';
+        }
+        debug += "}"
+        debug = JSON.stringify(debug)
+        // crée le fichier json avec le contenu
+        const file = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});
+    
+        element.href = URL.createObjectURL(file);
+        element.download = "myFile.json";
+        document.body.appendChild(element); // Required for this to work in FireFox
+        element.click();
+      }
+
 }
 
 

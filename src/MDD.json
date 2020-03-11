@@ -1,0 +1,23 @@
+{
+	"blockID": "1",
+	"blockName": "unVraiTitre",
+	"blockContenu": "UnVraiContenu",
+	"ListeChoix" : [
+		{
+			"ChoixTexte": "Choix1",
+			"ChoixIdSuivant": "1"
+		},
+		{
+			"ChoixTexte": "Choix2",
+			"ChoixIdSuivant": "2"
+		},
+		{
+			"ChoixTexte": "Choix3",
+			"ChoixIdSuivant": "3"
+		},
+		{
+			"ChoixTexte": "Choix4",
+			"ChoixIdSuivant": "4"
+		}
+]
+}

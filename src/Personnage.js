@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import data from './MDD.json';
 
 class Personnage extends React.Component{
 
@@ -33,12 +34,19 @@ class Personnage extends React.Component{
         element.click();
       }
 
+    lectureFichier() {
+        console.log(data);
+    }
+
+
     render() {
         return(
             <div>
                 <label>Nom du personnage </label> <input id="myInput" onBlur={this.setNom}/> 
                     <button onClick={this.downloadJsonFile}>Valider</button>
+                    <button onClick={this.lectureFichier}>Données</button>
                 <input id="Affichage"/>
+                
             </div>
         )
     }

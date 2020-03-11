@@ -5,6 +5,8 @@ import Block from './Block.js'
 class Page extends React.Component{
     state = {
         titre: "La page",
+        listeBlocks: [
+        ]
     }
     render(){
         return(
