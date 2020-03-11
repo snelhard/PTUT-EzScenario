@@ -23,7 +23,7 @@ export default function BasicExample() {
     <Router>
       <div>
       
-        <ul>
+        <ul className="navBar">
           <li>
             <Link to="/">Acceuil</Link>
           </li>
@@ -35,7 +35,7 @@ export default function BasicExample() {
           </li>
         </ul>
 
-        <hr />
+        {/* <hr /> */}
 
         {/*
           A <Switch> looks through all its children <Route>

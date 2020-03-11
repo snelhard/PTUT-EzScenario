@@ -25,8 +25,8 @@ class ChoixScene extends React.Component{
                     <div className="choixContainer">
                         <label>Texte choix:</label><input type="text" onChange={this.handleChangeTexteNouveauChoix} value={this.state.texte}/>
                         <label>Id Scene:</label><input type="number" onChange={this.handleChangeidSuivant} value={this.state.idSuivant}/>
+                        <button>valider</button> 
                     </div>
-                    <button>valider</button> 
                 </form>
             </div>
 

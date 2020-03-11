@@ -34,14 +34,43 @@ textarea{
   display: flex;
   flex-direction: column;
   filter: drop-shadow(1px 1px 2px #00000028);
-  background-color: rgb(217, 214, 214);
+  background-color: rgb(232, 232, 232);
   padding: 8px;
   border-radius: 3px;
   margin-bottom: 11px;
   border: solid 1px #0000001a;
 }
 
+.choixContainer > button {
+  margin: auto;
+  margin-top: 8px;
+  width: 50%;
+}
+
 .game-board{
   display: flex;
   flex-direction:row;
+}
+
+.navBar{
+  background-color: #444444;
+  display: flex;
+  padding: 0px 37px;
+  margin: 0;
+  list-style-type: none;
+}
+
+.navBar > li {
+  padding: 20px;
+  font-weight: 500;
+  transition: all .03s ease;
+}
+
+.navBar > li:hover {
+  background-color: #696969;
+}
+
+.navBar > li > a {
+  text-decoration: none;
+  color: white;
 }
