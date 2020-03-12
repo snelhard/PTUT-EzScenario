@@ -44,17 +44,20 @@ export default function BasicExample() {
           you have multiple routes, but you want only one
           of them to render at a time
         */}
-        <Switch>
-          <Route exact path="/">
-            <Menu />
-          </Route>
-          <Route path="/Page">
-            <Page />
-          </Route>
-          <Route path="/Personnage">
-              <Personnage />
-          </Route>
-        </Switch>
+        <div className="main-container">
+          <Switch>
+            <Route exact path="/">
+              <Menu />
+            </Route>
+            <Route path="/Page">
+              <Page />
+            </Route>
+            <Route path="/Personnage">
+                <Personnage />
+            </Route>
+          </Switch>
+        </div>
+        
       </div>
     </Router>
   );
@@ -63,7 +66,7 @@ export default function BasicExample() {
 function Menu() {
     return (
       <div>
-        <h2>Bienvenue</h2>
+        <h1>Bienvenue</h1>
       </div>
     );
   }
