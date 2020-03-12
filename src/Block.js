@@ -10,8 +10,7 @@ class Block extends React.Component {
             id: 1,
             titre: "unVraiTitre",
             texte: "UnVraiContenu",
-            scenesSuivantes: [{ id: 1, texte: "Choix1", idSuivant: "1" }, { id: 2, texte: "Choix2", idSuivant: "2" },
-            { id: 3, texte: "Choix3", idSuivant: "3" }, { id: 4, texte: "Choix4", idSuivant: "4" }
+            scenesSuivantes: [
             ]
         },
         IdChoixScene: 1,
@@ -41,7 +40,7 @@ class Block extends React.Component {
     render() {
         return (
             <div className="block" id="divBlockGlobal">
-                <h2>Id block: {this.state.scene.id}</h2>
+                <h2>Block</h2>
                 <div className="blockTitle" id="divTitle">
                     <label id="titre">Titre du block</label> <input onChange={this.setTitre} />
                     <label id="contenu">Contenu du block</label> <textarea rows="3" onChange={this.setContenu}></textarea>
@@ -50,7 +49,7 @@ class Block extends React.Component {
                     <h2>Liste des choix</h2>
                     <div>
                         {this.state.scene.scenesSuivantes.map((choixScene) => (
-                            <ChoixScene parentCallback={this.recuperationDataChoixScene} details={choixScene} key={this.state.scene.scenesSuivantes.id} />
+                            <ChoixScene parentCallback={this.recuperationDataChoixScene} details={choixScene} key={choixScene.id} />
                         ))}
                     </div>
                     <button onClick={() => this.ajouterChoix()}>Ajouter un choix</button>
