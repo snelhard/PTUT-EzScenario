@@ -23,7 +23,7 @@ class Page extends React.Component{
             <button onClick={this.downloadJsonFile}>Fichier Json</button>
             <div className="game-board">
                 {this.state.scenes.map((scene) => (
-                    <Block key={scene.id}/>
+                    <Block details={scene} key={scene.id}/>
                 ))}
             </div>
         </div>
