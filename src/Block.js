@@ -8,13 +8,14 @@ class Block extends React.Component{
         scene:
         {
             id: 1,
-            titre: "unVraiTitre",
-            texte: "UnVraiContenu",
-            scenesSuivantes: [ {id: 1, texte:"Choix1", idSuivant: "1"},{id: 2, texte:"Choix2", idSuivant: "2"},
-            {id: 3, texte:"Choix3", idSuivant: "3"},{id: 4, texte:"Choix4", idSuivant: "4"}
+            titre:"",
+            texte: "",
+            scenesSuivantes: [
             ]
         },
         IdChoixScene: 1,
+        fichierJson:"",
+        contenuJson:"",
     }
     setTitre = (event) => {
         const value = event.currentTarget.value;
@@ -39,24 +40,39 @@ class Block extends React.Component{
     render(){
         return(
             <div className="block" id="divBlockGlobal">
-                <h2>Id block: {this.state.scene.id}</h2>
-                <div className="blockTitle" id="divTitle">
-                    <label id="titre">Titre du block</label> <input onChange={this.setTitre} />
-                    <label id="contenu">Contenu du block</label> <textarea rows="3" onChange={this.setContenu}></textarea>
-                </div>
-                <div>
-                    <h2>Liste des choix</h2>
-                       <div>
-                            {this.state.scene.scenesSuivantes.map((choixScene) => (
-                                <ChoixScene parentCallback ={this.recuperationDataChoixScene} details={choixScene} key={this.state.scene.scenesSuivantes.id}/>
-                            ))}
-                        </div>
-                    <button onClick={() => this.ajouterChoix()}>Ajouter un choix</button>
-                    <button onClick={() => this.downloadJsonFile()}>Créer le fichier json</button>
-                </div>
+                <form onSubmit={this.handleSubmitBlock}>
+                    <h2>Block</h2>
+                    <div className="blockTitle" id="divTitle">
+                        <label id="titre">Titre du block</label> <input onChange={this.setTitre} />
+                        <label id="contenu">Contenu du block</label> <textarea rows="3" onChange={this.setContenu}></textarea>
+                    </div>
+                    <div>
+                        <h2>Liste des choix</h2>
+                        <div>
+                                {this.state.scene.scenesSuivantes.map((choixScene) => (
+                                    <ChoixScene parentCallback ={this.recuperationDataChoixScene} details={choixScene} key={choixScene.id}/>
+                                ))}
+                            </div>
+                        <button onClick={() => this.ajouterChoix()}>Ajouter un choix</button>
+                        <button onClick={() => this.downloadJsonFile()}>Créer le fichier json</button>
+                    </div>
+                    <button>Valider</button>
+                </form>
             </div>
         )
     }
+    handleSubmitBlock=(event)=> {
+        event.preventDefault();
+        // Définie le contenu qui va être dans le fichier JSON
+        this.state.contenuJson += '{ blockID: '+this.state.scene.id+', blockName: '+this.state.scene.titre+', blockContenu: '+this.state.scene.texte+' ';
+        const nbScenes = this.state.scene.scenesSuivantes;
+        for (let i=0; i<nbScenes.length; i++) {
+            this.state.contenuJson += '{ ChoixTexte: '+this.state.scene.scenesSuivantes[i].texte+', ChoixIdSuivant: '+this.state.scene.scenesSuivantes[i].idSuivant + ' }' ;
+        }
+        this.state.contenuJson += "}"
+        this.state.contenuJson.replace("/","")
+    }
+
     recuperationDataChoixScene= (choixSceneData) => {
         const scenesSuivantes = this.state.scene.scenesSuivantes.slice()
         //console.log(choixSceneData.texte)
