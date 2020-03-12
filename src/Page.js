@@ -6,11 +6,13 @@ class Page extends React.Component{
     state = {
         titre: "Création d'une histoire",
         scenes: [
-        ]
+        ],
+        IdScene:0
     }
     addBlock = () => {
         var scenes = this.state.scenes.slice();
-        scenes.push({id: 1, titre: "", text: ""});
+        scenes.push({id: this.state.IdScene+1, titre: "", text: ""});
+        this.state.IdScene+=1;
         this.setState({scenes: scenes});
     }
     render(){
@@ -21,7 +23,7 @@ class Page extends React.Component{
             <button onClick={this.downloadJsonFile}>Fichier Json</button>
             <div className="game-board">
                 {this.state.scenes.map((scene) => (
-                    <Block />
+                    <Block key={scene.id}/>
                 ))}
             </div>
         </div>
