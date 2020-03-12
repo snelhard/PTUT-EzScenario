@@ -6,7 +6,6 @@ class Page extends React.Component{
     state = {
         titre: "Création d'une histoire",
         scenes: [
-
         ]
     }
     addBlock = () => {

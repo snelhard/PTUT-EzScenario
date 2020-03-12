@@ -3,11 +3,11 @@ import './App.css';
 
 class ChoixScene extends React.Component{
     state = {
-        // id: 1,
+        id: this.props.details.id,
         texte: "",
-        idSuivant:0
-     }
-     handleChangeTexteNouveauChoix = (event) => {
+        idSuivant: 0
+    }
+    handleChangeTexteNouveauChoix = (event) => {
         const value = event.currentTarget.value;
         this.setState({texte : value});
         //this.sendData();
@@ -35,8 +35,7 @@ class ChoixScene extends React.Component{
         this.sendData();
     }
     sendData =() => {
-           this.props.parentCallback(this.state);
-           //console.log(this.state)
+        this.props.parentCallback(this.state);
     }
 }
 
