@@ -96,3 +96,37 @@ textarea{
   text-decoration: none;
   color: white;
 }
+.JeuContainer{
+  text-align: center;
+}
+
+.sceneJeu{
+  display: flex;
+  flex-direction: column;
+  background-color: #eaeaea;
+  align-items: center;
+  padding: 20px;
+  border-radius: 4px;
+  border: 0.5px #0000001c solid;
+  filter: drop-shadow(1px 1px 2px #00000028);
+}
+
+.sceneJeuTitre{
+  margin: 0px 0px 18px 0px;
+}
+.sceneJeuTexte{
+  margin: 0px 0px 18px 0px;
+}
+.choixContainerJeu{
+  width: 62%;
+  justify-content: space-evenly;
+  display: flex;
+  background-color: #cecece;
+  padding: 10px;
+  border-radius: 5px;
+  border: 0.5px #0000001c solid;
+  filter: drop-shadow(1px 1px 2px #00000028);
+}
+.choixContainerJeu > button:not(:last-child) {
+  margin-right: 20px;
+}

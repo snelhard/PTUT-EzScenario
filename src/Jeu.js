@@ -48,8 +48,8 @@ class Jeu extends React.Component{
 
     render() {
         return (
-            <div>
-                <h1>Jeu</h1>
+            <div className="JeuContainer">
+                <h1>~ Survivre au coronavirus ~</h1>
                 <Scene renvoiIdSuivant={this.changerScene} details={this.state.currentScene}/>
             </div>
         )

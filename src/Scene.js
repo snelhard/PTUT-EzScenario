@@ -12,10 +12,10 @@ class Scene extends React.Component{
             buttonQuitter = <button onClick={() => this.props.history.push('/')}>Quitter</button>;
         }
         return (
-            <div>
-                <h2>{this.props.details.blockName}</h2>
-                <p>{this.props.details.blockContenu}</p>
-                <div>
+            <div className="sceneJeu">
+                <h2 className="sceneJeuTitre">{this.props.details.blockName}</h2>
+                <p className="sceneJeuTexte">{this.props.details.blockContenu}</p>
+                <div className="choixContainerJeu">
                     {this.props.details.ListeChoix.map( (choix) => (
                         <button onClick={() => this.remonterChoix(choix.ChoixIdSuivant)} key={choix.id}>{choix.ChoixTexte}</button>
                     ))}
