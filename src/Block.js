@@ -14,7 +14,7 @@ class Block extends React.Component{
             {id: 3, texte:"Choix3", idSuivant: "3"},{id: 4, texte:"Choix4", idSuivant: "4"}
             ]
         },
-        IdChoixScene: 0,
+        IdChoixScene: 1,
     }
     setTitre = (event) => {
         const value = event.currentTarget.value;
@@ -66,11 +66,11 @@ class Block extends React.Component{
         console.log(this.state.scene.scenesSuivantes[index+1]);
         this.setState(prevState => {
             let scene = {...prevState.scene};;
-            const sceneSuivante = scenesSuivantes[index]
-            console.log(index+" :index")
+            // const sceneSuivante = scenesSuivantes[index]
+            console.log("index :"+ index)
             // scene.scenesSuivantes.splice(sceneSuivante,sceneSuivante+1,{id :sceneSuivante,texte : choixSceneData.texte, idSuivant: choixSceneData.idSuivant});
-            scene.scenesSuivantes.splice(index, 1, {id :this.state.IdChoixScene,texte : choixSceneData.texte, idSuivant: choixSceneData.idSuivant})
-            this.state.IdChoixScene += 1;
+            scene.scenesSuivantes.splice(index, 1, {id :choixSceneData.id, texte : choixSceneData.texte, idSuivant: choixSceneData.idSuivant})
+            // this.state.IdChoixScene += 1;
             // scene.scenesSuivantes.push({id :sceneSuivante,texte : choixSceneData.texte, idSuivant: choixSceneData.idSuivant})
             return {scene};
           })
@@ -78,11 +78,10 @@ class Block extends React.Component{
     
     ajouterChoix(){
         this.setState(prevState => {
-            let scene = { ...prevState.scene };;  // creating copy of state variable jasper
-            const id = Math.random();
-            scene.scenesSuivantes.push({id :this.state.IdChoixScene ,texte: "", idSuivant: id});                     // update the name property, assign a new value                 
-            this.state.IdChoixScene+=1;
-            return { scene };                                 // return new object jasper object
+            let scene = { ...prevState.scene };;    // creating copy of state variable jasper
+            scene.scenesSuivantes.push({id :this.state.IdChoixScene ,texte: "", idSuivant: null});    // update the name property, assign a new value                 
+            this.state.IdChoixScene += 1;
+            return { scene };   // return new object jasper object
           })
           //console.log(this.state)
     }

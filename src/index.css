@@ -16,8 +16,29 @@ textarea{
   resize: vertical;
 }
 
+.main-container{
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* .game{
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+} */
+
+.creation-personnage{
+
+}
+.creation-personnage > div{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
 .block{
-  width: 350px;
+  width: 250px;
   padding: 10px;
   filter: drop-shadow(1px 1px 5px #0000004f);
   background-color: rgb(240, 240, 240);
@@ -50,6 +71,7 @@ textarea{
 .game-board{
   display: flex;
   flex-direction:row;
+  flex-wrap: wrap;
 }
 
 .navBar{

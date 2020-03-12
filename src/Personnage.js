@@ -41,12 +41,20 @@ class Personnage extends React.Component{
 
     render() {
         return(
-            <div>
-                <label>Nom du personnage </label> <input id="myInput" onBlur={this.setNom}/> 
-                    <button onClick={this.downloadJsonFile}>Valider</button>
-                    <button onClick={this.lectureFichier}>Données</button>
-                <input id="Affichage"/>
-                
+            <div className="creation-personnage">
+                <h1>Création d'un personnage</h1>
+                <div>
+                    <label>Nom du personnage :</label>
+                    <div>
+                        <input id="myInput" onBlur={this.setNom}/> 
+                        <button onClick={this.downloadJsonFile}>Valider</button>
+                    </div>
+                </div>
+                {/* <input id="Affichage"/> */}
+                <div>
+                    <label>Output :</label>
+                    <textarea id="Affichage" name="Text1" cols="40" rows="5" onBlur={this.setNom}></textarea>
+                </div>
             </div>
         )
     }
