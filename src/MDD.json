@@ -2,7 +2,7 @@
 	"blockID": "1",
 	"blockName": "unVraiTitre",
 	"blockContenu": "UnVraiContenu",
-	"ListeChoix" : [
+	"ListeChoix": [
 		{
 			"ChoixTexte": "Choix1",
 			"ChoixIdSuivant": "1"
@@ -19,5 +19,5 @@
 			"ChoixTexte": "Choix4",
 			"ChoixIdSuivant": "4"
 		}
-]
+	]
 }
