@@ -13,12 +13,24 @@ class Block extends React.Component{
             scenesSuivantes: [ {id: 1, texte:"Choix1", idSuivant: "1"},{id: 2, texte:"Choix2", idSuivant: "2"},
             {id: 3, texte:"Choix3", idSuivant: "3"},{id: 4, texte:"Choix4", idSuivant: "4"}
             ]
-        }
+        },
+        IdChoixScene: 0,
     }
     setTitre = (event) => {
         const value = event.currentTarget.value;
-        this.setState({titre : value});
-        console.log(value);
+        this.setState((prevState) => {
+            let scene = {...prevState.scene};;
+            scene.titre = value;
+            return {scene};
+        })
+    }
+    setTexte = (event) => {
+        const value = event.currentTarget.value;
+        this.setState((prevState) => {
+            let scene = {...prevState.scene};;
+            scene.texte = value;
+            return {scene};
+        })
     }
     handleSubmitChoix = (event) => {
 		event.preventDefault();
@@ -36,7 +48,7 @@ class Block extends React.Component{
                     <h2>Liste des choix</h2>
                        <div>
                             {this.state.scene.scenesSuivantes.map((choixScene) => (
-                                <ChoixScene parentCallback ={this.recuperationDataChoixScene} details={choixScene} key={choixScene.idSuivant}/>
+                                <ChoixScene parentCallback ={this.recuperationDataChoixScene} details={choixScene} key={this.state.scene.scenesSuivantes.id}/>
                             ))}
                         </div>
                     <button onClick={() => this.ajouterChoix()}>Ajouter un choix</button>
@@ -48,24 +60,28 @@ class Block extends React.Component{
     recuperationDataChoixScene= (choixSceneData) => {
         const scenesSuivantes = this.state.scene.scenesSuivantes.slice()
         //console.log(choixSceneData.texte)
-        const index = scenesSuivantes.findIndex(function(sceneSuivantes){
-            return choixSceneData.id === scenesSuivantes.id
+        const index = scenesSuivantes.findIndex(function(sceneSuivante){
+            return choixSceneData.id === sceneSuivante.id
         })
+        console.log(this.state.scene.scenesSuivantes[index+1]);
         this.setState(prevState => {
             let scene = {...prevState.scene};;
             const sceneSuivante = scenesSuivantes[index]
-            console.log(index)
-            scene.scenesSuivantes.splice(sceneSuivante,sceneSuivante+1,{id :sceneSuivante,texte : choixSceneData.texte, idSuivant: choixSceneData.idSuivant});
-           // scene.scenesSuivantes.push({id :sceneSuivante,texte : choixSceneData.texte, idSuivant: choixSceneData.idSuivant})
+            console.log(index+" :index")
+            // scene.scenesSuivantes.splice(sceneSuivante,sceneSuivante+1,{id :sceneSuivante,texte : choixSceneData.texte, idSuivant: choixSceneData.idSuivant});
+            scene.scenesSuivantes.splice(index, 1, {id :this.state.IdChoixScene,texte : choixSceneData.texte, idSuivant: choixSceneData.idSuivant})
+            this.state.IdChoixScene += 1;
+            // scene.scenesSuivantes.push({id :sceneSuivante,texte : choixSceneData.texte, idSuivant: choixSceneData.idSuivant})
             return {scene};
           })
     }
+    
     ajouterChoix(){
         this.setState(prevState => {
             let scene = { ...prevState.scene };;  // creating copy of state variable jasper
             const id = Math.random();
-            scene.scenesSuivantes.push({id :this.IdChoixScene ,texte: "", idSuivant: id});                     // update the name property, assign a new value                 
-            this.IdChoixScene+=1;
+            scene.scenesSuivantes.push({id :this.state.IdChoixScene ,texte: "", idSuivant: id});                     // update the name property, assign a new value                 
+            this.state.IdChoixScene+=1;
             return { scene };                                 // return new object jasper object
           })
           //console.log(this.state)
@@ -73,13 +89,16 @@ class Block extends React.Component{
     downloadJsonFile = () => {
         const element = document.createElement("a");
         // Définie le contenu qui va être dans le fichier JSON
-        Array debug = ['{ "blockID": "'+this.state.scene.id+'", "blockName": "'+this.state.scene.titre+'", "blockContenu": "'+this.state.scene.texte+'"'];
+        var debug = '{ blockID: '+this.state.scene.id+', blockName: '+this.state.scene.titre+', blockContenu: '+this.state.scene.texte+' ';
         const nbScenes = this.state.scene.scenesSuivantes;
         for (let i=0; i<nbScenes.length; i++) {
-            debug += '{ "ChoixTexte": "'+this.state.scene.scenesSuivantes[i].texte+'", "ChoixIdSuivant": "'+this.state.scene.scenesSuivantes[i].idSuivant + '" }';
+            debug += '{ ChoixTexte: '+this.state.scene.scenesSuivantes[i].texte+', ChoixIdSuivant: '+this.state.scene.scenesSuivantes[i].idSuivant + ' }' ;
         }
         debug += "}"
-        debug = JSON.stringify(debug)
+        debug.replace("/","")
+        console.log(debug)
+        
+        //debug = JSON.stringify(debug)
         // crée le fichier json avec le contenu
         const file = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});
     

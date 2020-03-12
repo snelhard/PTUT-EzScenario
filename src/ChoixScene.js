@@ -3,7 +3,7 @@ import './App.css';
 
 class ChoixScene extends React.Component{
     state = {
-        id: 1,
+        // id: 1,
         texte: "",
         idSuivant:0
      }
@@ -13,9 +13,8 @@ class ChoixScene extends React.Component{
         //this.sendData();
     }
     handleChangeidSuivant = (event) => {
-        var value = event.currentTarget.value;
-        this.setState({idSuivant : value});
-        //this.sendData();
+        const value = event.currentTarget.value;
+        this.setState({idSuivant: value});
 
     }
     render(){
@@ -29,7 +28,6 @@ class ChoixScene extends React.Component{
                     </div>
                 </form>
             </div>
-
         )
     }
     handleSubmitChoix=(event)=> {
