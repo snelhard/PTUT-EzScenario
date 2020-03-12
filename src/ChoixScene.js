@@ -7,16 +7,17 @@ class ChoixScene extends React.Component{
         texte: "",
         idSuivant: 0
     }
+    
     handleChangeTexteNouveauChoix = (event) => {
         const value = event.currentTarget.value;
         this.setState({texte : value});
         //this.sendData();
     }
+
     handleChangeidSuivant = (event) => {
         var value = event.currentTarget.value;
         this.setState({idSuivant : value});
         //this.sendData();
-
     }
     render(){
         return(
