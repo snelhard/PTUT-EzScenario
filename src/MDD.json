@@ -1,5 +1,5 @@
-{
-	{
+[
+		{
 		"blockID": "1",
 		"blockName": "BlockName1",
 		"blockContenu": "BlockContenu1",
@@ -68,4 +68,5 @@
 			}
 		]
 	}
-}
+]
+
