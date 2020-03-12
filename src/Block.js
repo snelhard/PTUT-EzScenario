@@ -7,9 +7,9 @@ class Block extends React.Component {
     state = { //scene
         scene:
         {
-            id: 1,
-            titre: "unVraiTitre",
-            texte: "UnVraiContenu",
+            id: this.props.details.id,
+            titre: "",
+            texte: "",
             scenesSuivantes: [
             ]
         },
@@ -40,10 +40,10 @@ class Block extends React.Component {
     render() {
         return (
             <div className="block" id="divBlockGlobal">
-                <h2>Block</h2>
+                <h2> block {this.state.scene.id}</h2>
                 <div className="blockTitle" id="divTitle">
                     <label id="titre">Titre du block</label> <input onChange={this.setTitre} />
-                    <label id="contenu">Contenu du block</label> <textarea rows="3" onChange={this.setContenu}></textarea>
+                    <label id="contenu">Contenu du block</label> <textarea rows="3" onChange={this.setTexte}></textarea>
                 </div>
                 <div>
                     <h2>Liste des choix</h2>
