@@ -3,9 +3,9 @@ import './App.css';
 
 class ChoixScene extends React.Component{
     state = {
-        // id: 1,
+        id: 1,
         texte: "",
-        idSuivant:0
+        idSuivant:0,
      }
      handleChangeTexteNouveauChoix = (event) => {
         const value = event.currentTarget.value;
@@ -13,8 +13,9 @@ class ChoixScene extends React.Component{
         //this.sendData();
     }
     handleChangeidSuivant = (event) => {
-        const value = event.currentTarget.value;
-        this.setState({idSuivant: value});
+        var value = event.currentTarget.value;
+        this.setState({idSuivant : value});
+        //this.sendData();
 
     }
     render(){
@@ -35,8 +36,7 @@ class ChoixScene extends React.Component{
         this.sendData();
     }
     sendData =() => {
-           this.props.parentCallback(this.state);
-           //console.log(this.state)
+           this.props.parentCallback(this.state); 
     }
 }
 
