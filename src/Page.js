@@ -27,7 +27,7 @@ class Page extends React.Component{
             
             <div className="game-board">
                 {this.state.scenes.map((scene) => (
-                    <Block key={scene.id}/>
+                    <Block details={scene} key={scene.id}/>
                 ))}
             </div>
         </div>
