@@ -1,6 +1,9 @@
 import React from 'react';
 import './App.css';
 import data from './MDD.json';
+import {
+    withRouter
+  } from 'react-router-dom'
 
 class Personnage extends React.Component{
 
@@ -47,18 +50,24 @@ class Personnage extends React.Component{
                     <label>Nom du personnage :</label>
                     <div>
                         <input id="myInput" onBlur={this.setNom}/> 
-                        <button onClick={this.downloadJsonFile}>Valider</button>
+                        {/* <button onClick={this.downloadJsonFile}>Valider</button> */}
                     </div>
                 </div>
-                {/* <input id="Affichage"/> */}
-                <div>
+                {/* <div>
                     <label>Output :</label>
                     <textarea id="Affichage" name="Text1" cols="40" rows="5" onBlur={this.setNom}></textarea>
-                </div>
+                </div> */}
+                <button onClick={this._handleButtonClick}>Click</button>
             </div>
         )
     }
+
+    _handleButtonClick = () => {
+        //calculate your data here
+        //then redirect:
+        this.props.history.push('/Jeu');
+      }
 }
 
 
-export default Personnage;
+export default withRouter(Personnage);
