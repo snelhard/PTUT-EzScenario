@@ -1,0 +1,72 @@
+[
+		{
+		"blockID": "1",
+		"blockName": "BlockName1",
+		"blockContenu": "BlockContenu1",
+		"ListeChoix" : [
+			{
+				"ChoixTexte": "Block1Choix1",
+				"ChoixIdSuivant": 1
+			},
+			{
+				"ChoixTexte": "Block1Choix2",
+				"ChoixIdSuivant": 2
+			},
+			{
+				"ChoixTexte": "Block1Choix3",
+				"ChoixIdSuivant": 3
+			},
+			{
+				"ChoixTexte": "Block1Choix4",
+				"ChoixIdSuivant": 4
+			}
+		]
+	},
+	{
+		"blockID": "2",
+		"blockName": "BlockTitre2",
+		"blockContenu": "BlockContenu2",
+		"ListeChoix" : [
+			{
+				"ChoixTexte": "Block2Choix1",
+				"ChoixIdSuivant": 1
+			},
+			{
+				"ChoixTexte": "Block2Choix2",
+				"ChoixIdSuivant": 2
+			},
+			{
+				"ChoixTexte": "Block2Choix3",
+				"ChoixIdSuivant": 3
+			},
+			{
+				"ChoixTexte": "Block2Choix4",
+				"ChoixIdSuivant": 4
+			}
+		]
+	},
+	{
+		"blockID": "3",
+		"blockName": "BlockTitre3",
+		"blockContenu": "BlockContenu3",
+		"ListeChoix" : [
+			{
+				"ChoixTexte": "Block3Choix1",
+				"ChoixIdSuivant": 1
+			},
+			{
+				"ChoixTexte": "Block3Choix2",
+				"ChoixIdSuivant": 2
+			},
+			{
+				"ChoixTexte": "Block3Choix3",
+				"ChoixIdSuivant": 3
+			},
+			{
+				"ChoixTexte": "Block3Choix4",
+				"ChoixIdSuivant": 4
+			}
+		]
+	}
+]
+
