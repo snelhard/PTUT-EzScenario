@@ -9,6 +9,7 @@ import {
 import Page from './Page';
 import Personnage from './Personnage';
 import Jeu from './Jeu';
+import Editor from './Editor';
 
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
@@ -51,7 +52,7 @@ export default function BasicExample() {
               <Menu />
             </Route>
             <Route path="/Page">
-              <Page />
+              <Editor />
             </Route>
             <Route path="/Personnage">
                 <Personnage />
