@@ -54,7 +54,7 @@ class Block extends React.Component {
                     </div>
                     <button onClick={() => this.ajouterChoix()}>Ajouter un choix</button>
                     <button onClick={() => this.downloadJsonFile()}>Créer le fichier json</button>
-                    <button onClick={() => this.ajouterSauvegarde()}>Ajouter sauvegarde</button>
+                    <button onClick={() => this.ajouterSauvegarde()}>Sauvegarde json</button>
                 </div>
             </div>
         )
@@ -109,6 +109,7 @@ class Block extends React.Component {
         document.body.appendChild(element); // Required for this to work in FireFox
         element.click();
     }
+
     ajouterSauvegarde = () => {
         const element = document.createElement("a");
         var block = {};
