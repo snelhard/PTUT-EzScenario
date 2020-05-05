@@ -111,10 +111,8 @@ export const initEditor = function(container) {
 }
 
 const init =  async ()  => {
-	// console.log(container);
+
 	var components = [new StoryBlock(), new StartBlock(), new AddComponent(), new RemoveComponent()];
-	
-	// this.editor = new Rete.NodeEditor("demo@0.1.0", container);
 	
 	editor.use(ConnectionPlugin);
 	editor.use(ReactRenderPlugin, {
@@ -150,11 +148,11 @@ const init =  async ()  => {
 		console.log(node);
     });
 
-    editor.on('destroy', () => {
-        console.log("dest");
+    // editor.on('destroy', () => {
+        // console.log("dest");
         // editor.destroy();
         // engine.destroy();
-	});
+	// });
 	
 	editor.fromJSON({
 		"id": "demo@0.1.0",
@@ -298,15 +296,15 @@ const init =  async ()  => {
 }
 	
 export const jsoned = () => {
-	// var jsoned = editor.toJSON();
-	// console.log("jsoned :");
-    // console.log(JSON.stringify(jsoned));
-    editor.destroy();
-    engine.destroy();
-}
-
-export const save = () => {
 	var jsoned = editor.toJSON();
 	console.log("jsoned :");
-	console.log(JSON.stringify(jsoned));
+    console.log(JSON.stringify(jsoned));
+    // editor.destroy();
+    // engine.destroy();
+}
+
+export const load = () => {
+	editor.fromJSON({"id":"demo@0.1.0","nodes":{"1":{"id":1,"data":{},"inputs":{},"outputs":{"num":{"connections":[{"node":2,"input":"num1","data":{"pins":[]}}]}},"position":[-285.5,-105.375],"name":"Start"},"2":{"id":2,"data":{},"inputs":{"num1":{"connections":[{"node":1,"output":"num","data":{"pins":[]}}]}},"outputs":{"num":{"connections":[{"node":5,"input":"num1","data":{"pins":[]}}]},"num1":{"connections":[{"node":3,"input":"num1","data":{"pins":[]}}]}},"position":[-98.5,-125.375],"name":"Scene"},"3":{"id":3,"data":{},"inputs":{"num1":{"connections":[{"node":2,"output":"num1","data":{"pins":[]}}]}},"outputs":{"num":{"connections":[{"node":7,"input":"num1","data":{}}]},"num1":{"connections":[{"node":7,"input":"num1","data":{}}]}},"position":[152.5,-7.375],"name":"Scene"},"5":{"id":5,"data":{},"inputs":{"num1":{"connections":[{"node":2,"output":"num","data":{"pins":[]}}]}},"outputs":{"num":{"connections":[{"node":6,"input":"num1","data":{}}]},"num1":{"connections":[{"node":6,"input":"num1","data":{}}]}},"position":[177.5,-203.375],"name":"Scene"},"6":{"id":6,"data":{},"inputs":{"num1":{"connections":[{"node":5,"output":"num","data":{}},{"node":5,"output":"num1","data":{}},{"node":7,"output":"num","data":{}}]}},"outputs":{"num":{"connections":[]},"num1":{"connections":[]}},"position":[604,-244.375],"name":"Scene"},"7":{"id":7,"data":{},"inputs":{"num1":{"connections":[{"node":3,"output":"num","data":{}},{"node":3,"output":"num1","data":{}}]}},"outputs":{"num":{"connections":[{"node":6,"input":"num1","data":{}}]},"num1":{"connections":[]}},"position":[380,-104.375],"name":"Scene"}}});
+	// console.log("jsoned :");
+	// console.log(JSON.stringify(jsoned));
 }
