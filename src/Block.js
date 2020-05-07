@@ -54,6 +54,7 @@ class Block extends React.Component {
                     </div>
                     <button onClick={() => this.ajouterChoix()}>Ajouter un choix</button>
                     <button onClick={() => this.downloadJsonFile()}>Créer le fichier json</button>
+                    <button onClick={() => this.ajouterSauvegarde()}>Sauvegarde json</button>
                 </div>
             </div>
         )
@@ -109,6 +110,7 @@ class Block extends React.Component {
         element.click();
     }
 
+    
 
 
 }

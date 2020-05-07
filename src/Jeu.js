@@ -38,7 +38,9 @@ class Jeu extends React.Component{
             },
         ],
         currentScene: {
-        }
+        },
+        Chemin : []
+        
     }
 
     constructor(props){
@@ -47,10 +49,12 @@ class Jeu extends React.Component{
     }
 
     render() {
+        this.ajouterSauvegarde();
         return (
             <div className="JeuContainer">
                 <h1>~ Survivre au coronavirus ~</h1>
                 <Scene renvoiIdSuivant={this.changerScene} details={this.state.currentScene}/>
+                <button onClick={() => this.ajouterSauvegarde()}>Sauvegarde json</button>
             </div>
         )
     }
@@ -65,6 +69,26 @@ class Jeu extends React.Component{
         const sceneSuivante = this.state.scenes[index];
         this.setState({currentScene: sceneSuivante});
     }
-}
 
+    ajouterSauvegarde = () => {
+        this.state.Chemin.push(this.state.currentScene.blockID);
+        //console.log(this.state.Chemin)
+        const element = document.createElement("a");
+        var block = {};
+        var listeBlockPassés = []
+        
+        for (let i = 0; i < this.state.Chemin.length; i++) {
+            listeBlockPassés.push({
+                blockID: this.state.Chemin[i]
+            })
+        }
+        block["PointsDePassage"] = listeBlockPassés
+        const file = new Blob([JSON.stringify(block, '\t', 2)], { type: 'application/json' });
+        element.href = URL.createObjectURL(file);
+        element.download = "SauvegardeProgression.json";
+        document.body.appendChild(element); // Required for this to work in FireFox
+        console.log(element);
+    }
+
+}
 export default Jeu;
