@@ -110,17 +110,7 @@ class Block extends React.Component {
         element.click();
     }
 
-    ajouterSauvegarde = () => {
-        const element = document.createElement("a");
-        var block = {};
-        block["blockID"] = this.state.scene.id;
-        
-        const file = new Blob([JSON.stringify(block, '\t', 2)], { type: 'application/json' });
-        element.href = URL.createObjectURL(file);
-        //element.download = "myFile.json";
-        document.body.appendChild(element); // Required for this to work in FireFox
-        element.click();
-    }
+    
 
 
 }
