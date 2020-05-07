@@ -31,14 +31,14 @@ class MyReactControl extends React.Component {
       <div>
       <p> Titre   <input value={this.state.name} onChange={this.onChange.bind(this)} /> </p>
       <p> Contenu <input value={this.state.contenu} onChange={this.onChange.bind(this)} /> </p>
-      <p> Choix 1 <input value={this.state.choix1} onChange={this.onChange.bind(this)} /> </p>
-      <p>  Choix 2< input value={this.state.choix2} onChange={this.onChange.bind(this)} /></p>
+      <p> Enigme <input value={this.state.enigme} onChange={this.onChange.bind(this)} /> </p>
+      <p> Reponse < input value={this.state.reponse} onChange={this.onChange.bind(this)} /></p>
       </div>
     );
   }
 }
 
-export class MyControl extends Control {
+export class MyControlIntrigue extends Control {
   constructor(emitter, key, name) {
     super(key);
     this.render = "react";
@@ -48,7 +48,7 @@ export class MyControl extends Control {
       id: key,
       name,
      // putData:() => this.putData("texte",this.props.name)
-      putData: () => this.putData.apply(this, arguments)
+      putData: (id,data) => this.putData(id, data)
     };
   }
 }

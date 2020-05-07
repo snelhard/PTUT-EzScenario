@@ -6,6 +6,10 @@ import AreaPlugin from "rete-area-plugin";
 import { MyNode } from "./Node";
 import { MyNewNode } from "./MyNewNode";
 import { MyControl } from "./Control";
+import { MyControlIntrigue} from "./ControlIntrigue";
+import { MyControlStart} from "./ControlStart";
+import { MyControlFin} from "./ControlFin";
+
 // import ConnectionReroutePlugin from 'rete-connection-reroute-plugin';
 
 var numSocket = new Rete.Socket("Number value");
@@ -17,15 +21,37 @@ class StoryBlock extends Rete.Component {
 	}
 	
 	builder(node) {
-		var inp = new Rete.Input("num1", "Number", numSocket, true);
+		var inp = new Rete.Input("num1", "", numSocket, true);
 		var out = new Rete.Output("num", "Choix 1", numSocket, false);
 		var out2 = new Rete.Output("num1", "Choix 2", numSocket, false);
-		// var ctrl = new MyControl(this.editor, "greeting", "#username");
+		//var titre = new Rete.Control("Titre");
+		var ctrl = new MyControl(this.editor, "greeting", "	");
 		
 		return node
 		.addInput(inp)
 		.addOutput(out)
-		.addOutput(out2);
+		.addOutput(out2)
+		.addControl(ctrl);
+	}
+	
+	worker(node, inputs, outputs	) {
+		console.log(node.data.greeting);
+	}
+}
+class IntrigueBlock extends Rete.Component {
+	constructor() {
+		super("Intrigue");
+	}
+	
+	builder(node) {
+		var inp = new Rete.Input("num1", "", numSocket, true);
+		var out = new Rete.Output("num", "", numSocket, false);
+		 var ctrl = new MyControlIntrigue(this.editor, "greeting", "Intrigue");
+		
+		return node
+		.addInput(inp)
+		.addOutput(out)
+		.addControl(ctrl);
 	}
 	
 	worker(node, inputs, outputs) {
@@ -42,58 +68,76 @@ class StartBlock extends Rete.Component {
 	builder(node) {
 		// var inp = new Rete.Input("num1", "Number", numSocket, true);
 		var out = new Rete.Output("num", "Number", numSocket);
-		// var ctrl = new MyControl(this.editor, "greeting", "#username");
+		 var ctrl = new MyControlStart(this.editor, "greeting", "Start");
 		
-		return node.addOutput(out);
+		return node.addOutput(out).addControl(ctrl);
+
 	}
 	
 	worker(node, inputs, outputs) {
 		console.log(node.data.greeting);
 	}
 }
-
-class AddComponent extends Rete.Component {
+class endBlock extends Rete.Component {
 	constructor() {
-		super("Add");
+		super("Fin");
+		this.data.component = MyNode;
 	}
 	
 	builder(node) {
-		var inp = new Rete.Input("num1", "Number", numSocket);
-		var out = new Rete.Output("num", "Number", numSocket);
-		var ctrl = new MyControl(this.editor, "greeting", "#username");
+		var inp = new Rete.Input("num1", "Number", numSocket, true);
+
+		var ctrl = new MyControlFin(this.editor, "greeting", "Fin");
 		
-		return node
-		.addInput(inp)
-		.addOutput(out)
-		.addControl(ctrl);
+		return node.addInput(inp).addControl(ctrl);
 	}
 	
 	worker(node, inputs, outputs) {
 		console.log(node.data.greeting);
 	}
 }
-
-class RemoveComponent extends Rete.Component {
-	constructor() {
-		super("Remove");
-	}
+ class AddComponent extends Rete.Component {
+ 	constructor() {
+ 		super("Add");
+ 	}
 	
-	builder(node) {
-		var inp = new Rete.Input("num1", "Number", numSocket);
-		var inp2 = new Rete.Input("num2", "Number", numSocket);
-		var inp3 = new Rete.Input("num3", "Number", numSocket);
-		var inp4 = new Rete.Input("num4", "Number", numSocket);
-		var out = new Rete.Output("num", "Number", numSocket);
-		var ctrl = new MyControl(this.editor, "greeting", "#username");
+ 	builder(node) {
+ 		var inp = new Rete.Input("num1", "Number", numSocket);
+ 		var out = new Rete.Output("num", "Number", numSocket);
+ 		var ctrl = new MyControl(this.editor, "greeting", "#username");
 		
-		return node
-		.addInput(inp)
-		.addInput(inp2)
-		.addInput(inp3)
-		.addInput(inp4)
+ 		return node
+ 		.addInput(inp)
 		.addOutput(out)
-		.addControl(ctrl);
-	}
+ 		.addControl(ctrl);
+ 	}
+	
+ 	worker(node, inputs, outputs) {
+ 		console.log(node.data.greeting);
+ 	}
+ }
+
+ class RemoveComponent extends Rete.Component {
+ 	constructor() {
+ 		super("Remove");
+ 	}
+	
+ 	builder(node) {
+ 		var inp = new Rete.Input("num1", "Number", numSocket);
+ 		var inp2 = new Rete.Input("num2", "Number", numSocket);
+ 		var inp3 = new Rete.Input("num3", "Number", numSocket);
+ 		var inp4 = new Rete.Input("num4", "Number", numSocket);
+ 		var out = new Rete.Output("num", "Number", numSocket);
+ 		var ctrl = new MyControl(this.editor, "greeting", "#username");
+		
+ 		return node
+ 		.addInput(inp)
+ 		.addInput(inp2)
+ 		.addInput(inp3)
+ 		.addInput(inp4)
+ 		.addOutput(out)
+ 		.addControl(ctrl);
+ 	}
 	
 	worker(node, inputs, outputs) {
 		console.log("params");
@@ -112,7 +156,7 @@ export const initEditor = function(container) {
 
 const init =  async ()  => {
 
-	var components = [new StoryBlock(), new StartBlock(), new AddComponent(), new RemoveComponent()];
+	var components = [new StoryBlock(), new StartBlock(), new IntrigueBlock(), new endBlock()];
 	
 	editor.use(ConnectionPlugin);
 	editor.use(ReactRenderPlugin, {
@@ -133,7 +177,7 @@ const init =  async ()  => {
 			console.log("process");
 			await engine.abort();
 			const data = editor.toJSON();
-			await engine.process(data);
+			//await engine.process(data);
 			console.log(JSON.stringify(data));
 		}
 	);

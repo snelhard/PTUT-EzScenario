@@ -30,15 +30,12 @@ class MyReactControl extends React.Component {
     return (
       <div>
       <p> Titre   <input value={this.state.name} onChange={this.onChange.bind(this)} /> </p>
-      <p> Contenu <input value={this.state.contenu} onChange={this.onChange.bind(this)} /> </p>
-      <p> Choix 1 <input value={this.state.choix1} onChange={this.onChange.bind(this)} /> </p>
-      <p>  Choix 2< input value={this.state.choix2} onChange={this.onChange.bind(this)} /></p>
       </div>
     );
   }
 }
 
-export class MyControl extends Control {
+export class MyControlStart extends Control {
   constructor(emitter, key, name) {
     super(key);
     this.render = "react";
@@ -48,7 +45,7 @@ export class MyControl extends Control {
       id: key,
       name,
      // putData:() => this.putData("texte",this.props.name)
-      putData: () => this.putData.apply(this, arguments)
+      putData: (id,data) => this.putData(id, data)
     };
   }
 }
