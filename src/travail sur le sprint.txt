@@ -1,0 +1,5 @@
+- Réalisation d'un système d'"import" de fichiers simple : affichage des métadonnées du fichier dans la console avec console.log.
+- Rélisation d'un système d'"import" plus poussé, en utilisant le module REACT-DROPZONE => possibilité de glisser un fichier directement dans la zone.
+
+---
+Les fichiers JSON doivent être uploadés en local, et serviront pour le jeu.

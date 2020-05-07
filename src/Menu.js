@@ -9,6 +9,7 @@ import {
 import Page from './Page';
 import Personnage from './Personnage';
 import Jeu from './Jeu';
+import Import from './Import';
 
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
@@ -34,6 +35,9 @@ export default function BasicExample() {
           <li>
               <Link to="/Personnage">Jouer l'histoire</Link>
           </li>
+          <li>
+              <Link to="/Import">(TEST) Import - Dropzone</Link>
+          </li>
         </ul>
 
         {/* <hr /> */}
@@ -58,6 +62,9 @@ export default function BasicExample() {
             </Route>
             <Route path="/Jeu">
                 <Jeu />
+            </Route>
+            <Route path="/Import">
+                <Import />
             </Route>
           </Switch>
         </div>

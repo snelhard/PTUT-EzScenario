@@ -6,8 +6,6 @@ import {
   } from 'react-router-dom'
 
 class Personnage extends React.Component{
-
-
     downloadJsonFile = () => {
         const element = document.createElement("a");
         // Définie le contenu qui va être dans le fichier JSON
@@ -41,7 +39,6 @@ class Personnage extends React.Component{
         console.log(data);
     }
 
-
     render() {
         return(
             <div className="creation-personnage">
@@ -50,23 +47,28 @@ class Personnage extends React.Component{
                     <label>Nom du personnage :</label>
                     <div>
                         <input id="myInput" onBlur={this.setNom}/> 
-                        {/* <button onClick={this.downloadJsonFile}>Valider</button> */}
                     </div>
                 </div>
-                {/* <div>
-                    <label>Output :</label>
-                    <textarea id="Affichage" name="Text1" cols="40" rows="5" onBlur={this.setNom}></textarea>
-                </div> */}
-                <button onClick={this._handleButtonClick}>Click</button>
+                <button onClick={this._handleButtonClick}>Click</button><br></br><br></br>
+                <label>Image :</label><br></br>
+                <input type="file" onChange={this.traitementFichierChoisi} accept=".json" />
             </div>
         )
     }
 
     _handleButtonClick = () => {
-        //calculate your data here
-        //then redirect:
         this.props.history.push('/Jeu');
       }
+    
+    traitementFichierChoisi = (event) => {
+        console.log(event.target.files[0]); 
+        /*var obj = JSON.parse(event.target.result);
+        this.alert_data(obj.name, obj.family)*/
+    }
+
+    /*alert_data = (name, family) => {
+        alert('Name : ' + name + ', Family : ' + family);
+    }*/
 }
 
 
