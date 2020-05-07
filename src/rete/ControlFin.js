@@ -1,6 +1,6 @@
 import React from "react";
-// import { Control } from "rete";
-import Rete from "rete";
+import { Control } from "rete";
+
 
 class MyReactControl extends React.Component {
   state = {};
@@ -49,4 +49,4 @@ export class MyControlFin extends Control {
       getData: (field) => this.getData(field)
     };
   }
-  
+}
