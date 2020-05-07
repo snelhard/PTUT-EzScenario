@@ -52,7 +52,6 @@ class Jeu extends React.Component{
         return (
             <div className="JeuContainer">
                 <h1>~ Survivre au coronavirus ~</h1>
-                <h2>~Ceci est le block ID : {this.state.currentScene.blockID}</h2>
                 <Scene renvoiIdSuivant={this.changerScene} details={this.state.currentScene}/>
                 <button onClick={() => this.ajouterSauvegarde()}>Sauvegarde json</button>
             </div>
