@@ -49,6 +49,7 @@ class Jeu extends React.Component{
     }
 
     render() {
+        this.ajouterSauvegarde();
         return (
             <div className="JeuContainer">
                 <h1>~ Survivre au coronavirus ~</h1>
@@ -84,7 +85,7 @@ class Jeu extends React.Component{
         block["PointsDePassage"] = listeBlockPassés
         const file = new Blob([JSON.stringify(block, '\t', 2)], { type: 'application/json' });
         element.href = URL.createObjectURL(file);
-        element.download = "myFile.json";
+        element.download = "SauvegardeProgression.json";
         document.body.appendChild(element); // Required for this to work in FireFox
         console.log(element);
     }
