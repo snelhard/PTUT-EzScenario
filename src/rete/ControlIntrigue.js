@@ -5,50 +5,52 @@ class MyReactControl extends React.Component {
   state = {};
   componentDidMount() {
     this.setState({
-      name: this.props.name
+      titre: this.props.getData('titre'),
+      texte: this.props.getData('texte'),
+      enigme: this.props.getData('enigme'),
+      reponse: this.props.getData('reponse')
       //contenu: this.props.contenu
     });
-    console.log(this.props);
-    this.props.putData(this.props.id, this.props.titre);
   }
   onChange(event) {
-    this.props.putData(this.props.id, event.target.value);
-    this.props.emitter.trigger("process");
-    this.setState({
-      name: event.target.value
-    });
-    console.log(this.state.name);   
-    this.update();
+    let target = event.target.name;
+    let value = event.target.value;
+    console.log(target + " " + value)
+    this.update(target, value);
   }
-  update(){
-    console.log("this is  update");
-    this.props.putData("text",this.state.name);
-    this.props.emitter.trigger('process');
+  update(target, value){
+    this.setState({
+      [target]: value
+    }, () => this.props.putData(target, value));
   }
 
   render() {
     return (
-      <div>
-      <p> Titre   <input value={this.state.name} onChange={this.onChange.bind(this)} /> </p>
-      <p> Contenu <input value={this.state.contenu} onChange={this.onChange.bind(this)} /> </p>
-      <p> Enigme <input value={this.state.enigme} onChange={this.onChange.bind(this)} /> </p>
-      <p> Reponse < input value={this.state.reponse} onChange={this.onChange.bind(this)} /></p>
+      <div style={{color: "white  "}}>
+      <label>Titre</label><input value={this.state.titre} name="titre" onChange={this.onChange.bind(this)} style={{"width" : "100%"}}/> <br/>
+      <label>Texte</label><input value={this.state.texte} name="texte" onChange={this.onChange.bind(this)} style={{"width" : "100%"}}/><br/>
+      <label>Enigme</label><input value={this.state.enigme} name="enigme" onChange={this.onChange.bind(this)} style={{"width" : "100%"}}/> <br/>
+      <label>Reponse</label><input value={this.state.reponse} name="reponse" onChange={this.onChange.bind(this)} style={{"width" : "100%"}}/><br/>
       </div>
     );
   }
 }
 
 export class MyControlIntrigue extends Control {
-  constructor(emitter, key, name) {
+  constructor(emitter, key, titre, texte, enigme, reponse) {
     super(key);
     this.render = "react";
     this.component = MyReactControl;
     this.props = {
       emitter,
       id: key,
-      name,
+      titre,
+      texte,
+      enigme,
+      reponse,
      // putData:() => this.putData("texte",this.props.name)
-      putData: (id,data) => this.putData(id, data)
+      putData: (id,data) => this.putData(id, data),
+      getData: (field) => this.getData(field)
     };
   }
 }
