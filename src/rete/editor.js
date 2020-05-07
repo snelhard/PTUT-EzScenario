@@ -20,12 +20,13 @@ class StoryBlock extends Rete.Component {
 		var inp = new Rete.Input("num1", "Number", numSocket, true);
 		var out = new Rete.Output("num", "Choix 1", numSocket, false);
 		var out2 = new Rete.Output("num1", "Choix 2", numSocket, false);
-		// var ctrl = new MyControl(this.editor, "greeting", "#username");
+		var ctrl = new MyControl(this.editor, "greeting", "","","","","");
 		
 		return node
 		.addInput(inp)
 		.addOutput(out)
-		.addOutput(out2);
+		.addOutput(out2)
+		.addControl(ctrl);
 	}
 	
 	worker(node, inputs, outputs) {
@@ -112,7 +113,7 @@ export const initEditor = function(container) {
 
 const init =  async ()  => {
 
-	var components = [new StoryBlock(), new StartBlock(), new AddComponent(), new RemoveComponent()];
+	var components = [new StoryBlock(), new StartBlock()];
 	
 	editor.use(ConnectionPlugin);
 	editor.use(ReactRenderPlugin, {
@@ -133,8 +134,8 @@ const init =  async ()  => {
 			console.log("process");
 			await engine.abort();
 			const data = editor.toJSON();
-			await engine.process(data);
-			console.log(JSON.stringify(data));
+			// await engine.process(data);
+			console.log(data);
 		}
 	);
 		
@@ -223,66 +224,6 @@ const init =  async ()  => {
 				"position": [
 					-98.5,
 					-125.375
-				],
-				"name": "Scene"
-			},
-			"3": {
-				"id": 3,
-				"data": {},
-				"inputs": {
-					"num1": {
-						"connections": [
-							{
-								"node": 2,
-								"output": "num1",
-								"data": {
-									"pins": []
-								}
-							}
-						]
-					}
-				},
-				"outputs": {
-					"num": {
-						"connections": []
-					},
-					"num1": {
-						"connections": []
-					}
-				},
-				"position": [
-					219.5,
-					33.625
-				],
-				"name": "Scene"
-			},
-			"5": {
-				"id": 5,
-				"data": {},
-				"inputs": {
-					"num1": {
-						"connections": [
-							{
-								"node": 2,
-								"output": "num",
-								"data": {
-									"pins": []
-								}
-							}
-						]
-					}
-				},
-				"outputs": {
-					"num": {
-						"connections": []
-					},
-					"num1": {
-						"connections": []
-					}
-				},
-				"position": [
-					220.5,
-					-139.375
 				],
 				"name": "Scene"
 			}
