@@ -28,16 +28,16 @@ class Scene extends React.Component{
 
                     ))} */}
 
-
-                    <button onClick={() => this.remonterChoix()}>{this.props.details.data.choix1}</button>
-                    <button onClick={() => this.remonterChoix()}>{this.props.details.data.choix2}</button>
+                     
+                    <button onClick={() => this.remonterChoix(0)}>{this.props.details.data.choix1}</button>
+                    <button onClick={() => this.remonterChoix(1)}>{this.props.details.data.choix2}</button>
                     {/* {buttonQuitter} */}
                 </div>
             </div>
         )
     }
 
-    remonterChoix() {
+    remonterChoix =(idChoix) => {
         // let Idchoix  = this.props.details.outputs[idSuivant];
         // {this.props.details.outputs.map( (choix, index) => {
         //     if(index == idSuivant){
@@ -45,7 +45,8 @@ class Scene extends React.Component{
         //     }
         // })};
         // console.log( this.props.details.outputs.();
-        this.props.renvoiIdSuivant(5);
+        console.log(idChoix)
+        this.props.renvoiIdSuivant(idChoix);
     }
 }
 
