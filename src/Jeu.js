@@ -43,7 +43,7 @@ class Jeu extends React.Component{
         return (
             <div className="JeuContainer">
             <h1>~ {this.state.firstScene.data.titre} ~</h1>
-                {Current}
+            {Current}
         
             {/* { this.mountScene } */}
 
