@@ -20,7 +20,15 @@ class Intrigue extends React.Component{
       }
     
     handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.value);
+        //alert(this.state.value);
+        var rep=""
+       if(this.state.value===this.props.details.data.reponse){
+            rep=0;
+        }else{
+            rep=1;
+        }
+        this.props.renvoiIdSuivant(rep);
+       
         event.preventDefault();
     }
 
