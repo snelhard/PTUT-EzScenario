@@ -28,16 +28,16 @@ export default function BasicExample() {
       
         <ul className="navBar">
           <li>
-            <Link to="/">Acceuil</Link>
+            <Link to="/">Accueil</Link>
+          </li>
+          <li>
+              <Link to="/MesHistoires">Mes Histoires</Link>
           </li>
           <li>
             <Link to="/Page">Création histoire</Link>
           </li>
           <li>
-              <Link to="/Personnage">Jouer l'histoire</Link>
-          </li>
-          <li>
-              <Link to="/MesHistoires">Mes Histoires</Link>
+              <Link to="/Jeu">Demo histoire</Link>
           </li>
         </ul>
 
