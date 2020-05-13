@@ -21,12 +21,12 @@ class Editor extends React.Component {
   render() {
     return (
       <div>
-        <h1>Editor</h1>
-        <button onClick={() => jsoned()}>EXPORT</button>
-        <button onClick={() => load()}>LOAD</button>
-        <div className="editor">
-          <div ref={this.editorContainer} />
-        </div>
+      <h1>Editor</h1>
+      <button onClick={() => jsoned()}>EXPORT</button>
+      <input type="file" onChange={load} accept=".json" />
+      <div className="editor">
+        <div ref={this.editorContainer} />
+      </div>
       </div>
     );
   }
