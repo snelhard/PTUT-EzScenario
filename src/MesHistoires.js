@@ -8,21 +8,18 @@ class MesHistoires extends React.Component{
         if (localStorage.getItem('List') ==null) localStorage.setItem('List',"");    
     }
 
-    state={
-        json:[]
-    }
 
-    UploadJsonFile() {
+    UploadJsonFile(e) {
                 var FILE_KEY;
+                var reader = new FileReader();
                 // fire processUpload when the user uploads a file.
-                document.querySelector('#fileUpload').addEventListener('change', handleFileUpload, false);
+                handleFileUpload(e);
                 // Log any previously saved file.
                 console.log('previous save: ', retrieveSave());
 
                 // Setup file reading
-                var reader = new FileReader();
+                
                 reader.onload = handleFileRead;
-
 
 
                 function handleFileUpload(event) {
@@ -30,7 +27,7 @@ class MesHistoires extends React.Component{
                     FILE_KEY = file.name;
                     reader.readAsText(file); // fires onload when done.
                 }
-
+                
                 function addKey() {
                     var list = localStorage.getItem('List');
                     if (list !== null){
@@ -53,18 +50,18 @@ class MesHistoires extends React.Component{
                 function retrieveSave() {
                     return JSON.parse(localStorage.getItem(FILE_KEY))
                 }
-                
-            }
+                // window.location.reload(false);
+    }
 
     downloadFile(key) {
         var FILE_KEY = key;
-
+        
         console.log('current save: ', retrieveSave());
 
         function retrieveSave() {
             return JSON.parse(localStorage.getItem(FILE_KEY))
         }
-
+        
         const element = document.createElement("a");
         // Définie le contenu qui va être dans le fichier JSON
         var debug = {nom: retrieveSave()};
@@ -82,7 +79,7 @@ class MesHistoires extends React.Component{
             const contenu = JSON.parse(text);
             // renvoie le contenu affecté à nom dans le json
             console.log(contenu.nom)
-
+            
         });
         // Renvoyer le resultat de la lecture du fichier sous forme txt
         reader.readAsText(file);
@@ -96,9 +93,10 @@ class MesHistoires extends React.Component{
         return (
             <div className="AjouterHistoire">
                 <h1>Ajouter un nouvelle Histoire</h1>
-                <input type="file" name="files[]" id="fileUpload" onChange={this.UploadJsonFile}/>
+                <input type="file" name="files[]" id="fileUpload" onChange={e => this.UploadJsonFile(e)}/>
                 <div className="ListeHistoire">
                 <h1>Vos histoires</h1>
+                <button onClick={() => this.forceUpdate()}>Rafraichir la liste des histoires</button>
                 <table>
                     {localStorage.getItem('List').split(',').map(json => {
                         if (json!=="")
@@ -113,4 +111,4 @@ class MesHistoires extends React.Component{
 
 }
 
-export default MesHistoires;    
+export default MesHistoires;
