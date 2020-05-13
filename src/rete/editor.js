@@ -209,6 +209,37 @@ const init =  async ()  => {
 	
 export const jsoned = () => {
 	
+	function retrieveSave() {
+		return JSON.parse(editor.toJSON())
+	}
+
+	const element = document.createElement("a");
+	// Définie le contenu qui va être dans le fichier JSON
+	var debug = {nom: retrieveSave()};
+
+	// crée le fichier json avec le contenu
+	const file = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});
+
+	// Ouverture du lecteur
+	var reader = new FileReader();
+	// Attend que le fichier à fini de charger
+	reader.addEventListener("loadend", (e) => {
+		// Récupère la chaine contenu dans le fichier json
+		const text = e.srcElement.result;
+		// Analyse une chaîne de caractères JSON et construit la valeur JavaScript ou l'objet décrit par cette chaîne
+		const contenu = JSON.parse(text);
+		// renvoie le contenu affecté à nom dans le json
+		console.log(contenu.nom)
+
+	});
+	// Renvoyer le resultat de la lecture du fichier sous forme txt
+	reader.readAsText(file);
+	element.href = URL.createObjectURL(file);
+	element.download = "myFile.json";
+	document.body.appendChild(element); // Required for this to work in FireFox
+	element.click();
+
+	
 	var jsoned = editor.toJSON();
 	console.log("jsoned :");
     console.log(JSON.stringify(jsoned));

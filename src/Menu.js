@@ -10,6 +10,7 @@ import Page from './Page';
 import Personnage from './Personnage';
 import Jeu from './Jeu';
 import Editor from './Editor';
+import MesHistoires from './MesHistoires';
 
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
@@ -35,6 +36,9 @@ export default function BasicExample() {
           <li>
               <Link to="/Personnage">Jouer l'histoire</Link>
           </li>
+          <li>
+              <Link to="/MesHistoires">Mes Histoires</Link>
+          </li>
         </ul>
 
         {/* <hr /> */}
@@ -59,6 +63,9 @@ export default function BasicExample() {
             </Route>
             <Route path="/Jeu">
                 <Jeu />
+            </Route>
+            <Route path="/MesHistoires">
+                <MesHistoires />
             </Route>
           </Switch>
         </div>
