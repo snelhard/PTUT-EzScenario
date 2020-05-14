@@ -7,6 +7,7 @@
     "@testing-library/react": "^9.4.1",
     "@testing-library/user-event": "^7.2.1",
     "fs": "0.0.1-security",
+    "history": "^4.10.1",
     "jsonfile": "^6.0.0",
     "meteor-node-stubs": "^1.0.0",
     "react": "^16.13.0",

@@ -9,7 +9,7 @@ class Page extends React.Component{
         ],
         IdScene:0
     }
-    
+
     addBlock = () => {
         var scenes = this.state.scenes.slice();
         scenes.push({id: this.state.IdScene.length+1, titre: "", text: ""});

@@ -99,7 +99,8 @@ class Jeu extends React.Component{
     
     constructor(props){
         super(props);
-        
+        this.state.file=JSON.parse(localStorage.getItem('Current')).file;
+        console.log(this.state)
         this.state.currentScene = this.state.file.nodes[1];
         this.state.firstScene = this.state.currentScene
         this.state.currentScene = this.state.file.nodes[this.state.firstScene.outputs.out.connections[0].node];

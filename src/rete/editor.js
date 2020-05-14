@@ -217,9 +217,16 @@ const init = async () => {
 	// editor.destroy();
 	// engine.destroy();
 	// });
-
-	editor.fromJSON({ "id": "demo@0.1.0", "nodes": { "1": { "id": 1, "data": { "titre": "" }, "inputs": {}, "outputs": {}, "position": [-419.80039837027675, -61.903379254543886], "name": "Start" } } });
-
+	if (localStorage.getItem('Current') ==null){
+		editor.fromJSON({ "id": "demo@0.1.0", "nodes": { "1": { "id": 1, "data": { "titre": "" }, "inputs": {}, "outputs": {}, "position": [-419.80039837027675, -61.903379254543886], "name": "Start" } } });
+	} else {
+		var json = JSON.parse(localStorage.getItem('Current')); // Parse du JSON
+		console.log(json);
+		var editorData = json.file;
+		console.log(editorData)
+		editor.fromJSON(editorData);
+	}
+	
 	editor.view.resize();
 	console.log(editor.nodes);
 	AreaPlugin.zoomAt(editor);

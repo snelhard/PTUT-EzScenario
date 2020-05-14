@@ -1,7 +1,13 @@
 import React from 'react';
 import './App.css'
-
-
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
+  import Jeu from './Jeu';
+  
 class MesHistoires extends React.Component{
     constructor(props){
         super(props);
@@ -89,18 +95,29 @@ class MesHistoires extends React.Component{
         element.click();
     }
 
+    setCurrent(key){
+        localStorage.setItem('Current',localStorage.getItem(key));
+    }
+
+
     render() {
         return (
             <div className="AjouterHistoire">
                 <h1>Ajouter un nouvelle Histoire</h1>
-                <input type="file" name="files[]" id="fileUpload" onChange={e => this.UploadJsonFile(e)}/>
+                <input type="file" name="files[]" id="fileUpload" accept=".json" onChange={e => this.UploadJsonFile(e)}/>
                 <div className="ListeHistoire">
                 <h1>Vos histoires</h1>
                 <button onClick={() => this.forceUpdate()}>Rafraichir la liste des histoires</button>
                 <table>
                     {localStorage.getItem('List').split(',').map(json => {
                         if (json!=="")
-                        return (<tr key={json}><td>{json}</td><td><input value="Download" type="button" onClick={() => this.downloadFile(json)}/></td></tr>);
+                        return (
+                            <tr key={json}>
+                                <td>{json}</td>
+                                <td><Link to="/Jeu"><input value="Jouer" type="button" onClick={() => this.setCurrent(json)}/></Link></td>
+                                <td><Link to="/Page"><input value="Modifier" type="button" onClick={() => this.setCurrent(json)}/></Link></td>
+                                <td><input value="Download" type="button" onClick={() => this.downloadFile(json)}/></td>
+                            </tr>);
                     })}
                 </table>
 
