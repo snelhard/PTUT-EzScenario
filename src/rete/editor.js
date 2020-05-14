@@ -9,7 +9,7 @@ import { MyControl } from "./Control";
 import { MyControlIntrigue} from "./ControlIntrigue";
 import { MyControlStart} from "./ControlStart";
 import { MyControlFin} from "./ControlFin";
-
+import { MyControlMessage} from "./ControlMessage";
 // import ConnectionReroutePlugin from 'rete-connection-reroute-plugin';
 
 var numSocket = new Rete.Socket("Number value");
@@ -60,7 +60,26 @@ class IntrigueBlock extends Rete.Component {
 	// 	console.log(node.data.greeting);
 	// }
 }
-
+class MessageBlock extends Rete.Component {
+	constructor() {
+		super("Message");
+	}
+	
+	builder(node) {
+		var inp = new Rete.Input("input", "", numSocket, true);
+		var out = new Rete.Output("choice1", "", numSocket, false);	
+		var ctrl = new MyControlMessage(this.editor, "greeting", "Intrigue");
+		
+		return node
+		.addInput(inp)
+		.addOutput(out)
+		.addControl(ctrl);
+	}
+	
+	// worker(node, inputs, outputs) {
+	// 	console.log(node.data.greeting);
+	// }
+}
 class StartBlock extends Rete.Component {
 	constructor() {
 		super("Start");
@@ -157,7 +176,7 @@ export const initEditor = function(container) {
 
 const init =  async ()  => {
 
-	var components = [new StartBlock(), new StoryBlock(), new IntrigueBlock(), new endBlock()];
+	var components = [new StartBlock(), new StoryBlock(),new MessageBlock(), new IntrigueBlock(), new endBlock()];
 	
 	editor.use(ConnectionPlugin);
 	editor.use(ReactRenderPlugin, {
