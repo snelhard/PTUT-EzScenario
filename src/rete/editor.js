@@ -217,7 +217,7 @@ const init = async () => {
 	// editor.destroy();
 	// engine.destroy();
 	// });
-	if (localStorage.getItem('Current') ==null){
+	if (localStorage.getItem('Current') ==null || localStorage.getItem('Current')=="") {
 		editor.fromJSON({ "id": "demo@0.1.0", "nodes": { "1": { "id": 1, "data": { "titre": "" }, "inputs": {}, "outputs": {}, "position": [-419.80039837027675, -61.903379254543886], "name": "Start" } } });
 	} else {
 		var json = JSON.parse(localStorage.getItem('Current')); // Parse du JSON

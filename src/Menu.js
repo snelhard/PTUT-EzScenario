@@ -8,6 +8,7 @@ import {
 
 import Page from './Page';
 import Personnage from './Personnage';
+import Jeu from './Jeu';
 import Editor from './Editor';
 import MesHistoires from './MesHistoires';
 
@@ -57,6 +58,9 @@ export default function BasicExample() {
             <Route path="/Personnage">
                 <Personnage />
             </Route>
+            <Route path="/Jeu">
+                <Jeu />
+            </Route>
             <Route path="/MesHistoires">
                 <MesHistoires />
             </Route>
@@ -71,7 +75,7 @@ export default function BasicExample() {
 function Menu() {
     return (
       <div>
-        {localStorage.setItem('Current',"")}
+      {localStorage.setItem('Current',"")}
         <h1>Bienvenue</h1>
       </div>
     );
