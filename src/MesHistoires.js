@@ -104,10 +104,10 @@ class MesHistoires extends React.Component{
         return (
             <div className="AjouterHistoire">
                 <h1>Ajouter un nouvelle Histoire</h1>
-                <input type="file" name="files[]" id="fileUpload" accept=".json" onChange={e => this.UploadJsonFile(e)}/>
+                <input type="file" data-testid="rc" name="files[]" id="fileUpload" accept=".json" onChange={e => this.UploadJsonFile(e)}/>
                 <div className="ListeHistoire">
                 <h1>Vos histoires</h1>
-                <button onClick={() => this.forceUpdate()}>Rafraichir la liste des histoires</button>
+                <button data-testid="br" onClick={() => this.forceUpdate()}>Rafraichir la liste des histoires</button>
                 <table>
                     {localStorage.getItem('List').split(',').map(json => {
                         if (json!=="")
