@@ -19,21 +19,21 @@ class StoryBlock extends Rete.Component {
 	constructor() {
 		super("Scene");
 	}
-	
+
 	builder(node) {
 		var inp = new Rete.Input("input", "", numSocket, true);
 		var out = new Rete.Output("choice1", "Choix 1", numSocket, false);
 		var out2 = new Rete.Output("choice2", "Choix 2", numSocket, false);
 		//var titre = new Rete.Control("Titre");
-		var ctrl = new MyControl(this.editor, "greeting", "","","","");
-		
+		var ctrl = new MyControl(this.editor, "greeting", "", "", "", "");
+
 		return node
-		.addInput(inp)
-		.addOutput(out)
-		.addOutput(out2)
-		.addControl(ctrl);
+			.addInput(inp)
+			.addOutput(out)
+			.addOutput(out2)
+			.addControl(ctrl);
 	}
-	
+
 	// worker(node, inputs, outputs) {
 	// 	console.log(node.data.greeting);
 	// }
@@ -42,20 +42,20 @@ class IntrigueBlock extends Rete.Component {
 	constructor() {
 		super("Intrigue");
 	}
-	
+
 	builder(node) {
 		var inp = new Rete.Input("input", "", numSocket, true);
 		var out = new Rete.Output("choice1", "Bonne reponse", numSocket, false);
 		var out2 = new Rete.Output("choice2", "Mauvaise réponse", numSocket, false);
 		var ctrl = new MyControlIntrigue(this.editor, "greeting", "Intrigue");
-		
+
 		return node
-		.addInput(inp)
-		.addOutput(out)
-		.addOutput(out2)
-		.addControl(ctrl);
+			.addInput(inp)
+			.addOutput(out)
+			.addOutput(out2)
+			.addControl(ctrl);
 	}
-	
+
 	// worker(node, inputs, outputs) {
 	// 	console.log(node.data.greeting);
 	// }
@@ -85,16 +85,16 @@ class StartBlock extends Rete.Component {
 		super("Start");
 		this.data.component = MyNode;
 	}
-	
+
 	builder(node) {
 		// var inp = new Rete.Input("num1", "Number", numSocket, true);
 		var out = new Rete.Output("out", "Number", numSocket);
 		var ctrl = new MyControlStart(this.editor, "greeting", "Start");
-		
+
 		return node.addOutput(out).addControl(ctrl);
 
 	}
-	
+
 	// worker(node, inputs, outputs) {
 	// 	console.log(node.data.greeting);
 	// }
@@ -104,61 +104,61 @@ class endBlock extends Rete.Component {
 		super("Fin");
 		this.data.component = MyNode;
 	}
-	
+
 	builder(node) {
 		var inp = new Rete.Input("input", "Number", numSocket, true);
 		var ctrl = new MyControlFin(this.editor, "greeting", "Fin");
-		
+
 		return node.addInput(inp).addControl(ctrl);
 	}
-	
+
 	// worker(node, inputs, outputs) {
 	// 	console.log(node.data.greeting);
 	// }
 }
- class AddComponent extends Rete.Component {
- 	constructor() {
- 		super("Add");
- 	}
-	
- 	builder(node) {
- 		var inp = new Rete.Input("num1", "Number", numSocket);
- 		var out = new Rete.Output("num", "Number", numSocket);
- 		var ctrl = new MyControl(this.editor, "greeting", "#username");
-		
- 		return node
- 		.addInput(inp)
-		.addOutput(out)
- 		.addControl(ctrl);
- 	}
-	
- 	worker(node, inputs, outputs) {
- 		console.log(node.data.greeting);
- 	}
- }
+class AddComponent extends Rete.Component {
+	constructor() {
+		super("Add");
+	}
 
- class RemoveComponent extends Rete.Component {
- 	constructor() {
- 		super("Remove");
- 	}
-	
- 	builder(node) {
- 		var inp = new Rete.Input("num1", "Number", numSocket);
- 		var inp2 = new Rete.Input("num2", "Number", numSocket);
- 		var inp3 = new Rete.Input("num3", "Number", numSocket);
- 		var inp4 = new Rete.Input("num4", "Number", numSocket);
- 		var out = new Rete.Output("num", "Number", numSocket);
- 		var ctrl = new MyControl(this.editor, "greeting", "#username");
-		
- 		return node
- 		.addInput(inp)
- 		.addInput(inp2)
- 		.addInput(inp3)
- 		.addInput(inp4)
- 		.addOutput(out)
- 		.addControl(ctrl);
- 	}
-	
+	builder(node) {
+		var inp = new Rete.Input("num1", "Number", numSocket);
+		var out = new Rete.Output("num", "Number", numSocket);
+		var ctrl = new MyControl(this.editor, "greeting", "#username");
+
+		return node
+			.addInput(inp)
+			.addOutput(out)
+			.addControl(ctrl);
+	}
+
+	worker(node, inputs, outputs) {
+		console.log(node.data.greeting);
+	}
+}
+
+class RemoveComponent extends Rete.Component {
+	constructor() {
+		super("Remove");
+	}
+
+	builder(node) {
+		var inp = new Rete.Input("num1", "Number", numSocket);
+		var inp2 = new Rete.Input("num2", "Number", numSocket);
+		var inp3 = new Rete.Input("num3", "Number", numSocket);
+		var inp4 = new Rete.Input("num4", "Number", numSocket);
+		var out = new Rete.Output("num", "Number", numSocket);
+		var ctrl = new MyControl(this.editor, "greeting", "#username");
+
+		return node
+			.addInput(inp)
+			.addInput(inp2)
+			.addInput(inp3)
+			.addInput(inp4)
+			.addOutput(out)
+			.addControl(ctrl);
+	}
+
 	worker(node, inputs, outputs) {
 		console.log("params");
 		console.log(node.data.greeting);
@@ -169,12 +169,12 @@ class endBlock extends Rete.Component {
 
 var editor;
 var engine;
-export const initEditor = function(container) {
+export const initEditor = function (container) {
 	editor = new Rete.NodeEditor("demo@0.1.0", container);
 	init();
 }
 
-const init =  async ()  => {
+const init = async () => {
 
 	var components = [new StartBlock(), new StoryBlock(),new MessageBlock(), new IntrigueBlock(), new endBlock()];
 	
@@ -184,14 +184,14 @@ const init =  async ()  => {
 	});
 	editor.use(ContextMenuPlugin);
 	// editor.use(ConnectionReroutePlugin);
-	
+
 	engine = new Rete.Engine("demo@0.1.0");
 
 	components.map(c => {
 		editor.register(c);
 		engine.register(c);
 	});
-	
+
 	editor.on("process nodecreated noderemoved connectioncreated connectionremoved nodedraged",
 		async () => {
 			console.log("process");
@@ -201,36 +201,36 @@ const init =  async ()  => {
 			console.log(data);
 		}
 	);
-		
+
 	editor.on('click', () => {
 		editor.selected.clear();
 		editor.nodes.map(n => n.update())
 	});
-	
+
 	editor.on('nodeselect', node => {
 		console.log("Selected Node :");
 		console.log(node);
-    });
+	});
 
-    // editor.on('destroy', () => {
-        // console.log("dest");
-        // editor.destroy();
-        // engine.destroy();
+	// editor.on('destroy', () => {
+	// console.log("dest");
+	// editor.destroy();
+	// engine.destroy();
 	// });
-	
-	editor.fromJSON({"id":"demo@0.1.0","nodes":{"1":{"id":1,"data":{"titre":""},"inputs":{},"outputs":{},"position":[-419.80039837027675,-61.903379254543886],"name":"Start"}}    });
-		
+
+	editor.fromJSON({ "id": "demo@0.1.0", "nodes": { "1": { "id": 1, "data": { "titre": "" }, "inputs": {}, "outputs": {}, "position": [-419.80039837027675, -61.903379254543886], "name": "Start" } } });
+
 	editor.view.resize();
 	console.log(editor.nodes);
 	AreaPlugin.zoomAt(editor);
 	editor.trigger("process");
 }
-	
+
 export const exportEditorData = () => {
-	
+
 	function retrieveSave() {
 		let editorData = editor.toJSON();
-		let newJson = { "file" : editorData };
+		let newJson = { "file": editorData };
 		return newJson;
 	}
 
@@ -239,7 +239,7 @@ export const exportEditorData = () => {
 	var debug = retrieveSave();
 
 	// crée le fichier json avec le contenu
-	const file = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});
+	const file = new Blob([JSON.stringify(debug, null, 2)], { type: 'application/json' });
 
 	// Ouverture du lecteur
 	var reader = new FileReader();
@@ -268,19 +268,18 @@ export const loadEditorData = (event) => {
 	for (var i = 0, f; f = files[i]; i++) {
 		var reader = new FileReader();
 
-		reader.onload = (function () {
+		reader.onload = (function () { // À chaque fois qu'une opération de lecture de fichier est menée à bien
 			return function (e) {
 				try {
-					json = JSON.parse(e.target.result);
+					json = JSON.parse(e.target.result); // Parse du JSON
 					var editorData = json.file;
-					console.log(JSON.stringify(editorData));
-					editor.fromJSON(editorData);
+					// console.log(JSON.stringify(editorData));
+					editor.fromJSON(editorData); // Fonction qui exploite les données du JSON pour les mettre dans l'éditeur (blocs, titres, énigmes...)
 				} catch (ex) {
-					console.log("Exception lors du parse du JSON = ", ex);
-					editor.fromJSON();
+					console.log("Exception lors du parse du JSON = ", ex); // Exception levée en cas d'erreur de parse, ou d'envoi de fichier incorrect (non-JSON)
 				}
 			}
 		})(f);
-		reader.readAsText(f);
+		reader.readAsText(f); // Lit le contenu du fichier f passé en paramètre grâce au FileReader
 	}
 }
