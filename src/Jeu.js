@@ -145,7 +145,7 @@ class Jeu extends React.Component{
             )
         }
 
-        
+          
         changerScene = (idScene) => {
            
             console.log("changement de scene vers :" + idScene);    
