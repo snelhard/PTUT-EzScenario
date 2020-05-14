@@ -9,9 +9,15 @@ import {
   import Jeu from './Jeu';
   
 class MesHistoires extends React.Component{
+
+    state={
+        nbHistoire:0
+    }
     constructor(props){
         super(props);
-        if (localStorage.getItem('List') ==null) localStorage.setItem('List',"");    
+        if (localStorage.getItem('List') ==null) localStorage.setItem('List',""); 
+        localStorage.setItem('Current',"");
+        this.state.nbHistoire=localStorage.getItem('List').split(',').length-1;   
     }
 
 
@@ -38,7 +44,9 @@ class MesHistoires extends React.Component{
                     var list = localStorage.getItem('List');
                     if (list !== null){
                         var array = list.split(',');
-                        if (!array.includes(FILE_KEY))localStorage.setItem('List',list+FILE_KEY+',');
+                        if (!array.includes(FILE_KEY)){
+                            localStorage.setItem('List',list+FILE_KEY+',');
+                        }
                     } else {
                         localStorage.setItem('List',FILE_KEY+',');
                     }
@@ -56,7 +64,7 @@ class MesHistoires extends React.Component{
                 function retrieveSave() {
                     return JSON.parse(localStorage.getItem(FILE_KEY))
                 }
-                // window.location.reload(false);
+                window.location.reload(false);
     }
 
     downloadFile(key) {
@@ -104,10 +112,9 @@ class MesHistoires extends React.Component{
         return (
             <div className="AjouterHistoire">
                 <h1>Ajouter un nouvelle Histoire</h1>
-                <input type="file" data-testid="rc" name="files[]" id="fileUpload" accept=".json" onChange={e => this.UploadJsonFile(e)}/>
-                <div className="ListeHistoire">
-                <h1>Vos histoires</h1>
-                <button data-testid="br" onClick={() => this.forceUpdate()}>Rafraichir la liste des histoires</button>
+                <input type="file" name="files[]" id="fileUpload" accept=".json" onChange={e => this.UploadJsonFile(e)}/>
+                <div className="ListeHistoire" >
+                <h1>Vous avez actuellement {this.state.nbHistoire} Histoires </h1>
                 <table>
                     {localStorage.getItem('List').split(',').map(json => {
                         if (json!=="")
