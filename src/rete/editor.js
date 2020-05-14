@@ -226,7 +226,9 @@ const init = async () => {
 		console.log(editorData)
 		editor.fromJSON(editorData);
 	}
-	
+	editor.on('zoom', ({ source }) => {
+		return source !== 'dblclick';
+	});
 	editor.view.resize();
 	console.log(editor.nodes);
 	AreaPlugin.zoomAt(editor);
