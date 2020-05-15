@@ -281,7 +281,7 @@ export const exportEditorData = () => {
 	element.href = URL.createObjectURL(file);
 
 
-	element.download = debug.file.nodes[1].data.titre + " - Story file.json";
+	element.download = debug.file.nodes[1].data.titre + "_-_Story_file.json";
 	console.log(debug)
 	FILE_KEY=element.download;
 	localStorage.setItem(FILE_KEY,JSON.stringify(debug));
