@@ -64,7 +64,7 @@ class MesHistoires extends React.Component{
                 function retrieveSave() {
                     return JSON.parse(localStorage.getItem(FILE_KEY))
                 }
-                window.location.reload(false);
+               window.location.reload(false);
     }
 
     downloadFile(key) {
@@ -78,7 +78,7 @@ class MesHistoires extends React.Component{
         
         const element = document.createElement("a");
         // Définie le contenu qui va être dans le fichier JSON
-        var debug = {nom: retrieveSave()};
+        var debug = {file: retrieveSave().file};
 
         // crée le fichier json avec le contenu
         const file = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});
@@ -115,7 +115,7 @@ class MesHistoires extends React.Component{
     setCurrent(key){
         localStorage.setItem('Current',localStorage.getItem(key));
     }
-
+    
 
     render() {
         return (
