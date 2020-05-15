@@ -116,56 +116,6 @@ class endBlock extends Rete.Component {
 	// 	console.log(node.data.greeting);
 	// }
 }
-class AddComponent extends Rete.Component {
-	constructor() {
-		super("Add");
-	}
-
-	builder(node) {
-		var inp = new Rete.Input("num1", "Number", numSocket);
-		var out = new Rete.Output("num", "Number", numSocket);
-		var ctrl = new MyControl(this.editor, "greeting", "#username");
-
-		return node
-			.addInput(inp)
-			.addOutput(out)
-			.addControl(ctrl);
-	}
-
-	worker(node, inputs, outputs) {
-		console.log(node.data.greeting);
-	}
-}
-
-class RemoveComponent extends Rete.Component {
-	constructor() {
-		super("Remove");
-	}
-
-	builder(node) {
-		var inp = new Rete.Input("num1", "Number", numSocket);
-		var inp2 = new Rete.Input("num2", "Number", numSocket);
-		var inp3 = new Rete.Input("num3", "Number", numSocket);
-		var inp4 = new Rete.Input("num4", "Number", numSocket);
-		var out = new Rete.Output("num", "Number", numSocket);
-		var ctrl = new MyControl(this.editor, "greeting", "#username");
-
-		return node
-			.addInput(inp)
-			.addInput(inp2)
-			.addInput(inp3)
-			.addInput(inp4)
-			.addOutput(out)
-			.addControl(ctrl);
-	}
-
-	worker(node, inputs, outputs) {
-		console.log("params");
-		console.log(node.data.greeting);
-		console.log(inputs);
-		console.log(outputs);
-	}
-}
 
 var editor;
 var engine;
@@ -229,6 +179,7 @@ const init = async () => {
 	editor.on('zoom', ({ source }) => {
 		return source !== 'dblclick';
 	});
+
 	editor.view.resize();
 	console.log(editor.nodes);
 	AreaPlugin.zoomAt(editor);
