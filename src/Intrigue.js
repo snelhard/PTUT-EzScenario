@@ -13,37 +13,33 @@ class Intrigue extends React.Component{
     
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-      }
+    }
 
     handleChange(event) {
         this.setState({value: event.target.value});
-      }
+    }
     
     handleSubmit(event) {
-        //alert(this.state.value);
-        var rep=""
-       if(this.state.value===this.props.details.data.reponse){
-            rep=0;
-        }else{
-            rep=1;
-        }
-        this.props.renvoiIdSuivant(rep);
-       
         event.preventDefault();
+        var rep = "";
+        if(this.state.value===this.props.details.data.reponse)
+            rep=0;
+        else
+            rep=1;
+        this.props.renvoiIdSuivant(rep);
     }
 
     render() {
         return (
             <div className="sceneJeu">
-                <h2 className="intrigueJeuTitre">{this.props.details.data.titre}</h2>
-                <p className="intrigueJeuTexte">{this.props.details.data.texte}</p>
+                <h2 className="intrigueJeuTitre" data-testid="titre">{this.props.details.data.titre}</h2>
+                <p className="intrigueJeuTexte" data-testid="texte">{this.props.details.data.texte}</p>
                 <div className="choixContainerJeu">
-
                     <form onSubmit={this.handleSubmit}>
-                        <p className="intrigueJeuQuestion">{this.props.details.data.enigme}</p>
+                        <p className="intrigueJeuQuestion" data-testid="enigme">{this.props.details.data.enigme}</p>
                         {/* <label>Réponse</label> */}
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
-                        <input type="submit" value="Valider" />
+                        <input type="text" value={this.state.value} onChange={this.handleChange} data-testid="reponseInput"/>
+                        <input type="submit" value="Valider" data-testid="buttonSubmit"/>
                     </form>
 
                     {/* {buttonQuitter} */}

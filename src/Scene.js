@@ -6,9 +6,9 @@ import {
 
 class Scene extends React.Component{
 
-    componentDidMount(){
-        console.log(this.props.details);
-    }
+    // componentDidMount(){
+    //     console.log(this.props.details);
+    // }
 
     render() {
         // let buttonQuitter;
@@ -17,20 +17,11 @@ class Scene extends React.Component{
         // }
         return (
             <div className="sceneJeu">
-                <h2 className="sceneJeuTitre">{this.props.details.data.titre}</h2>
-                <p className="sceneJeuTexte">{this.props.details.data.texte}</p>
+                <h2 className="sceneJeuTitre" data-testid="titre">{this.props.details.data.titre}</h2>
+                <p className="sceneJeuTexte" data-testid="texte">{this.props.details.data.texte}</p>
                 <div className="choixContainerJeu">
-
-                    
-                    {/* {this.props.details.output.num.connections.map( (choix, index) => (
-
-                        <button onClick={() => this.remonterChoix(choix.node)} key={index}>{this.props.details.nodes[choix.node].data.choix}</button>
-
-                    ))} */}
-
-                     
-                    <button onClick={() => this.remonterChoix(0)}>{this.props.details.data.choix1}</button>
-                    <button onClick={() => this.remonterChoix(1)}>{this.props.details.data.choix2}</button>
+                    <button onClick={() => this.remonterChoix(0)} data-testid="choix1">{this.props.details.data.choix1}</button>
+                    <button onClick={() => this.remonterChoix(1)} data-testid="choix2">{this.props.details.data.choix2}</button>
                     {/* {buttonQuitter} */}
                 </div>
             </div>
@@ -38,13 +29,6 @@ class Scene extends React.Component{
     }
 
     remonterChoix =(idChoix) => {
-        // let Idchoix  = this.props.details.outputs[idSuivant];
-        // {this.props.details.outputs.map( (choix, index) => {
-        //     if(index == idSuivant){
-        //         Idchoix = choix.num.connection.node;
-        //     }
-        // })};
-        // console.log( this.props.details.outputs.();
         console.log(idChoix)
         this.props.renvoiIdSuivant(idChoix);
     }

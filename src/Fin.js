@@ -17,9 +17,9 @@ class Fin extends React.Component{
         // }
         return (
             <div className="finJeu">
-                <h2 className="finJeuTitre">{this.props.details.data.titre}</h2>
-                <p className="finJeuTexte">{this.props.details.data.texte}</p>
-                <button onClick={() => this.props.history.push('/MesHistoires')}>Retour à Mes histoire</button>
+                <h2 className="finJeuTitre" data-testid="titre">{this.props.details.data.titre}</h2>
+                <p className="finJeuTexte" data-testid="texte">{this.props.details.data.texte}</p>
+                <button onClick={() => this.props.history.push('/MesHistoires')} data-testid="button">Retour à Mes histoire</button>
             </div>
         )
     }
