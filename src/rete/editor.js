@@ -236,6 +236,20 @@ const init = async () => {
 }
 
 export const exportEditorData = () => {
+	var FILE_KEY;
+	function addKey() {
+		var list = localStorage.getItem('List');
+		if (list !== null){
+			var array = list.split(',');
+			if (!array.includes(FILE_KEY)){
+				localStorage.setItem('List',list+FILE_KEY+',');
+			}
+		} else {
+			localStorage.setItem('List',FILE_KEY+',');
+		}
+
+
+	}
 
 	function retrieveSave() {
 		let editorData = editor.toJSON();
@@ -265,7 +279,15 @@ export const exportEditorData = () => {
 	// Renvoyer le resultat de la lecture du fichier sous forme txt
 	reader.readAsText(file);
 	element.href = URL.createObjectURL(file);
-	element.download = debug.file.nodes[1].data.titre + "_-_Story_file.json";
+
+
+	element.download = debug.file.nodes[1].data.titre + " - Story file.json";
+	console.log(debug)
+	FILE_KEY=element.download;
+	localStorage.setItem(FILE_KEY,JSON.stringify(debug));
+	console.log(debug)
+	addKey();
+
 	document.body.appendChild(element); // Required for this to work in FireFox
 	element.click();
 }

@@ -13,12 +13,25 @@ beforeEach(() => {
 afterEach(cleanup);
 
 test (' Affichage de mes histoires ', () => {
-  wrapper.debug();
   const RafraichirBoutton = wrapper.getByTestId('br');
   const fichiers = wrapper.getByTestId('rc');
   fireEvent.click(RafraichirBoutton);
 })
 
 test('should save to localStorage', () => {
-  console.log(localStorage.length);
+  localStorage.setItem('List','test.json,');
+  console.log(localStorage.getItem('List'));
+  
+
+  // const result = '{ "name":"John", "age":30, "car":"Peugeot"}';
+
+  // //set json object to storage 
+  // localStorage.setItem('user', JSON.stringify(result));
+
+  // //get object
+  // expect(result).toBe(JSON.parse(localStorage.getItem('user')));
+  // // const value = localStorage.getItem('user');
+
+  // //remove object
+  // localStorage.removeItem('user');
 })
