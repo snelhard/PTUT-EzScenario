@@ -103,6 +103,15 @@ class MesHistoires extends React.Component{
         element.click();
     }
 
+    supprimer(key){
+        var list = localStorage.getItem('List');
+        var tab = list.split(',');
+        tab.splice([tab.indexOf(key)],1);
+        localStorage.setItem('List',tab.toString());
+        localStorage.removeItem(key);
+        window.location.reload(false);
+    }
+
     setCurrent(key){
         localStorage.setItem('Current',localStorage.getItem(key));
     }
@@ -124,6 +133,7 @@ class MesHistoires extends React.Component{
                                 <td><Link to="/Jeu"><input value="Jouer" type="button" onClick={() => this.setCurrent(json)}/></Link></td>
                                 <td><Link to="/Page"><input value="Modifier" type="button" onClick={() => this.setCurrent(json)}/></Link></td>
                                 <td><input value="Download" type="button" onClick={() => this.downloadFile(json)}/></td>
+                                <td><input value="Supprimer" type="button" onClick={() => this.supprimer(json)}/></td>
                             </tr>);
                     })}
                 </table>
