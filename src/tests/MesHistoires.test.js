@@ -2,7 +2,7 @@ import React from "react";
 import { render, cleanup, fireEvent, findAllByTestId } from "@testing-library/react";
 
 import MesHistoires from '../MesHistoires'
-
+import {setCurrent} from '../MesHistoires'
 
 let wrapper = null;
 beforeEach(() => {
@@ -12,26 +12,24 @@ beforeEach(() => {
 
 afterEach(cleanup);
 
-test (' Affichage de mes histoires ', () => {
-  const RafraichirBoutton = wrapper.getByTestId('br');
-  const fichiers = wrapper.getByTestId('rc');
-  fireEvent.click(RafraichirBoutton);
-})
-
-test('should save to localStorage', () => {
-  localStorage.setItem('List','test.json,');
-  console.log(localStorage.getItem('List'));
+test (' Affichage des histoires présents dans le localstorage ', () => {
+  const UneHistoire = "Contenu de l'histoire"
+  localStorage.setItem('Histoire', UneHistoire);
+  console.log(localStorage.getItem('Histoire'));
+  expect(localStorage.getItem('Histoire')).toBe(UneHistoire);
   
+});
 
-  // const result = '{ "name":"John", "age":30, "car":"Peugeot"}';
+test('Sauvegarde dans le localstorage', () => {
+  const UploadJsonFileMockFn = jest.fn();
+  const Histoire = "Une exemple d'une histoire";
+});
 
-  // //set json object to storage 
-  // localStorage.setItem('user', JSON.stringify(result));
 
-  // //get object
-  // expect(result).toBe(JSON.parse(localStorage.getItem('user')));
-  // // const value = localStorage.getItem('user');
-
-  // //remove object
-  // localStorage.removeItem('user');
+test('selectionner une histoire', () => {
+  const UneHistoire = "Contenu de l'histoire"
+  localStorage.setItem('Histoire', UneHistoire);
+  const setCurrent = jest.fn(() => localStorage.setItem('Current',localStorage.getItem('Histoire')));
+  setCurrent();
+  expect(localStorage.getItem('Current')).toBe(localStorage.getItem('Histoire'));
 })
