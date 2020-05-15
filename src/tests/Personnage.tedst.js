@@ -21,7 +21,6 @@ const onSubmit = () => console.log('hi');
 
 test ('Bouton de validation du nom de perso visible' , () => {
   expect(wrapper.queryByTestId('BoutonNomPerso')).toBeTruthy();
-  expect(buttonValidation.tagName).toBe('BUTTON');
   expect(buttonValidation.textContent).toBe('Valider');
 })
 
