@@ -88,7 +88,7 @@ class StartBlock extends Rete.Component {
 
 	builder(node) {
 		// var inp = new Rete.Input("num1", "Number", numSocket, true);
-		var out = new Rete.Output("out", "Number", numSocket);
+		var out = new Rete.Output("out", "Number", numSocket, false);
 		var ctrl = new MyControlStart(this.editor, "greeting", "Start");
 
 		return node.addOutput(out).addControl(ctrl);

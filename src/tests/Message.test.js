@@ -1,7 +1,7 @@
 import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from 'react-router-dom';
-import Message from "../Message";
+import Message from "../Components/Message";
 
 let message;
 let button;
