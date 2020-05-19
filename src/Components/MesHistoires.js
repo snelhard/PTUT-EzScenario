@@ -143,8 +143,8 @@ class MesHistoires extends React.Component{
                         return (
                             <tr key={json}>
                                 <td>{json}</td>
-                                <td><Link to="/Jeu"><input value="Jouer" type="button" onClick={() => this.setCurrent(json)}/></Link></td>
-                                <td><Link to="/Page"><input value="Modifier" type="button" onClick={() => this.setCurrent(json)}/></Link></td>
+                                <td><Link to="/jeu"><input value="Jouer" type="button" onClick={() => this.setCurrent(json)}/></Link></td>
+                                <td><Link to="/editeur"><input value="Modifier" type="button" onClick={() => this.setCurrent(json)}/></Link></td>
                                 <td><input value="Télécharger" type="button" onClick={() => this.downloadFile(json)}/></td>
                                 <td><input value="Supprimer" type="button" onClick={() => this.supprimer(json)}/></td>
                             </tr>);
