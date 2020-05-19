@@ -1,9 +1,11 @@
 import React from 'react';
 import './App.css';
+
 import Scene from './Scene';
 import Intrigue from './Intrigue';
 import Fin from './Fin';
 import Message from './Message';
+
 class Jeu extends React.Component{
     state = {
       "file": {
@@ -96,19 +98,52 @@ class Jeu extends React.Component{
         firstScene :{
         }
     }
-    
+
     constructor(props){
         super(props);
+        
         this.state.file=JSON.parse(localStorage.getItem('Current')).file;
         console.log(this.state)
-        this.state.currentScene = this.state.file.nodes[1];
-        this.state.firstScene = this.state.currentScene
+        //for(this.state.file)
+
+       
+        this.state.firstScene=this.state.file.nodes[1];       
         this.state.currentScene = this.state.file.nodes[this.state.firstScene.outputs.out.connections[0].node];
         console.log(this.state.firstScene);
         console.log(this.state.firstScene.outputs.out.connections[0].node)
         // this.sceneConatainer = React.createRef();
     }
-
+  UNSAFE_componentWillMount(){     
+  //Verification robustesse
+  var nbNodes=0;
+  var Start=0;
+  let liste=[];
+  JSON.parse(JSON.stringify(this.state.file.nodes),(key,value)=> {
+    if(key==="id"){
+      nbNodes+=1;
+      liste.push(value);
+    } 
+  });     
+  console.log(this.state.file)
+  for(var i=0;i<nbNodes;i++){
+      if (this.state.file.nodes[liste[i].name==="Start"]){
+        alert('Votre histoire doit avoir un debut pour etre jouée');
+       // this.props.history.push('/MesHistoires');
+      }
+       if (this.state.file.nodes[liste[i]].name==="Scene"  || this.state.file.nodes[liste[i]].name==="Intrigue" ){
+           if (this.state.file.nodes[liste[i]].outputs.choice1.connections.length===0 || this.state.file.nodes[liste[i]].outputs.choice2.connections.length===0){
+            alert('Vos blocks intrigue ou scene doivent avoir un suite pour pouvoir etre jouée');
+            // this.props.history.push('/MesHistoires');
+           }
+       }
+       if (this.state.file.nodes[liste[i]].name==="Message"){
+        if (this.state.file.nodes[liste[i]].outputs.choice1.connections.length===0){
+          alert('Vos Messages doivent avoir un suite pour pouvoir etre jouée');
+            // this.props.history.push('/MesHistoires');
+        }
+       }
+  }    
+    }
     componentDidMount(){
         // update();
     }
