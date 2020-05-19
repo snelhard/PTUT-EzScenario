@@ -7,7 +7,7 @@ import {
     Link
   } from "react-router-dom";
   import Jeu from './Jeu';
-  
+  import Swal from 'sweetalert2'
 class MesHistoires extends React.Component{
 
     state={
@@ -104,12 +104,25 @@ class MesHistoires extends React.Component{
     }
 
     supprimer(key){
-        var list = localStorage.getItem('List');
-        var tab = list.split(',');
-        tab.splice([tab.indexOf(key)],1);
-        localStorage.setItem('List',tab.toString());
-        localStorage.removeItem(key);
-        window.location.reload(false);
+        Swal.fire({
+            title: 'Êtes vous sur de vouloir le supprimer ? ',
+            text: "Ce sera impossible de revenir en arrière",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Supprimer',
+            cancelButtonText: 'Annuler'
+          }).then((result) => {
+            if (result.value) {
+                var list = localStorage.getItem('List');
+                var tab = list.split(',');
+                tab.splice([tab.indexOf(key)],1);
+                localStorage.setItem('List',tab.toString());
+                localStorage.removeItem(key);
+                window.location.reload(false);
+            }
+          })
     }
 
     setCurrent(key){

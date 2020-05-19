@@ -10,6 +10,7 @@ import { MyControlIntrigue} from "./ControlIntrigue";
 import { MyControlStart} from "./ControlStart";
 import { MyControlFin} from "./ControlFin";
 import { MyControlMessage} from "./ControlMessage";
+import Swal from 'sweetalert2'
 // import ConnectionReroutePlugin from 'rete-connection-reroute-plugin';
 
 var numSocket = new Rete.Socket("Number value");
@@ -261,4 +262,47 @@ export const loadEditorData = (event) => {
 		})(f);
 		reader.readAsText(f); // Lit le contenu du fichier f passé en paramètre grâce au FileReader
 	}
+}
+
+export const saveEditorData = (event) => {
+	var FILE_KEY;
+	function addKey() {
+		var list = localStorage.getItem('List');
+		if (list !== null){
+			var array = list.split(',');
+			if (!array.includes(FILE_KEY)){
+				localStorage.setItem('List',list+FILE_KEY+',');
+			}
+		} else {
+			localStorage.setItem('List',FILE_KEY+',');
+		}
+
+
+	}
+
+	function retrieveSave() {
+		let editorData = editor.toJSON();
+		let newJson = { "file": editorData };
+		return newJson;
+	}
+
+	const element = document.createElement("a");
+	// Définie le contenu qui va être dans le fichier JSON
+	var debug = retrieveSave();
+
+	
+	console.log(debug)
+	FILE_KEY=debug.file.nodes[1].data.titre + "_-_Story_file.json";
+	localStorage.setItem(FILE_KEY,JSON.stringify(debug));
+	console.log(debug)
+	addKey();
+	document.body.appendChild(element); // Required for this to work in FireFox
+	element.click();
+
+	Swal.fire({
+		icon: 'success',
+		title: 'Votre fichier a bien été sauvegardé',
+		showConfirmButton: false,
+		timer: 1000
+	  })
 }
