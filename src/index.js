@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import Menu from './Menu';
+import Menu from './Components/Menu';
 // import index from "./js/index";
-import Page from './Page';
+// import Page from './Page';
 ReactDOM.render( <Menu/ > , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

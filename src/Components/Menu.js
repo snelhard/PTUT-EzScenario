@@ -6,8 +6,8 @@ import {
   Link
 } from "react-router-dom";
 
-import Page from './Page';
-import Personnage from './Personnage';
+// import Page from './Page';
+// import Personnage from './Personnage';
 import Jeu from './Jeu';
 import Editor from './Editor';
 import MesHistoires from './MesHistoires';
@@ -31,10 +31,10 @@ export default function BasicExample() {
             <Link to="/">Accueil</Link>
           </li>
           <li>
-              <Link to="/MesHistoires">Mes Histoires</Link>
+              <Link to="/meshistoires">Mes Histoires</Link>
           </li>
           <li>
-            <Link to="/Page">Création histoire</Link>
+            <Link to="/editeur">Création histoire</Link>
           </li>
         </ul>
 
@@ -52,16 +52,13 @@ export default function BasicExample() {
             <Route exact path="/">
               <Menu />
             </Route>
-            <Route path="/Page">
+            <Route path="/editeur">
               <Editor />
             </Route>
-            <Route path="/Personnage">
-                <Personnage />
-            </Route>
-            <Route path="/Jeu">
+            <Route path="/jeu">
                 <Jeu />
             </Route>
-            <Route path="/MesHistoires">
+            <Route path="/meshistoires">
                 <MesHistoires />
             </Route>
           </Switch>

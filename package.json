@@ -26,12 +26,13 @@
     "rete-context-menu-plugin": "^0.6.0-rc.1",
     "rete-react-render-plugin": "^0.2.0",
     "rete-vue-render-plugin": "^0.5.0",
+    "sweetalert2": "^9.10.13",
     "typings": "^2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "set CI=true &&react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

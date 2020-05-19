@@ -1,6 +1,5 @@
 import React from 'react';
-import './App.css';
-
+import '../App.css';
 import Scene from './Scene';
 import Intrigue from './Intrigue';
 import Fin from './Fin';
@@ -8,91 +7,91 @@ import Message from './Message';
 
 class Jeu extends React.Component{
     state = {
-      "file": {
-        "id": "demo@0.1.0",
-        "nodes": {
-          "1": {
-            "id": 1,
-            "data": {
-              "titre": "Debut"
-            },
-            "inputs": {},
-            "outputs": {
-              "out": {
-                "connections": [
-                  {
-                    "node": 2,
-                    "input": "input",
-                    "data": {}
-                  }
-                ]
-              }
-            },
-            "position": [
-              -419.80039837027675,
-              -61.903379254543886
-            ],
-            "name": "Start"
-          },
-          "2": {
-            "id": 2,
-            "data": {
-              "texte": "Milieu"
-            },
-            "inputs": {
-              "input": {
-                "connections": [
-                  {
-                    "node": 1,
-                    "output": "out",
-                    "data": {}
-                  }
-                ]
-              }
-            },
-            "outputs": {
-              "choice1": {
-                "connections": [
-                  {
-                    "node": 3,
-                    "input": "input",
-                    "data": {}
-                  }
-                ]
-              }
-            },
-            "position": [
-              -88.72922817376633,
-              -75.19785955293125
-            ],
-            "name": "Message"
-          },
-          "3": {
-            "id": 3,
-            "data": {
-              "titre": "Fin",
-              "texte": "Fin"
-            },
-            "inputs": {
-              "input": {
-                "connections": [
-                  {
-                    "node": 2,
-                    "output": "choice1",
-                    "data": {}
-                  }
-                ]
-              }
-            },
-            "outputs": {},
-            "position": [
-              247.0670603121046,
-              -82.0763918177984
-            ],
-            "name": "Fin"
-          }
-        }
-      },
+      // "file": {
+      //   "id": "demo@0.1.0",
+      //   "nodes": {
+      //     "1": {
+      //       "id": 1,
+      //       "data": {
+      //         "titre": "Debut"
+      //       },
+      //       "inputs": {},
+      //       "outputs": {
+      //         "out": {
+      //           "connections": [
+      //             {
+      //               "node": 2,
+      //               "input": "input",
+      //               "data": {}
+      //             }
+      //           ]
+      //         }
+      //       },
+      //       "position": [
+      //         -419.80039837027675,
+      //         -61.903379254543886
+      //       ],
+      //       "name": "Start"
+      //     },
+      //     "2": {
+      //       "id": 2,
+      //       "data": {
+      //         "texte": "Milieu"
+      //       },
+      //       "inputs": {
+      //         "input": {
+      //           "connections": [
+      //             {
+      //               "node": 1,
+      //               "output": "out",
+      //               "data": {}
+      //             }
+      //           ]
+      //         }
+      //       },
+      //       "outputs": {
+      //         "choice1": {
+      //           "connections": [
+      //             {
+      //               "node": 3,
+      //               "input": "input",
+      //               "data": {}
+      //             }
+      //           ]
+      //         }
+      //       },
+      //       "position": [
+      //         -88.72922817376633,
+      //         -75.19785955293125
+      //       ],
+      //       "name": "Message"
+      //     },
+      //     "3": {
+      //       "id": 3,
+      //       "data": {
+      //         "titre": "Fin",
+      //         "texte": "Fin"
+      //       },
+      //       "inputs": {
+      //         "input": {
+      //           "connections": [
+      //             {
+      //               "node": 2,
+      //               "output": "choice1",
+      //               "data": {}
+      //             }
+      //           ]
+      //         }
+      //       },
+      //       "outputs": {},
+      //       "position": [
+      //         247.0670603121046,
+      //         -82.0763918177984
+      //       ],
+      //       "name": "Fin"
+      //     }
+      //   }
+      // },
         currentScene: {
         },
         firstScene :{
