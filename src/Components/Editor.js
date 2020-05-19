@@ -1,5 +1,6 @@
 import React from "react";
-import { initEditor, exportEditorData, loadEditorData } from "./rete/editor";
+import '../App.css';
+import { initEditor, exportEditorData, loadEditorData } from "../rete/editor";
 import { read } from "fs";
 
 // import "./styles.css";

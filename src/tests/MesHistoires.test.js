@@ -1,7 +1,7 @@
 import React from "react";
 import { render, cleanup, fireEvent, findAllByTestId } from "@testing-library/react";
 
-import MesHistoires from '../MesHistoires';
+import MesHistoires from '../Components/MesHistoires';
 import { MemoryRouter } from "react-router-dom";
 
 let wrapper = null;
