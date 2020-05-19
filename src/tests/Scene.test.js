@@ -22,10 +22,6 @@ describe('Scene', () => {
             </MemoryRouter>
         );
     });
-    afterEach(() => {
-        cleanup();
-        renvoiIdSuivant.mockClear();
-    }); 
 
     it('Affichage de la scene', () => {
         expect(scene.getByTestId('titre').textContent).toEqual(tmp.data.titre);
@@ -48,6 +44,10 @@ describe('Scene', () => {
         expect(renvoiIdSuivant).toHaveBeenCalledWith(1);
     });
        
+    afterEach(() => {
+        cleanup();
+        renvoiIdSuivant.mockClear();
+    }); 
 });
 
 

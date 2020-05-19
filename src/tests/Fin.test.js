@@ -10,7 +10,7 @@ const tmp = {
         texte: "texte",
     }
 }
-describe('Scene', () => {
+describe('Fin', () => {
     beforeEach(() => {
         fin = render(
             <MemoryRouter>
@@ -18,18 +18,19 @@ describe('Scene', () => {
             </MemoryRouter>
         );
     });
-    afterEach(() => {
-        cleanup();
-    });
     
     it('Affichage de la fin' , () => {
         expect(fin.getByTestId('titre').textContent).toEqual(tmp.data.titre);
         expect(fin.getByTestId('texte').textContent).toEqual(tmp.data.texte);
     });
 
-    it('Affichage de la fin' , () => {
+    it('Quitter' , () => {
         let button = fin.getByTestId('button');
         fireEvent.click(button);
         fin.debug();
+    });
+    
+    afterEach(() => {
+        cleanup();
     });
 });
