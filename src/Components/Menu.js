@@ -72,7 +72,6 @@ export default function BasicExample() {
 function Menu() {
     return (
       <div>
-      {localStorage.setItem('Current',"")}
         <h1>Bienvenue</h1>
       </div>
     );

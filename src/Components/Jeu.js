@@ -146,6 +146,10 @@ class Jeu extends React.Component{
     componentDidMount(){
         // update();
     }
+
+    componentWillUnmount() {
+        localStorage.setItem('Current',"");
+    }
     
     render() {
         let Current;
@@ -208,10 +212,11 @@ class Jeu extends React.Component{
         }
 
         gererSauvegarde = () => {
-            // Vérifie qu'une sauvegarde existe est qu'elle n'es pas vide)
+            // Définie la clef d'accès au local storage (titre de l'histoire)
             var KEY = this.state.firstScene.data.titre+'.save';
-
+            // Vérifie qu'une sauvegarde existe est qu'elle n'est pas vide
             if(localStorage.getItem(KEY)!=="" && localStorage.getItem(KEY)!==null) {
+                // Affiche un message comme quoi une sauvegarde existe déjà et propose à l'utilisateur de faire un choix
                 Swal.fire({
                     title: 'Une sauvegarde pour cette histoire existe déjà ...',
                     text: "Voulez vous reprendre la sauvegarde déjà existante ?",
@@ -223,16 +228,19 @@ class Jeu extends React.Component{
                     cancelButtonText: 'Supprimer'
                   }).then((result) => {
                     if (result.value) {
+                        // Récupère les éléments de sauvegarde stocké dans local storage et crée un tableau
                         var tab = localStorage.getItem(KEY).split(',');
-                        console.log(tab)
+                        // Définie quelle sera la scène suivante (length-2 car -1 ="" car .split prend ce qui se trouve après l'élément limite " , ")
                         var sceneSuivante = this.state.file.nodes[tab[tab.length-2]];
-                        console.log(tab[tab.length-2])
+                        // Met à jour la scène courrante 
                         this.setState({currentScene: sceneSuivante})
                     } else {
+                        // Réinitialise la valeur stocké dans le local storage pour la clef KEY
                         localStorage.setItem(KEY,"");
                     }
                   })
             } else {
+                // Initialise la valeur du local storage pour la clef KEY
                 localStorage.setItem(KEY,"");
             }
     

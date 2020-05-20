@@ -16,7 +16,6 @@ class MesHistoires extends React.Component{
     constructor(props){
         super(props);
         if (localStorage.getItem('List') ==null) localStorage.setItem('List',""); 
-        localStorage.setItem('Current',"");
         this.state.nbHistoire=localStorage.getItem('List').split(',').length-1;   
     }
 

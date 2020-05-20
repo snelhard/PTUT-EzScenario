@@ -18,6 +18,7 @@ class Editor extends React.Component {
 
   componentWillUnmount() {
     console.log("unmounting");
+    localStorage.setItem('Current',"");
   }
 
   render() {
