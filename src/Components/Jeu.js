@@ -4,7 +4,10 @@ import Scene from './Scene';
 import Intrigue from './Intrigue';
 import Fin from './Fin';
 import Message from './Message';
-
+import {
+    withRouter
+  } from 'react-router-dom';
+import Swal from 'sweetalert2'
 class Jeu extends React.Component{
     state = {
       // "file": {
@@ -104,14 +107,15 @@ class Jeu extends React.Component{
         this.state.file=JSON.parse(localStorage.getItem('Current')).file;
         console.log(this.state)
         //for(this.state.file)
-
+        this.state.firstScene=this.state.file.nodes[1];
+        this.state.currentScene = this.state.file.nodes[this.state.firstScene.outputs.out.connections[0].node];       
        
-        this.state.firstScene=this.state.file.nodes[1];       
-        this.state.currentScene = this.state.file.nodes[this.state.firstScene.outputs.out.connections[0].node];
-        console.log(this.state.firstScene);
-        console.log(this.state.firstScene.outputs.out.connections[0].node)
+       
         // this.sceneConatainer = React.createRef();
     }
+
+
+
   UNSAFE_componentWillMount(){     
   //Verification robustesse
   var nbNodes=0;
@@ -124,21 +128,27 @@ class Jeu extends React.Component{
     } 
   });     
   console.log(this.state.file)
+
   for(var i=0;i<nbNodes;i++){
-      if (this.state.file.nodes[liste[i].name==="Start"]){
-        alert('Votre histoire doit avoir un debut pour etre jouée');
-       // this.props.history.push('/MesHistoires');
-      }
+       
        if (this.state.file.nodes[liste[i]].name==="Scene"  || this.state.file.nodes[liste[i]].name==="Intrigue" ){
            if (this.state.file.nodes[liste[i]].outputs.choice1.connections.length===0 || this.state.file.nodes[liste[i]].outputs.choice2.connections.length===0){
-            alert('Vos blocks intrigue ou scene doivent avoir un suite pour pouvoir etre jouée');
-            // this.props.history.push('/MesHistoires');
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vos blocks intrigue ou scene doivent avoir une suite pour pouvoir etre jouée',
+              })
+             this.props.history.push('/MesHistoires');
            }
        }
        if (this.state.file.nodes[liste[i]].name==="Message"){
         if (this.state.file.nodes[liste[i]].outputs.choice1.connections.length===0){
-          alert('Vos Messages doivent avoir un suite pour pouvoir etre jouée');
-            // this.props.history.push('/MesHistoires');
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vos Messages doivent avoir un suite pour pouvoir etre jouée',
+              })
+         this.props.history.push('/MesHistoires');
         }
        }
   }    
@@ -204,4 +214,4 @@ class Jeu extends React.Component{
     }
 
     
-    export default Jeu;
+    export default withRouter(Jeu);
