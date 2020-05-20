@@ -4,14 +4,10 @@ import Scene from './Scene';
 import Intrigue from './Intrigue';
 import Fin from './Fin';
 import Message from './Message';
-<<<<<<< HEAD
 import {
     withRouter
   } from 'react-router-dom';
-import Swal from 'sweetalert2'
-=======
 import Swal from 'sweetalert2';
->>>>>>> 15d6dd9d4d1cc2b117a1adf25285bcc4f3157843
 class Jeu extends React.Component{
     state = {
       // "file": {
