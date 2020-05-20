@@ -4,7 +4,7 @@ import Scene from './Scene';
 import Intrigue from './Intrigue';
 import Fin from './Fin';
 import Message from './Message';
-
+import Swal from 'sweetalert2';
 class Jeu extends React.Component{
     state = {
       // "file": {
@@ -100,16 +100,16 @@ class Jeu extends React.Component{
 
     constructor(props){
         super(props);
-        
+
         this.state.file=JSON.parse(localStorage.getItem('Current')).file;
         console.log(this.state)
         //for(this.state.file)
-
-       
         this.state.firstScene=this.state.file.nodes[1];       
         this.state.currentScene = this.state.file.nodes[this.state.firstScene.outputs.out.connections[0].node];
         console.log(this.state.firstScene);
-        console.log(this.state.firstScene.outputs.out.connections[0].node)
+        console.log(this.state.firstScene.outputs.out.connections[0].node);
+        this.gererSauvegarde();
+        
         // this.sceneConatainer = React.createRef();
     }
   UNSAFE_componentWillMount(){     
@@ -162,7 +162,7 @@ class Jeu extends React.Component{
         if(this.state.currentScene.name==="Message"){
             Current = <Message renvoiIdSuivant={this.changerScene} details={this.state.currentScene}/>
         }
-
+            
         return (
             <div className="JeuContainer">
             <h1>~ {this.state.firstScene.data.titre} ~</h1>
@@ -171,7 +171,6 @@ class Jeu extends React.Component{
             {/* { this.mountScene } */}
 
             <div ref={this.sceneConatainer} />
-
             {/* <Scene renvoiIdSuivant={this.changerScene} details={this.state.currentScene}/> */}
 
             {/* <button onClick={ this.mountScene }>TEST</button> */}
@@ -181,7 +180,7 @@ class Jeu extends React.Component{
 
           
         changerScene = (idScene) => {
-           
+            
             console.log("changement de scene vers :" + idScene);    
             console.log(this.state.currentScene)
             var sceneSuivante=this.currentScene;
@@ -195,12 +194,51 @@ class Jeu extends React.Component{
 
 
             }
-                        this.setState({currentScene: sceneSuivante})                            
+                        this.setState({currentScene: sceneSuivante}) 
+                        this.Sauvegarder(sceneSuivante);                           
         //     let scenes = this.state.scenes.slice();
         //     const index = scenes.findIndex(function(scene){
         //         return scene.blockID === idScene
       
         }
+
+        Sauvegarder (sceneSuivante) {
+            var FILE_KEY=this.state.firstScene.data.titre+'.save';
+            localStorage.setItem(FILE_KEY,(localStorage.getItem(FILE_KEY).concat(sceneSuivante.id+',')));
+        }
+
+        gererSauvegarde = () => {
+            // Vérifie qu'une sauvegarde existe est qu'elle n'es pas vide)
+            var KEY = this.state.firstScene.data.titre+'.save';
+
+            if(localStorage.getItem(KEY)!=="" && localStorage.getItem(KEY)!==null) {
+                Swal.fire({
+                    title: 'Une sauvegarde pour cette histoire existe déjà ...',
+                    text: "Voulez vous reprendre la sauvegarde déjà existante ?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Reprendre',
+                    cancelButtonText: 'Supprimer'
+                  }).then((result) => {
+                    if (result.value) {
+                        var tab = localStorage.getItem(KEY).split(',');
+                        console.log(tab)
+                        var sceneSuivante = this.state.file.nodes[tab[tab.length-2]];
+                        console.log(tab[tab.length-2])
+                        this.setState({currentScene: sceneSuivante})
+                    } else {
+                        localStorage.setItem(KEY,"");
+                    }
+                  })
+            } else {
+                localStorage.setItem(KEY,"");
+            }
+    
+        }
+    
+
     }
 
     
