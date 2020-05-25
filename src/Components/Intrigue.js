@@ -38,7 +38,7 @@ class Intrigue extends React.Component{
                     <form onSubmit={this.handleSubmit}>
                         <p className="intrigueJeuQuestion" data-testid="enigme">{this.props.details.data.enigme}</p>
                         {/* <label>Réponse</label> */}
-                        <input type="text" value={this.state.value} onChange={this.handleChange} data-testid="reponseInput"/>
+                        <input type="number" value={this.state.value} onChange={this.handleChange} data-testid="reponseInput"/>
                         <input type="submit" value="Valider" data-testid="buttonSubmit"/>
                     </form>
 

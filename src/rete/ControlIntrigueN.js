@@ -31,13 +31,13 @@ class MyReactControl extends React.Component {
       <label>Titre</label><input value={this.state.titre} name="titre" onChange={this.onChange.bind(this)} style={{"width" : "100%"}}/> <br/>
       <label>Texte</label><input value={this.state.texte} name="texte" onChange={this.onChange.bind(this)} style={{"width" : "100%"}}/><br/>
       <label>Enigme</label><input value={this.state.enigme} name="enigme" onChange={this.onChange.bind(this)} style={{"width" : "100%"}}/> <br/>
-      <label>Reponse</label><input value={this.state.reponse} name="reponse" onChange={this.onChange.bind(this)} style={{"width" : "100%"}}/><br/>
+      <label>Reponse</label><input value={this.state.reponse} type="number" name="reponse" onChange={this.onChange.bind(this)} style={{"width" : "100%"}}/><br/>
       </div>
     );
   }
 }
 
-export class MyControlIntrigue extends Control {
+export class MyControlIntrigueN extends Control {
   constructor(emitter, key, titre, texte, enigme, reponse) {
     super(key);
     this.render = "react";

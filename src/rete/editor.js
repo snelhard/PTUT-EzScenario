@@ -6,7 +6,7 @@ import AreaPlugin from "rete-area-plugin";
 import { MyNode } from "./Node";
 import { MyNewNode } from "./MyNewNode";
 import { MyControl } from "./Control";
-import { MyControlIntrigue} from "./ControlIntrigue";
+import { MyControlIntrigueN} from "./ControlIntrigueN";
 import { MyControlStart} from "./ControlStart";
 import { MyControlFin} from "./ControlFin";
 import { MyControlMessage} from "./ControlMessage";
@@ -39,16 +39,16 @@ class StoryBlock extends Rete.Component {
 	// 	console.log(node.data.greeting);
 	// }
 }
-class IntrigueBlock extends Rete.Component {
+class IntrigueNBlock extends Rete.Component {
 	constructor() {
-		super("Intrigue");
+		super("Intrigue reponse numérique");
 	}
 
 	builder(node) {
 		var inp = new Rete.Input("input", "", numSocket, true);
 		var out = new Rete.Output("choice1", "Bonne reponse", numSocket, false);
 		var out2 = new Rete.Output("choice2", "Mauvaise réponse", numSocket, false);
-		var ctrl = new MyControlIntrigue(this.editor, "greeting", "Intrigue");
+		var ctrl = new MyControlIntrigueN(this.editor, "greeting", "Intrigue");
 
 		return node
 			.addInput(inp)
@@ -127,7 +127,7 @@ export const initEditor = function (container) {
 
 const init = async () => {
 
-	var components = [new StartBlock(), new StoryBlock(),new MessageBlock(), new IntrigueBlock(), new endBlock()];
+	var components = [new StartBlock(), new StoryBlock(),new MessageBlock(), new IntrigueNBlock(), new endBlock()];
 	
 	editor.use(ConnectionPlugin);
 	editor.use(ReactRenderPlugin, {
