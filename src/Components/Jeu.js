@@ -10,91 +10,6 @@ import {
 import Swal from 'sweetalert2';
 class Jeu extends React.Component{
     state = {
-      // "file": {
-      //   "id": "demo@0.1.0",
-      //   "nodes": {
-      //     "1": {
-      //       "id": 1,
-      //       "data": {
-      //         "titre": "Debut"
-      //       },
-      //       "inputs": {},
-      //       "outputs": {
-      //         "out": {
-      //           "connections": [
-      //             {
-      //               "node": 2,
-      //               "input": "input",
-      //               "data": {}
-      //             }
-      //           ]
-      //         }
-      //       },
-      //       "position": [
-      //         -419.80039837027675,
-      //         -61.903379254543886
-      //       ],
-      //       "name": "Start"
-      //     },
-      //     "2": {
-      //       "id": 2,
-      //       "data": {
-      //         "texte": "Milieu"
-      //       },
-      //       "inputs": {
-      //         "input": {
-      //           "connections": [
-      //             {
-      //               "node": 1,
-      //               "output": "out",
-      //               "data": {}
-      //             }
-      //           ]
-      //         }
-      //       },
-      //       "outputs": {
-      //         "choice1": {
-      //           "connections": [
-      //             {
-      //               "node": 3,
-      //               "input": "input",
-      //               "data": {}
-      //             }
-      //           ]
-      //         }
-      //       },
-      //       "position": [
-      //         -88.72922817376633,
-      //         -75.19785955293125
-      //       ],
-      //       "name": "Message"
-      //     },
-      //     "3": {
-      //       "id": 3,
-      //       "data": {
-      //         "titre": "Fin",
-      //         "texte": "Fin"
-      //       },
-      //       "inputs": {
-      //         "input": {
-      //           "connections": [
-      //             {
-      //               "node": 2,
-      //               "output": "choice1",
-      //               "data": {}
-      //             }
-      //           ]
-      //         }
-      //       },
-      //       "outputs": {},
-      //       "position": [
-      //         247.0670603121046,
-      //         -82.0763918177984
-      //       ],
-      //       "name": "Fin"
-      //     }
-      //   }
-      // },
         currentScene: {
         },
         firstScene :{
@@ -196,26 +111,46 @@ class Jeu extends React.Component{
 
           
         changerScene = (idScene) => {
+           
             
-            console.log("changement de scene vers :" + idScene);    
-            console.log(this.state.currentScene)
+            var tableauDeConnexions = JSON.stringify(this.state.currentScene.outputs)
+            let nbChoix = 0
+            for (let index = 0; index < tableauDeConnexions.length; index++) {
+                if ((tableauDeConnexions[index] === 'c') 
+                && (tableauDeConnexions[index+1] === 'h') 
+                && (tableauDeConnexions[index+2] === 'o')
+                && (tableauDeConnexions[index+3] === 'i')
+                && (tableauDeConnexions[index+4] === 'c')
+                && (tableauDeConnexions[index+5] === 'e')) {
+                    nbChoix++;
+                }
+            }
+            console.log("nombre de choix = "+nbChoix);
             var sceneSuivante=this.currentScene;
+           
             if (idScene===0) {
                 sceneSuivante =this.state.file.nodes[this.state.currentScene.outputs.choice1.connections[0].node];
-                console.log(this.state.currentScene.outputs.choice1.connections[0].node)
+                // console.log(this.state.currentScene.outputs.choice1.connections[0].node)
             }
             if (idScene===1){
                  sceneSuivante =this.state.file.nodes[this.state.currentScene.outputs.choice2.connections[0].node];
-                 console.log(this.state.currentScene.outputs.choice2.connections[0].node)
-
-
+                //  console.log(this.state.currentScene.outputs.choice2.connections[0].node)
             }
-                        this.setState({currentScene: sceneSuivante}) 
-                        this.Sauvegarder(sceneSuivante);                           
-        //     let scenes = this.state.scenes.slice();
-        //     const index = scenes.findIndex(function(scene){
-        //         return scene.blockID === idScene
-      
+            if (idScene===2){
+                sceneSuivante =this.state.file.nodes[this.state.currentScene.outputs.choice3.connections[0].node];
+                // console.log(this.state.currentScene.outputs.choice3.connections[0].node)
+           }
+           if (idScene===3){
+                sceneSuivante =this.state.file.nodes[this.state.currentScene.outputs.choice4.connections[0].node];
+                // console.log(this.state.currentScene.outputs.choice4.connections[0].node)
+           }
+           if (idScene===4){
+                sceneSuivante =this.state.file.nodes[this.state.currentScene.outputs.choice5.connections[0].node];
+                // console.log(this.state.currentScene.outputs.choice5.connections[0].node)
+           }
+        
+           this.setState({currentScene: sceneSuivante});
+           this.Sauvegarder(sceneSuivante);
         }
 
         Sauvegarder (sceneSuivante) {
