@@ -22,19 +22,31 @@ class StoryBlock extends Rete.Component {
 	}
 
 	builder(node) {
+		const nbSorties = prompt('Nombre de choix');
+		
+		let listeOutput = [];
+		for (let i = 0; i < nbSorties; i++) {
+			listeOutput.push( 
+				new Rete.Output("choice"+(i+1), "Choix "+(i+1), numSocket, false)
+			);
+		}
+
+		for (let i = 0; i < listeOutput.length; i++) {
+			node.addOutput(listeOutput[i]);
+		}
 		var inp = new Rete.Input("input", "", numSocket, true);
-		var out = new Rete.Output("choice1", "Choix 1", numSocket, false);
-		var out2 = new Rete.Output("choice2", "Choix 2", numSocket, false);
+		//var out = new Rete.Output("choice1", "Choix 1", numSocket, false);
+		//var out2 = new Rete.Output("choice2", "Choix 2", numSocket, false);
 		//var titre = new Rete.Control("Titre");
-		var ctrl = new MyControl(this.editor, "greeting", "", "", "", "");
+		var ctrl = new MyControl(this.editor, "greeting", nbSorties, "", "", "");
 
 		return node
 			.addInput(inp)
-			.addOutput(out)
-			.addOutput(out2)
+			//.addOutput(out)
+			//.addOutput(out2)
 			.addControl(ctrl);
 	}
-
+	
 	// worker(node, inputs, outputs) {
 	// 	console.log(node.data.greeting);
 	// }
