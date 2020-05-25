@@ -4,6 +4,7 @@ import Scene from './Scene';
 import Intrigue from './Intrigue';
 import Fin from './Fin';
 import Message from './Message';
+import Qcm from './Qcm';
 import {
     withRouter
   } from 'react-router-dom';
@@ -177,6 +178,9 @@ class Jeu extends React.Component{
         }
         if(this.state.currentScene.name==="Message"){
             Current = <Message renvoiIdSuivant={this.changerScene} details={this.state.currentScene}/>
+        }
+        if(this.state.currentScene.name==="Qcm"){
+            Current = <Qcm renvoiIdSuivant={this.changerScene} details={this.state.currentScene}/>
         }
             
         return (

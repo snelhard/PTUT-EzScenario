@@ -27,7 +27,7 @@ describe('Fin', () => {
     it('Quitter' , () => {
         let button = fin.getByTestId('button');
         fireEvent.click(button);
-        fin.debug();
+        // fin.debug();
     });
     
     afterEach(() => {

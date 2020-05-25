@@ -7,7 +7,7 @@ import {
 class Fin extends React.Component{
 
     componentDidMount(){
-        console.log(this.props.details);
+        // console.log(this.props.details);
     }
 
     render() {

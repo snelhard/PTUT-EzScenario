@@ -21,7 +21,7 @@ class Scene extends React.Component{
     }
 
     remonterChoix =(idChoix) => {
-        console.log(idChoix)
+        // console.log(idChoix)
         this.props.renvoiIdSuivant(idChoix);
     }
 }
