@@ -12,6 +12,7 @@ import { MyControlFin} from "./ControlFin";
 import { MyControlMessage} from "./ControlMessage";
 import { MyControlQcm} from "./ControlQcm";
 import Swal from 'sweetalert2'
+
 // import ConnectionReroutePlugin from 'rete-connection-reroute-plugin';
 
 var numSocket = new Rete.Socket("Number value");
@@ -400,4 +401,9 @@ export const saveEditorData = (event) => {
 		}
 		}
 
+}
+
+export const resetEditor = () => {
+	localStorage.setItem('Current', "");
+	window.location.reload(true);
 }
