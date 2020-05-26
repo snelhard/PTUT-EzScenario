@@ -31,23 +31,25 @@ class StoryBlock extends Rete.Component {
 		let nbSorties = 0
 		
 		nbSorties = typeof(testChoix1) == "undefined" ? prompt('Nombre de choix (2 à 5)') : 99;
+		let nbSoriesint = Number(nbSorties)
 
-		while(nbSorties>5 || nbSorties<2) {
+		while(nbSoriesint>5 || nbSoriesint<2 || isNaN(nbSoriesint)) {
 			nbSorties = prompt("Veuillez saisir une valeur comprise entre 2 et 5 inclus.")
+			nbSoriesint = Number(nbSorties)
 		}
 
-		if (nbSorties==99) {
-			nbSorties=0
+		if (nbSoriesint==99) {
+			nbSoriesint=0
 			if (typeof(testChoix1) != "undefined") {
-				nbSorties++
+				nbSoriesint++
 				if (typeof(testChoix2) != "undefined") {
-					nbSorties++
+					nbSoriesint++
 					if (typeof(testChoix3) != "undefined") {
-						nbSorties++
+						nbSoriesint++
 						if (typeof(testChoix4) != "undefined") {
-							nbSorties++
+							nbSoriesint++
 							if (typeof(testChoix5) != "undefined") {
-								nbSorties++
+								nbSoriesint++
 							}
 						}
 					}
@@ -64,7 +66,6 @@ class StoryBlock extends Rete.Component {
 			);
 		}
 
-		
 		var inp = new Rete.Input("input", "", defaultSocket, true);
 		var ctrl = new MyControl(this.editor, "Paramètres Scene", nbSorties, "", "", "");
 
@@ -377,18 +378,30 @@ export const resetEditor = () => {
 		title: "êtes vous sûr?",
 		text: "Vous perderez l'histoire présente dans l'editeur !",
 		icon: "warning",
-		showConfirmButton: false,
+		showConfirmButton: true,
+		showCancelButton: true,
 		confirmButtonColor: '#3085d6',
   	cancelButtonColor: '#d33',
-  	confirmButtonText: 'Oui supprimer !',
+		confirmButtonText: 'Confimer',
+		cancelButtonText:'Annuler',
 		dangerMode: true,
-	}).then(function(isConfirm) {
-		if (isConfirm) {
+	}).then((result) => {
+		if (result.value) {
 			localStorage.setItem('Current', "");
 			window.location.reload(true);
 		} else {
-			Swal.fire("Annulé", "Reprise de l'histoire dans l'editeur", "error");
+			Swal.fire("Annulé", "Reprise de l'histoire dans l'editeur", "error")
 		}
 	})
+	
+	
+	// .then(function(isConfirm) {
+	// 	if (isConfirm ) {
+	// 		localStorage.setItem('Current', "");
+	// 		window.location.reload(true);
+	// 	} else {
+	// 		Swal.fire("Annulé", "Reprise de l'histoire dans l'editeur", "error");
+	// 	}
+	// })
 		
 }
