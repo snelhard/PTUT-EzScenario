@@ -28,9 +28,6 @@ textarea{
   margin: auto;
 } */
 
-.creation-personnage{
-
-}
 .creation-personnage > div{
   display: flex;
   flex-direction: column;
@@ -131,7 +128,7 @@ textarea{
   margin-right: 20px;
 }
 
-button {
+button:not(#bouton) {
   margin: 10px;
   background: #444444;
   color: white;
@@ -144,7 +141,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button:hover:not(#bouton) {
   background: #9c9c9c;
 }
 
