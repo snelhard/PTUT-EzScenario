@@ -31,7 +31,11 @@ class StoryBlock extends Rete.Component {
 		const testChoix5 = node.data.choix5
 		let nbSorties = 0
 		
-		nbSorties = typeof(testChoix1) == "undefined" ? prompt('Nombre de choix') : 99;
+		nbSorties = typeof(testChoix1) == "undefined" ? prompt('Nombre de choix (2 à 5)') : 99;
+
+		while(nbSorties>5 || nbSorties<2) {
+			nbSorties = prompt("Veuillez saisir une valeur comprise entre 2 et 5 inclus.")
+		}
 
 		if (nbSorties==99) {
 			nbSorties=0
