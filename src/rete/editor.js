@@ -10,6 +10,7 @@ import { MyControlIntrigueN} from "./ControlIntrigueN";
 import { MyControlStart} from "./ControlStart";
 import { MyControlFin} from "./ControlFin";
 import { MyControlMessage} from "./ControlMessage";
+import { MyControlQcm} from "./ControlQcm";
 import Swal from 'sweetalert2'
 // import ConnectionReroutePlugin from 'rete-connection-reroute-plugin';
 
@@ -140,6 +141,28 @@ class StartBlock extends Rete.Component {
 	// 	console.log(node.data.greeting);
 	// }
 }
+class QcmBlock extends Rete.Component {
+	constructor() {
+		super("Qcm");
+	}
+
+	builder(node) {
+		var inp = new Rete.Input("input", "", numSocket, true);
+		var out = new Rete.Output("choice1", "Bonne réponse", numSocket, false);
+		var out2 = new Rete.Output("choice2", "Mauvaise réponse", numSocket, false);
+		var ctrl = new MyControlQcm(this.editor, "greeting", "", "", "", "", false, "", false, "", false, "", false);
+
+		return node
+			.addInput(inp)
+			.addOutput(out)
+			.addOutput(out2)
+			.addControl(ctrl);
+	}
+
+	// worker(node, inputs, outputs) {
+	// 	console.log(node.data.greeting);
+	// }
+}
 class endBlock extends Rete.Component {
 	constructor() {
 		super("Fin");
@@ -167,7 +190,7 @@ export const initEditor = function (container) {
 
 const init = async () => {
 
-	var components = [new StartBlock(), new StoryBlock(),new MessageBlock(), new IntrigueNBlock(), new endBlock()];
+	var components = [new StartBlock(), new StoryBlock(),new MessageBlock(), new IntrigueNBlock(), new QcmBlock(), new endBlock()];
 	
 	editor.use(ConnectionPlugin);
 	editor.use(ReactRenderPlugin, {
