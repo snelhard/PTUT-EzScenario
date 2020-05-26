@@ -142,12 +142,20 @@ class Jeu extends React.Component{
            }
         
            this.setState({currentScene: sceneSuivante});
-           this.Sauvegarder(sceneSuivante);
+           if (sceneSuivante.name!== "Fin")
+            this.Sauvegarder(sceneSuivante);
+           else
+            this.supprimerSauvegarde();
         }
 
         Sauvegarder (sceneSuivante) {
             var FILE_KEY=this.state.firstScene.data.titre+'.save';
             localStorage.setItem(FILE_KEY,(localStorage.getItem(FILE_KEY).concat(sceneSuivante.id+',')));
+        }
+
+        supprimerSauvegarde () {
+            var FILE_KEY=this.state.firstScene.data.titre+'.save';
+            localStorage.setItem(FILE_KEY,'');
         }
 
         gererSauvegarde = () => {
