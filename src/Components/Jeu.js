@@ -117,19 +117,7 @@ class Jeu extends React.Component{
         changerScene = (idScene) => {
            
             
-            var tableauDeConnexions = JSON.stringify(this.state.currentScene.outputs)
-            let nbChoix = 0
-            for (let index = 0; index < tableauDeConnexions.length - 5; index++) {
-                if ((tableauDeConnexions[index] === 'c') 
-                && (tableauDeConnexions[index+1] === 'h') 
-                && (tableauDeConnexions[index+2] === 'o')
-                && (tableauDeConnexions[index+3] === 'i')
-                && (tableauDeConnexions[index+4] === 'c')
-                && (tableauDeConnexions[index+5] === 'e')) {
-                    nbChoix++;
-                }
-            }
-            console.log("nombre de choix = "+nbChoix);
+            
             var sceneSuivante=this.currentScene;
            
             if (idScene===0) {
@@ -154,12 +142,20 @@ class Jeu extends React.Component{
            }
         
            this.setState({currentScene: sceneSuivante});
-           this.Sauvegarder(sceneSuivante);
+           if (sceneSuivante.name!== "Fin")
+            this.Sauvegarder(sceneSuivante);
+           else
+            this.supprimerSauvegarde();
         }
 
         Sauvegarder (sceneSuivante) {
             var FILE_KEY=this.state.firstScene.data.titre+'.save';
             localStorage.setItem(FILE_KEY,(localStorage.getItem(FILE_KEY).concat(sceneSuivante.id+',')));
+        }
+
+        supprimerSauvegarde () {
+            var FILE_KEY=this.state.firstScene.data.titre+'.save';
+            localStorage.setItem(FILE_KEY,'');
         }
 
         gererSauvegarde = () => {
