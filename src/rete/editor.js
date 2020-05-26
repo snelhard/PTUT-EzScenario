@@ -22,29 +22,57 @@ class StoryBlock extends Rete.Component {
 	}
 
 	builder(node) {
-		const nbSorties = prompt('Nombre de choix');
+
+		const testChoix1 = node.data.choix1
+		const testChoix2 = node.data.choix2
+		const testChoix3 = node.data.choix3
+		const testChoix4 = node.data.choix4
+		const testChoix5 = node.data.choix5
+		let nbSorties = 0
 		
+		nbSorties = typeof(testChoix1) == "undefined" ? prompt('Nombre de choix') : 99;
+
+		if (nbSorties==99) {
+			nbSorties=0
+			if (typeof(testChoix1) != "undefined") {
+				nbSorties++
+				if (typeof(testChoix2) != "undefined") {
+					nbSorties++
+					if (typeof(testChoix3) != "undefined") {
+						nbSorties++
+						if (typeof(testChoix4) != "undefined") {
+							nbSorties++
+							if (typeof(testChoix5) != "undefined") {
+								nbSorties++
+							}
+						}
+					}
+				}
+			}
+		}
+
+
+		console.log(`type du node ${typeof (node)}`)
 		let listeOutput = [];
 		for (let i = 0; i < nbSorties; i++) {
 			listeOutput.push( 
-				new Rete.Output("choice"+(i+1), "Choix "+(i+1), numSocket, false)
+				new Rete.Output("choice"+(i+1), "Choix"+(i+1), numSocket, false)
 			);
 		}
 
-		for (let i = 0; i < listeOutput.length; i++) {
-			node.addOutput(listeOutput[i]);
-		}
+		
 		var inp = new Rete.Input("input", "", numSocket, true);
 		//var out = new Rete.Output("choice1", "Choix 1", numSocket, false);
 		//var out2 = new Rete.Output("choice2", "Choix 2", numSocket, false);
 		//var titre = new Rete.Control("Titre");
 		var ctrl = new MyControl(this.editor, "greeting", nbSorties, "", "", "");
 
-		return node
-			.addInput(inp)
-			//.addOutput(out)
-			//.addOutput(out2)
-			.addControl(ctrl);
+		node.addInput(inp)
+		for (let i = 0; i < listeOutput.length; i++) {
+				node.addOutput(listeOutput[i]);
+		}
+		node.addControl(ctrl);
+		return node;
 	}
 	
 	// worker(node, inputs, outputs) {
@@ -157,11 +185,11 @@ const init = async () => {
 
 	editor.on("process nodecreated noderemoved connectioncreated connectionremoved nodedraged",
 		async () => {
-			console.log("process");
+			// console.log("process");
 			await engine.abort();
 			const data = editor.toJSON();
 			// await engine.process(data);
-			console.log(data);
+			// console.log(data);
 		}
 	);
 
@@ -278,8 +306,6 @@ export const saveEditorData = (event) => {
 		} else {
 			localStorage.setItem('List',FILE_KEY+',');
 		}
-
-
 	}
 
 	function retrieveSave() {
