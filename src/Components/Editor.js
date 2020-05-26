@@ -28,6 +28,8 @@ class Editor extends React.Component {
       <button onClick={() => exportEditorData()}>EXPORT</button>
       <button onClick={() => saveEditorData()}>SAVE</button>
       <input type="file" onChange={loadEditorData} accept=".json" />
+      {/* <input id="upload" name="upload" type="file" onChange={loadEditorData} accept=".json"/>
+      <label for="upload" className="custom-file-upload"> IMPORTER HISTOIRE  </label> */}
       <button onClick={() => resetEditor()}>CLEAR</button>
       <div className="editor">
         <div ref={this.editorContainer} />
