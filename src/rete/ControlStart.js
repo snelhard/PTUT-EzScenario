@@ -2,9 +2,7 @@ import React from "react";
  import { Control } from "rete";
 
 class MyReactControl extends React.Component {
-  state = {
-    titre : ""
-  };
+  state = {};
   componentDidMount() {
     this.setState({
       titre: this.props.getData('titre')
