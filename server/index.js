@@ -27,7 +27,6 @@ app.post('/api/form', (req, res) => {
             }
         });
         let mailOptions = {
-            /*from: req.body.email,*/
             to: 'ez.scenario@gmail.com',
             subject: req.body.objet,
             text: req.body.message,
