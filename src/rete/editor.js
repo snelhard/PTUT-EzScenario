@@ -404,6 +404,22 @@ export const saveEditorData = (event) => {
 }
 
 export const resetEditor = () => {
-	localStorage.setItem('Current', "");
-	window.location.reload(true);
+	Swal.fire({
+		title: "êtes vous sûr?",
+		text: "Vous perderez l'histoire présente dans l'editeur !",
+		icon: "warning",
+		showConfirmButton: false,
+		confirmButtonColor: '#3085d6',
+  	cancelButtonColor: '#d33',
+  	confirmButtonText: 'Oui supprimer !',
+		dangerMode: true,
+	}).then(function(isConfirm) {
+		if (isConfirm) {
+			localStorage.setItem('Current', "");
+			window.location.reload(true);
+		} else {
+			Swal.fire("Annulé", "Reprise de l'histoire dans l'editeur", "error");
+		}
+	})
+		
 }
