@@ -119,7 +119,7 @@ class Jeu extends React.Component{
             
             var tableauDeConnexions = JSON.stringify(this.state.currentScene.outputs)
             let nbChoix = 0
-            for (let index = 0; index < tableauDeConnexions.length; index++) {
+            for (let index = 0; index < tableauDeConnexions.length - 5; index++) {
                 if ((tableauDeConnexions[index] === 'c') 
                 && (tableauDeConnexions[index+1] === 'h') 
                 && (tableauDeConnexions[index+2] === 'o')

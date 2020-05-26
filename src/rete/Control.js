@@ -7,10 +7,25 @@ class MyReactControl extends React.Component {
   state = {};
   
   componentDidMount() {
+
+    let listeChoixtemp = [];
+    let Tab = this.props.listeChoix;
+    for (let index = 0; index < Tab.length; index++) {
+      listeChoixtemp.push(
+        Tab[index].name
+      )
+    }
+
+    // console.log(Tab)
+
     this.setState({
       titre: this.props.getData('titre'),
       texte: this.props.getData('texte'),
-      listeChoix: this.props.getData('outputs')
+      listeChoix: [this.props.getData('choix1'), 
+                   this.props.getData('choix2'), 
+                   this.props.getData('choix3'),
+                   this.props.getData('choix4'),
+                   this.props.getData('choix5')],
       //choix1: this.props.getData('choix1'),
       //choix2: this.props.getData('choix2')
     },
@@ -18,11 +33,12 @@ class MyReactControl extends React.Component {
     );
   }
 
+
   onChange(event) {
     // this.props.emitter.trigger("process");
     let target = event.target.name;
     let value = event.target.value;
-    console.log(target + " " + value)
+    // console.log(target + " " + value)
     
     this.update(target, value);
   }
@@ -41,8 +57,8 @@ class MyReactControl extends React.Component {
         <div>
           <label>choix {index}</label>
           <input 
-            value={this.state.listeChoix} 
-            name={"choix "+index}
+            value={typeof (this.state.listeChoix) == "undefined" ? "" : this.state.listeChoix[index-1] } 
+            name={"choix"+index}
             onChange={this.onChange.bind(this)} 
             style={{"width" : "100%"}}/><br/>
         </div>

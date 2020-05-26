@@ -1,6 +1,6 @@
 import React from "react";
 import '../App.css';
-import { initEditor, exportEditorData, loadEditorData, saveEditorData} from "../rete/editor";
+import { initEditor, exportEditorData, loadEditorData, saveEditorData, resetEditor} from "../rete/editor";
 import { read } from "fs";
 
 // import "./styles.css";
@@ -28,6 +28,7 @@ class Editor extends React.Component {
       <button onClick={() => exportEditorData()}>EXPORT</button>
       <button onClick={() => saveEditorData()}>SAVE</button>
       <input type="file" onChange={loadEditorData} accept=".json" />
+      <button onClick={() => resetEditor()}>CLEAR</button>
       <div className="editor">
         <div ref={this.editorContainer} />
       </div>

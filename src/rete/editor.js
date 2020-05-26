@@ -12,6 +12,7 @@ import { MyControlFin} from "./ControlFin";
 import { MyControlMessage} from "./ControlMessage";
 import { MyControlQcm} from "./ControlQcm";
 import Swal from 'sweetalert2'
+
 // import ConnectionReroutePlugin from 'rete-connection-reroute-plugin';
 
 var defaultSocket = new Rete.Socket("");
@@ -21,24 +22,58 @@ class StoryBlock extends Rete.Component {
 		super("Scene");
 	}
 	builder(node) {
-		const nbSorties = prompt('Combien de choix ?');
+
+		const testChoix1 = node.data.choix1
+		const testChoix2 = node.data.choix2
+		const testChoix3 = node.data.choix3
+		const testChoix4 = node.data.choix4
+		const testChoix5 = node.data.choix5
+		let nbSorties = 0
 		
+		nbSorties = typeof(testChoix1) == "undefined" ? prompt('Nombre de choix (2 à 5)') : 99;
+
+		while(nbSorties>5 || nbSorties<2) {
+			nbSorties = prompt("Veuillez saisir une valeur comprise entre 2 et 5 inclus.")
+		}
+
+		if (nbSorties==99) {
+			nbSorties=0
+			if (typeof(testChoix1) != "undefined") {
+				nbSorties++
+				if (typeof(testChoix2) != "undefined") {
+					nbSorties++
+					if (typeof(testChoix3) != "undefined") {
+						nbSorties++
+						if (typeof(testChoix4) != "undefined") {
+							nbSorties++
+							if (typeof(testChoix5) != "undefined") {
+								nbSorties++
+							}
+						}
+					}
+				}
+			}
+		}
+
+
+		console.log(`type du node ${typeof (node)}`)
 		let listeOutput = [];
 		for (let i = 0; i < nbSorties; i++) {
 			listeOutput.push( 
-				new Rete.Output("choice"+(i+1), "Choix "+(i+1), defaultSocket, false)
+				new Rete.Output("choice"+(i+1), "Choix"+(i+1), defaultSocket, false)
 			);
 		}
 
-		for (let i = 0; i < listeOutput.length; i++) {
-			node.addOutput(listeOutput[i]);
-		}
+		
 		var inp = new Rete.Input("input", "", defaultSocket, true);
-		var ctrl = new MyControl(this.editor, "Paramètres scene", nbSorties, "", "", "");
+		var ctrl = new MyControl(this.editor, "Paramètres Scene", nbSorties, "", "", "");
 
-		return node
-			.addInput(inp)
-			.addControl(ctrl);
+		node.addInput(inp)
+		for (let i = 0; i < listeOutput.length; i++) {
+				node.addOutput(listeOutput[i]);
+		}
+		node.addControl(ctrl);
+		return node;
 	}
 }
 
@@ -147,11 +182,11 @@ const init = async () => {
 
 	editor.on("process nodecreated noderemoved connectioncreated connectionremoved nodedraged",
 		async () => {
-			console.log("process");
+			// console.log("process");
 			await engine.abort();
 			const data = editor.toJSON();
 			// await engine.process(data);
-			console.log(data);
+			// console.log(data);
 		}
 	);
 
@@ -268,8 +303,6 @@ export const saveEditorData = (event) => {
 		} else {
 			localStorage.setItem('List',FILE_KEY+',');
 		}
-
-
 	}
 
 	function retrieveSave() {
@@ -337,4 +370,9 @@ export const saveEditorData = (event) => {
 		}
 		}
 
+}
+
+export const resetEditor = () => {
+	localStorage.setItem('Current', "");
+	window.location.reload(true);
 }
