@@ -14,54 +14,43 @@ import { MyControlQcm} from "./ControlQcm";
 import Swal from 'sweetalert2'
 // import ConnectionReroutePlugin from 'rete-connection-reroute-plugin';
 
-var numSocket = new Rete.Socket("Number value");
-
+var defaultSocket = new Rete.Socket("");
 
 class StoryBlock extends Rete.Component {
 	constructor() {
 		super("Scene");
 	}
-
 	builder(node) {
-		const nbSorties = prompt('Nombre de choix');
+		const nbSorties = prompt('Combien de choix ?');
 		
 		let listeOutput = [];
 		for (let i = 0; i < nbSorties; i++) {
 			listeOutput.push( 
-				new Rete.Output("choice"+(i+1), "Choix "+(i+1), numSocket, false)
+				new Rete.Output("choice"+(i+1), "Choix "+(i+1), defaultSocket, false)
 			);
 		}
 
 		for (let i = 0; i < listeOutput.length; i++) {
 			node.addOutput(listeOutput[i]);
 		}
-		var inp = new Rete.Input("input", "", numSocket, true);
-		//var out = new Rete.Output("choice1", "Choix 1", numSocket, false);
-		//var out2 = new Rete.Output("choice2", "Choix 2", numSocket, false);
-		//var titre = new Rete.Control("Titre");
-		var ctrl = new MyControl(this.editor, "greeting", nbSorties, "", "", "");
+		var inp = new Rete.Input("input", "", defaultSocket, true);
+		var ctrl = new MyControl(this.editor, "Paramètres scene", nbSorties, "", "", "");
 
 		return node
 			.addInput(inp)
-			//.addOutput(out)
-			//.addOutput(out2)
 			.addControl(ctrl);
 	}
-	
-	// worker(node, inputs, outputs) {
-	// 	console.log(node.data.greeting);
-	// }
 }
+
 class IntrigueNBlock extends Rete.Component {
 	constructor() {
 		super("Intrigue reponse numérique");
 	}
-
 	builder(node) {
-		var inp = new Rete.Input("input", "", numSocket, true);
-		var out = new Rete.Output("choice1", "Bonne reponse", numSocket, false);
-		var out2 = new Rete.Output("choice2", "Mauvaise réponse", numSocket, false);
-		var ctrl = new MyControlIntrigueN(this.editor, "greeting", "Intrigue");
+		var inp = new Rete.Input("input", "", defaultSocket, true);
+		var out = new Rete.Output("choice1", "Bonne reponse", defaultSocket, false);
+		var out2 = new Rete.Output("choice2", "Mauvaise réponse", defaultSocket, false);
+		var ctrl = new MyControlIntrigueN(this.editor, "Paramètres Intrigue", "Intrigue");
 
 		return node
 			.addInput(inp)
@@ -69,60 +58,46 @@ class IntrigueNBlock extends Rete.Component {
 			.addOutput(out2)
 			.addControl(ctrl);
 	}
-
-	// worker(node, inputs, outputs) {
-	// 	console.log(node.data.greeting);
-	// }
 }
+
 class MessageBlock extends Rete.Component {
 	constructor() {
 		super("Message");
 	}
-	
 	builder(node) {
-		var inp = new Rete.Input("input", "", numSocket, true);
-		var out = new Rete.Output("choice1", "", numSocket, false);	
-		var ctrl = new MyControlMessage(this.editor, "greeting", "Intrigue");
+		var inp = new Rete.Input("input", "", defaultSocket, true);
+		var out = new Rete.Output("choice1", "", defaultSocket, false);	
+		var ctrl = new MyControlMessage(this.editor, "Paramètres Message", "Message");
 		
 		return node
 		.addInput(inp)
 		.addOutput(out)
 		.addControl(ctrl);
 	}
-	
-	// worker(node, inputs, outputs) {
-	// 	console.log(node.data.greeting);
-	// }
 }
+
 class StartBlock extends Rete.Component {
 	constructor() {
 		super("Start");
 		this.data.component = MyNode;
 	}
-
 	builder(node) {
-		// var inp = new Rete.Input("num1", "Number", numSocket, true);
-		var out = new Rete.Output("out", "Number", numSocket, false);
-		var ctrl = new MyControlStart(this.editor, "greeting", "Start");
+		var out = new Rete.Output("out", "Number", defaultSocket, false);
+		var ctrl = new MyControlStart(this.editor, "Paramètres Début", "Start");
 
 		return node.addOutput(out).addControl(ctrl);
-
 	}
-
-	// worker(node, inputs, outputs) {
-	// 	console.log(node.data.greeting);
-	// }
 }
+
 class QcmBlock extends Rete.Component {
 	constructor() {
 		super("Qcm");
 	}
-
 	builder(node) {
-		var inp = new Rete.Input("input", "", numSocket, true);
-		var out = new Rete.Output("choice1", "Bonne réponse", numSocket, false);
-		var out2 = new Rete.Output("choice2", "Mauvaise réponse", numSocket, false);
-		var ctrl = new MyControlQcm(this.editor, "greeting", "", "", "", "", false, "", false, "", false, "", false);
+		var inp = new Rete.Input("input", "", defaultSocket, true);
+		var out = new Rete.Output("choice1", "Bonne réponse", defaultSocket, false);
+		var out2 = new Rete.Output("choice2", "Mauvaise réponse", defaultSocket, false);
+		var ctrl = new MyControlQcm(this.editor, "Paramètres QCM", "", "", "", "", false, "", false, "", false, "", false);
 
 		return node
 			.addInput(inp)
@@ -130,27 +105,19 @@ class QcmBlock extends Rete.Component {
 			.addOutput(out2)
 			.addControl(ctrl);
 	}
-
-	// worker(node, inputs, outputs) {
-	// 	console.log(node.data.greeting);
-	// }
 }
+
 class endBlock extends Rete.Component {
 	constructor() {
 		super("Fin");
 		this.data.component = MyNode;
 	}
-
 	builder(node) {
-		var inp = new Rete.Input("input", "Number", numSocket, true);
-		var ctrl = new MyControlFin(this.editor, "greeting", "Fin");
+		var inp = new Rete.Input("input", "Number", defaultSocket, true);
+		var ctrl = new MyControlFin(this.editor, "Paramètres Fin", "Fin");
 
 		return node.addInput(inp).addControl(ctrl);
 	}
-
-	// worker(node, inputs, outputs) {
-	// 	console.log(node.data.greeting);
-	// }
 }
 
 var editor;
