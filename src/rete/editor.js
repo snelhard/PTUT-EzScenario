@@ -58,7 +58,7 @@ class StoryBlock extends Rete.Component {
 		}
 		
 
-		if (nbSortiesint===99) {
+		if (nbSorties===99) {
 			nbSortiesint=0
 			if (typeof(testChoix1) != "undefined") {
 				nbSortiesint++
