@@ -4,8 +4,20 @@ import Rete from "rete";
 
 
 class MyReactControl extends React.Component {
-  state = {};
+  state = {
+  };
   
+  enFonctionDuNbChoix() {
+    const nbChoix = this.props.titre;
+    if (nbChoix == 0) {
+      return null;
+    } else {
+      for (let index = 0; index < nbChoix; index++) {
+        this.update('choix'+(index+1), '')
+      }
+    }
+  }
+
   componentDidMount() {
 
     let listeChoixtemp = [];
@@ -21,18 +33,21 @@ class MyReactControl extends React.Component {
     this.setState({
       titre: this.props.getData('titre'),
       texte: this.props.getData('texte'),
-      listeChoix: [this.props.getData('choix1'), 
-                   this.props.getData('choix2'), 
-                   this.props.getData('choix3'),
-                   this.props.getData('choix4'),
-                   this.props.getData('choix5')],
+      listeChoix: [typeof(this.props.getData('choix1')) == 'undefined' ? this.enFonctionDuNbChoix() : this.props.getData('choix1'), 
+      typeof(this.props.getData('choix2')) == 'undefined' ? this.enFonctionDuNbChoix() : this.props.getData('choix2'), 
+      typeof(this.props.getData('choix3')) == 'undefined' ? this.enFonctionDuNbChoix() : this.props.getData('choix3'),
+      typeof(this.props.getData('choix4')) == 'undefined' ? this.enFonctionDuNbChoix() : this.props.getData('choix4'),
+      typeof(this.props.getData('choix5')) == 'undefined' ? this.enFonctionDuNbChoix() : this.props.getData('choix5')],
       //choix1: this.props.getData('choix1'),
       //choix2: this.props.getData('choix2')
     },
     // console.log("liste choix "+this.props.getData("inputs"))
     );
+
+    
   }
 
+  
 
   onChange(event) {
     // this.props.emitter.trigger("process");
@@ -42,6 +57,7 @@ class MyReactControl extends React.Component {
     
     this.update(target, value);
   }
+  
   update(target, value){
     this.setState({
       [target]: value
@@ -53,15 +69,18 @@ class MyReactControl extends React.Component {
     const nbChoix = this.props.titre;
     var lesChoix = [];
     for (let index = 1; index <= nbChoix; index++) {
+      typeof (this.state.listeChoix) != "undefined" ? console.log("Le type de la donnée : "+typeof(this.state.listeChoix[index-1])) : console.log("c'est vide !");
       lesChoix.push(
         <div>
           <label>choix {index}</label>
-          <input 
-            value={typeof (this.state.listeChoix) == "undefined" ? "" : this.state.listeChoix[index-1] } 
+          <input
+            value={typeof (this.state.listeChoix) === "undefined" ? "" : this.state.listeChoix[index-1] } 
             name={"choix"+index}
             onChange={this.onChange.bind(this)} 
-            style={{"width" : "100%"}}/><br/>
-        </div>
+            style={{"width" : "100%"}}
+            />
+            <br/>
+         </div>
       );
     }
 

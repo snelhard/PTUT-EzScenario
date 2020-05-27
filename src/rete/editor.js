@@ -40,6 +40,9 @@ class StoryBlock extends Rete.Component {
 
 	async builder(node) {
 
+		const lesInputs = node.inputs;
+		const lesOutputs = node.outputs;
+
 		const testChoix1 = node.data.choix1
 		const testChoix2 = node.data.choix2
 		const testChoix3 = node.data.choix3
@@ -48,7 +51,7 @@ class StoryBlock extends Rete.Component {
 		let nbSorties = 0
 		let nbSortiesint = Number(nbSorties);
 
-		if (typeof(testChoix1) == "undefined") {
+		if ((typeof(testChoix1) == "undefined") && lesInputs.size==0 && lesOutputs.size==0) {
 			while(nbSortiesint>5 || nbSortiesint<2 || isNaN(nbSortiesint)) {
 				nbSorties = await this.saisieValeur();
 				nbSortiesint = Number(nbSorties);
