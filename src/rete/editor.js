@@ -77,10 +77,8 @@ class StoryBlock extends Rete.Component {
 			}
 		}
 
-
-		console.log(`type du node ${typeof (node)}`)
 		let listeOutput = [];
-		for (let i = 0; i < nbSorties; i++) {
+		for (let i = 0; i < nbSortiesint; i++) {
 			listeOutput.push( 
 				new Rete.Output("choice"+(i+1), "Choix"+(i+1), defaultSocket, false)
 			);
