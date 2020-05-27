@@ -21,7 +21,24 @@ class StoryBlock extends Rete.Component {
 	constructor() {
 		super("Scene");
 	}
-	builder(node) {
+
+	async saisieValeur() {
+		const { value: ValeurSaisie } = await Swal.fire({
+			title: 'Nombre de choix (entre 2 et 5)',
+			input: 'number',
+			inputValidator: (value) => {
+				if (!value) {
+					return 'Vous devez saisir une valeur!'
+				}
+			}
+		})
+		if (ValeurSaisie) {
+			return ValeurSaisie;
+		}
+	}
+
+
+	async builder(node) {
 
 		const testChoix1 = node.data.choix1
 		const testChoix2 = node.data.choix2
@@ -29,27 +46,30 @@ class StoryBlock extends Rete.Component {
 		const testChoix4 = node.data.choix4
 		const testChoix5 = node.data.choix5
 		let nbSorties = 0
-		
-		nbSorties = typeof(testChoix1) == "undefined" ? prompt('Nombre de choix (2 à 5)') : 99;
-		let nbSoriesint = Number(nbSorties)
+		let nbSortiesint = Number(nbSorties);
 
-		while(nbSoriesint>5 || nbSoriesint<2 || isNaN(nbSoriesint)) {
-			nbSorties = prompt("Veuillez saisir une valeur comprise entre 2 et 5 inclus.")
-			nbSoriesint = Number(nbSorties)
+		if (typeof(testChoix1) == "undefined") {
+			while(nbSortiesint>5 || nbSortiesint<2 || isNaN(nbSortiesint)) {
+				nbSorties = await this.saisieValeur();
+				nbSortiesint = Number(nbSorties);
+			}
+		} else {
+			nbSorties = 99;
 		}
+		
 
-		if (nbSoriesint==99) {
-			nbSoriesint=0
+		if (nbSortiesint===99) {
+			nbSortiesint=0
 			if (typeof(testChoix1) != "undefined") {
-				nbSoriesint++
+				nbSortiesint++
 				if (typeof(testChoix2) != "undefined") {
-					nbSoriesint++
+					nbSortiesint++
 					if (typeof(testChoix3) != "undefined") {
-						nbSoriesint++
+						nbSortiesint++
 						if (typeof(testChoix4) != "undefined") {
-							nbSoriesint++
+							nbSortiesint++
 							if (typeof(testChoix5) != "undefined") {
-								nbSoriesint++
+								nbSortiesint++
 							}
 						}
 					}
@@ -393,15 +413,5 @@ export const resetEditor = () => {
 			Swal.fire("Annulé", "Reprise de l'histoire dans l'editeur", "error")
 		}
 	})
-	
-	
-	// .then(function(isConfirm) {
-	// 	if (isConfirm ) {
-	// 		localStorage.setItem('Current', "");
-	// 		window.location.reload(true);
-	// 	} else {
-	// 		Swal.fire("Annulé", "Reprise de l'histoire dans l'editeur", "error");
-	// 	}
-	// })
 		
 }
