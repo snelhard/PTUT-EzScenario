@@ -85,7 +85,7 @@ class StoryBlock extends Rete.Component {
 		}
 
 		var inp = new Rete.Input("input", "", defaultSocket, true);
-		var ctrl = new MyControl(this.editor, "Paramètres de la scène", nbSorties, "", "", "");
+		var ctrl = new MyControl(this.editor, "Paramètres de la scène", nbSortiesint, "", "", "");
 
 		node.addInput(inp)
 		for (let i = 0; i < listeOutput.length; i++) {
