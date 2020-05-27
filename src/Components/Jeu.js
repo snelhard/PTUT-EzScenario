@@ -54,7 +54,7 @@ class Jeu extends React.Component{
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Vos blocks intrigue ou scene doivent avoir une suite pour pouvoir etre jouée',
+                text: "Vos blocs d'intrigue ou scène doivent avoir une suite pour pouvoir etre joués !",
               })
              this.props.history.push('/MesHistoires');
            }
@@ -64,7 +64,7 @@ class Jeu extends React.Component{
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Vos Messages doivent avoir un suite pour pouvoir etre jouée',
+                text: 'Vos messages doivent avoir un suite pour pouvoir etre joués !',
               })
          this.props.history.push('/MesHistoires');
         }
@@ -165,7 +165,7 @@ class Jeu extends React.Component{
             if(localStorage.getItem(KEY)!=="" && localStorage.getItem(KEY)!==null) {
                 // Affiche un message comme quoi une sauvegarde existe déjà et propose à l'utilisateur de faire un choix
                 Swal.fire({
-                    title: 'Une sauvegarde pour cette histoire existe déjà ...',
+                    title: 'Une sauvegarde pour cette histoire existe déjà...',
                     text: "Voulez vous reprendre la sauvegarde déjà existante ?",
                     icon: 'warning',
                     showCancelButton: true,
