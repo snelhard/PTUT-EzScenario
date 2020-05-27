@@ -214,7 +214,7 @@ class Jeu extends React.Component{
             if(localStorage.getItem(KEY)!=="" && localStorage.getItem(KEY)!==null) {
                 // Affiche un message comme quoi une sauvegarde existe déjà et propose à l'utilisateur de faire un choix
                 Swal.fire({
-                    title: 'Une sauvegarde pour cette histoire existe déjà ...',
+                    title: 'Une sauvegarde pour cette histoire existe déjà...',
                     text: "Voulez vous reprendre la sauvegarde déjà existante ?",
                     icon: 'warning',
                     showCancelButton: true,
