@@ -30,7 +30,7 @@ class StoryBlock extends Rete.Component {
 		const testChoix5 = node.data.choix5
 		let nbSorties = 0
 		
-		nbSorties = typeof(testChoix1) == "undefined" ? prompt('Nombre de choix (2 à 5)') : 99;
+		nbSorties = typeof(testChoix1) == "undefined" ? prompt('Nombre de choix (2 à 5) :') : 99;
 		let nbSoriesint = Number(nbSorties)
 
 		while(nbSoriesint>5 || nbSoriesint<2 || isNaN(nbSoriesint)) {
@@ -67,7 +67,7 @@ class StoryBlock extends Rete.Component {
 		}
 
 		var inp = new Rete.Input("input", "", defaultSocket, true);
-		var ctrl = new MyControl(this.editor, "Paramètres Scene", nbSorties, "", "", "");
+		var ctrl = new MyControl(this.editor, "Paramètres de la scène", nbSorties, "", "", "");
 
 		node.addInput(inp)
 		for (let i = 0; i < listeOutput.length; i++) {
@@ -84,9 +84,9 @@ class IntrigueNBlock extends Rete.Component {
 	}
 	builder(node) {
 		var inp = new Rete.Input("input", "", defaultSocket, true);
-		var out = new Rete.Output("choice1", "Bonne reponse", defaultSocket, false);
+		var out = new Rete.Output("choice1", "Bonne réponse", defaultSocket, false);
 		var out2 = new Rete.Output("choice2", "Mauvaise réponse", defaultSocket, false);
-		var ctrl = new MyControlIntrigueN(this.editor, "Paramètres Intrigue", "Intrigue");
+		var ctrl = new MyControlIntrigueN(this.editor, "Paramètres de l'intrigue", "Intrigue");
 
 		return node
 			.addInput(inp)
@@ -103,7 +103,7 @@ class MessageBlock extends Rete.Component {
 	builder(node) {
 		var inp = new Rete.Input("input", "", defaultSocket, true);
 		var out = new Rete.Output("choice1", "", defaultSocket, false);	
-		var ctrl = new MyControlMessage(this.editor, "Paramètres Message", "Message");
+		var ctrl = new MyControlMessage(this.editor, "Paramètres du message", "Message");
 		
 		return node
 		.addInput(inp)
@@ -119,7 +119,7 @@ class StartBlock extends Rete.Component {
 	}
 	builder(node) {
 		var out = new Rete.Output("out", "Number", defaultSocket, false);
-		var ctrl = new MyControlStart(this.editor, "Paramètres Début", "Start");
+		var ctrl = new MyControlStart(this.editor, "Paramètres du début", "Start");
 
 		return node.addOutput(out).addControl(ctrl);
 	}
@@ -133,7 +133,7 @@ class QcmBlock extends Rete.Component {
 		var inp = new Rete.Input("input", "", defaultSocket, true);
 		var out = new Rete.Output("choice1", "Bonne réponse", defaultSocket, false);
 		var out2 = new Rete.Output("choice2", "Mauvaise réponse", defaultSocket, false);
-		var ctrl = new MyControlQcm(this.editor, "Paramètres QCM", "", "", "", "", false, "", false, "", false, "", false);
+		var ctrl = new MyControlQcm(this.editor, "Paramètres du QCM", "", "", "", "", false, "", false, "", false, "", false);
 
 		return node
 			.addInput(inp)
@@ -150,7 +150,7 @@ class endBlock extends Rete.Component {
 	}
 	builder(node) {
 		var inp = new Rete.Input("input", "Number", defaultSocket, true);
-		var ctrl = new MyControlFin(this.editor, "Paramètres Fin", "Fin");
+		var ctrl = new MyControlFin(this.editor, "Paramètres de la fin", "Fin");
 
 		return node.addInput(inp).addControl(ctrl);
 	}
@@ -332,7 +332,7 @@ export const saveEditorData = (event) => {
 		if (localStorage.getItem(FILE_KEY)!== "" && localStorage.getItem(FILE_KEY)!== null){
 			Swal.fire({
 				title: 'Une histoire portant ce nom existe déjà',
-				text: "Voulez vous quand même sauvegarder votre histoire ?",
+				text: "Voulez-vous quand même sauvegarder votre histoire ?",
 				icon: 'warning',
 				showCancelButton: true,
 				confirmButtonColor: '#3085d6',
@@ -364,7 +364,7 @@ export const saveEditorData = (event) => {
 		
 			Swal.fire({
 				icon: 'success',
-				title: 'Votre fichier a bien été sauvegardé',
+				title: 'Votre fichier a bien été sauvegardé !',
 				showConfirmButton: false,
 				timer: 1000
 			  })
@@ -375,7 +375,7 @@ export const saveEditorData = (event) => {
 
 export const resetEditor = () => {
 	Swal.fire({
-		title: "êtes vous sûr?",
+		title: "Êtes vous sûr?",
 		text: "Vous perderez l'histoire présente dans l'editeur !",
 		icon: "warning",
 		showConfirmButton: true,

@@ -23,7 +23,7 @@ class Page extends React.Component{
         <div className="game">
             
             <h1>{this.state.titre}</h1>
-            <button onClick={this.addBlock}>Ajouter scene</button>
+            <button onClick={this.addBlock}>Ajouter une scène</button>
             
             <div className="game-board">
                 {this.state.scenes.map((scene) => (
