@@ -84,7 +84,7 @@ class Jeu extends React.Component{
         if(this.state.currentScene.name==="Scene"){
             Current  = <Scene renvoiIdSuivant={this.changerScene} details={this.state.currentScene}/> 
         }
-        if(this.state.currentScene.name==="Intrigue"){
+        if(this.state.currentScene.name==="Intrigue reponse numérique"){
             Current  = <Intrigue renvoiIdSuivant={this.changerScene} details={this.state.currentScene}/> 
         }
         
