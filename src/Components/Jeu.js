@@ -39,7 +39,7 @@ class Jeu extends React.Component{
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Vos blocks doivent avoir une suite pour pouvoir etre joués',
+                    text: 'Votre block start doit avoir une suite pour pouvoir etre joué',
                   })
                 this.props.history.push('/MesHistoires');
             }
