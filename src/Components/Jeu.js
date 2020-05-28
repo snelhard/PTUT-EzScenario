@@ -51,7 +51,7 @@ class Jeu extends React.Component{
   UNSAFE_componentWillMount(){   
   //Verification robustesse
   var nbNodes=0;
-  //var Start=0;
+  var Start=0;
   let liste=[];
   JSON.parse(JSON.stringify(this.state.file.nodes),(key,value)=> {
     if(key==="id"){
@@ -60,7 +60,13 @@ class Jeu extends React.Component{
     } 
   });     
   var tableauDeConnexions="a"
+
   for(var i=0;i<nbNodes;i++){
+    if(this.state.file.nodes[liste[i]].name==="Start"){
+        Start+=1;
+        this.state.firstScene=this.state.file.nodes[liste[i]];       
+        this.state.currentScene = this.state.file.nodes[this.state.firstScene.outputs.out.connections[0].node];
+    }
 
     var tableauDeConnexions = JSON.stringify(this.state.file.nodes[liste[i]].outputs)
    // console.log(tableauDeConnexions +" tableau de connexion   ")

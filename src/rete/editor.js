@@ -271,19 +271,44 @@ export const exportEditorData = () => {
 
 	});
 	// Renvoyer le resultat de la lecture du fichier sous forme txt
-	if (debug.file.nodes[1].data.titre == ""){
+	var nbNodes=0;
+	  let liste=[];
+	  let Start=0;
+	  let idStart=""
+  	JSON.parse(JSON.stringify(debug.file.nodes),(key,value)=> {
+		if(key==="id"){
+		nbNodes+=1;
+		liste.push(value);
+		} 
+	 }); 
+	 for(var i=0;i<nbNodes;i++){
+		if(debug.file.nodes[liste[i]].name==="Start"){
+			Start+=1
+			idStart=debug.file.nodes[liste[i]].data.titre;
+		}
+	} 
+	if(Start>=2 || Start==0){
 		Swal.fire({
 			icon: 'error',
 			title: 'Oops...',
-			text: 'Vous avez oublié de donner un nom à votre histoire !',
-		  })
-	} else {
-		reader.readAsText(file);
-		element.href = URL.createObjectURL(file);
-		element.download = debug.file.nodes[1].data.titre + "_-_Story_file.json";
-		document.body.appendChild(element); // Required for this to work in FireFox
-		element.click();
-	}
+			text: "Il doit n'y avoir qu'un seul debut",
+		})
+	}else{
+		if (idStart == ""){
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Vous avez oublié de donner un nom à votre histoire !',
+			  })
+		} else {
+			reader.readAsText(file);
+			element.href = URL.createObjectURL(file);
+			element.download = idStart + "_-_Story_file.json";
+			document.body.appendChild(element); // Required for this to work in FireFox
+			element.click();
+		}
+	} 
+	
 
 }
 
@@ -333,19 +358,40 @@ export const saveEditorData = (event) => {
 	const element = document.createElement("a");
 	// Définie le contenu qui va être dans le fichier JSON
 	var debug = retrieveSave();
-
 	// demande à l'utilisateur de rentrer un titre si le titre est vide !
-	if (debug.file.nodes[1].data.titre == ""){
+	var nbNodes=0;
+	let liste=[];
+	let Start=0;
+	let idStart=""
+  	JSON.parse(JSON.stringify(debug.file.nodes),(key,value)=> {
+		if(key==="id"){
+		nbNodes+=1;
+		liste.push(value);
+		} 
+	 }); 
+	 for(var i=0;i<nbNodes;i++){
+		if(debug.file.nodes[liste[i]].name==="Start"){
+			Start+=1
+			idStart=debug.file.nodes[liste[i]].data.titre;
+		}
+	} 
+	if(Start>=2 || Start==0){
 		Swal.fire({
 			icon: 'error',
 			title: 'Oops...',
-			text: 'Vous avez oublié de donner un nom à votre histoire !',
-		  })
-	}
+			text: "Il doit n'y avoir qu'un seul debut",
+		})
+	}else{
+		if (idStart == ""){
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Vous avez oublié de donner un nom à votre histoire !',
+			  })
+		} else {
 	// Si l'utilisateur a rentré un titre
-	else {
 		console.log(debug)
-		FILE_KEY=debug.file.nodes[1].data.titre + "_-_Story_file.json";
+		FILE_KEY=idStart + "_-_Story_file.json";
 
 		if (localStorage.getItem(FILE_KEY)!== "" && localStorage.getItem(FILE_KEY)!== null){
 			Swal.fire({
@@ -389,7 +435,8 @@ export const saveEditorData = (event) => {
 		}
 		}
 
-}
+	}
+}		
 
 export const resetEditor = () => {
 	Swal.fire({
