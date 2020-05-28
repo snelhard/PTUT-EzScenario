@@ -24,7 +24,8 @@ class Editor extends React.Component {
   render() {
     return (
       <div>
-      <h1>Editor</h1>
+      <h1>Bienvenue dans l'éditeur d'histoire</h1>
+      <hr class="divider light my-4"></hr>
       <button onClick={() => exportEditorData()}>EXPORT</button>
       <button onClick={() => saveEditorData()}>SAVE</button>
       <input type="file" onChange={loadEditorData} accept=".json" />

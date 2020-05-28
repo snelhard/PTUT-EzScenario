@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #54392d;
 }
 
 code {
@@ -28,9 +29,9 @@ textarea{
   margin: auto;
 } */
 
-.creation-personnage{
+/* .creation-personnage{
 
-}
+} */
 .creation-personnage > div{
   display: flex;
   flex-direction: column;
@@ -74,12 +75,17 @@ textarea{
   flex-wrap: wrap;
 }
 
+/* Navbar */
 .navBar{
-  background-color: #444444;
+  background-color: #a7a599;
+  box-shadow: 0 0.5rem 1rem #0000007d;
   display: flex;
-  padding: 0px 37px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  /* padding: 0px 37px; */
   margin: 0;
   list-style-type: none;
+  justify-content: center;
 }
 
 .navBar > li {
@@ -93,9 +99,26 @@ textarea{
 }
 
 .navBar > li > a {
+  font-family: italic large serif;
+  font-weight: 700;
+  font-size: 1.2rem;
   text-decoration: none;
-  color: white;
+  color: rgb(255, 255, 255);
+  padding: 0 1.5rem;
 }
+
+/* divider */
+hr.divider{
+  max-width: 3.25rem;
+  border-width: 0.2rem;
+  margin-bottom: 5rem;
+  border-color: #fff;
+}
+
+.main-container{
+  text-align: center;
+}
+
 .JeuContainer{
   text-align: center;
 }
@@ -146,6 +169,10 @@ button {
 
 button:hover {
   background: #9c9c9c;
+}
+
+h1{
+  color: #fff;
 }
 
 /* input[type="file"] {
