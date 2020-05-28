@@ -11,7 +11,6 @@ import {
 import Jeu from './Jeu';
 import Editor from './Editor';
 import MesHistoires from './MesHistoires';
-import Contact from './Contact';
 
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
@@ -37,9 +36,6 @@ export default function BasicExample() {
           <li>
             <Link to="/editeur">Création d'une histoire</Link>
           </li>
-          <li>
-            <Link to="/contact">Contact</Link>
-          </li>
         </ul>
 
         {/* <hr /> */}
@@ -64,9 +60,6 @@ export default function BasicExample() {
             </Route>
             <Route path="/meshistoires">
                 <MesHistoires />
-            </Route>
-            <Route path="/contact">
-                <Contact />
             </Route>
           </Switch>
         </div>
