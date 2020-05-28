@@ -19,19 +19,82 @@ class Jeu extends React.Component{
 
     constructor(props){
         super(props);
-
         this.state.file=JSON.parse(localStorage.getItem('Current')).file;
+        var nbNodes=0;
+        var Start=0;
+        let liste=[];
+        JSON.parse(JSON.stringify(this.state.file.nodes),(key,value)=> {
+          if(key==="id"){
+            nbNodes+=1;
+            liste.push(value);
+          } 
+        });     
+        var tableauDeConnexions="a"
+      
+        for(var i=0;i<nbNodes;i++){
+          if(this.state.file.nodes[liste[i]].name==="Start"){
+            Start+=1;
+            this.state.firstScene=this.state.file.nodes[liste[i]];
+            if(this.state.file.nodes[liste[i]].outputs.out.connections.length===0){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Votre block start doit avoir une suite pour pouvoir etre joué',
+                  })
+                this.props.history.push('/MesHistoires');
+            }
+         }   
+           
+          
+      
+          var tableauDeConnexions = JSON.stringify(this.state.file.nodes[liste[i]].outputs)
+         // console.log(tableauDeConnexions +" tableau de connexion   ")
+          let nbChoix = 0
+      
+          for (let index = 0; index < tableauDeConnexions.length - 5; index++) {
+              if ((tableauDeConnexions[index] === 'c') 
+              && (tableauDeConnexions[index+1] === 'h') 
+              && (tableauDeConnexions[index+2] === 'o')
+              && (tableauDeConnexions[index+3] === 'i')
+              && (tableauDeConnexions[index+4] === 'c')
+              && (tableauDeConnexions[index+5] === 'e')){
+                  nbChoix++;
+              }
+          }
+             // console.log(nbChoix + " nb choix")
+              if(this.state.file.nodes[liste[i]].name==="Fin"){
+      
+              }else{
+                  //choix+nbchoix
+                  if(nbChoix!=0){
+                     // console.log(this.renderSwitch(nbChoix,liste[i])+ "test")
+                      if(this.renderSwitch(nbChoix,liste[i]).connections.length===0){
+                          Swal.fire({
+                              icon: 'error',
+                              title: 'Oops...',
+                             text: 'Vos blocks doivent avoir une suite pour pouvoir etre joués',
+                            })
+                                            this.props.history.push('/MesHistoires');
+                                          }
+                  }
+                      
+                    
+        if(this.state.file.nodes[liste[i]].name==="Fin"){   
+        this.state.currentScene = this.state.file.nodes[this.state.firstScene.outputs.out.connections[0].node];
         console.log(this.state)
         //for(this.state.file)
-        this.state.firstScene=this.state.file.nodes[1];       
-        this.state.currentScene = this.state.file.nodes[this.state.firstScene.outputs.out.connections[0].node];
-        console.log(this.state.firstScene);
-        console.log(this.state.firstScene.outputs.out.connections[0].node);
+        //this.state.firstScene=this.state.file.nodes[1];       
+        //this.state.currentScene = this.state.file.nodes[this.state.firstScene.outputs.out.connections[0].node];
+        //console.log(this.state.firstScene);
+       // console.log(this.state.firstScene.outputs.out.connections[0].node);
         this.gererSauvegarde();
         
         // this.sceneConatainer = React.createRef();
     }
-
+}
+    }
+}   
+        
     renderSwitch(param,i) {
         switch(param) {
           case 1:
@@ -48,61 +111,7 @@ class Jeu extends React.Component{
         }
       }
 
-  UNSAFE_componentWillMount(){   
-  //Verification robustesse
-  var nbNodes=0;
-  var Start=0;
-  let liste=[];
-  JSON.parse(JSON.stringify(this.state.file.nodes),(key,value)=> {
-    if(key==="id"){
-      nbNodes+=1;
-      liste.push(value);
-    } 
-  });     
-  var tableauDeConnexions="a"
-
-  for(var i=0;i<nbNodes;i++){
-    if(this.state.file.nodes[liste[i]].name==="Start"){
-        Start+=1;
-        this.state.firstScene=this.state.file.nodes[liste[i]];       
-        this.state.currentScene = this.state.file.nodes[this.state.firstScene.outputs.out.connections[0].node];
-    }
-
-    var tableauDeConnexions = JSON.stringify(this.state.file.nodes[liste[i]].outputs)
-   // console.log(tableauDeConnexions +" tableau de connexion   ")
-    let nbChoix = 0
-
-    for (let index = 0; index < tableauDeConnexions.length - 5; index++) {
-        if ((tableauDeConnexions[index] === 'c') 
-        && (tableauDeConnexions[index+1] === 'h') 
-        && (tableauDeConnexions[index+2] === 'o')
-        && (tableauDeConnexions[index+3] === 'i')
-        && (tableauDeConnexions[index+4] === 'c')
-        && (tableauDeConnexions[index+5] === 'e')){
-            nbChoix++;
-        }
-    }
-       // console.log(nbChoix + " nb choix")
-        if(this.state.file.nodes[liste[i]].name==="Fin"){
-
-        }else{
-            //choix+nbchoix
-            if(nbChoix!=0){
-               // console.log(this.renderSwitch(nbChoix,liste[i])+ "test")
-                if(this.renderSwitch(nbChoix,liste[i]).connections.length===0){
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                       text: 'Vos blocks doivent avoir une suite pour pouvoir etre joués',
-                      })
-                                      this.props.history.push('/MesHistoires');
-                                    }
-            }
-                
-              
-         
-        
-    }
+ 
         
     //    if (this.state.file.nodes[liste[i]].name==="Scene"  || this.state.file.nodes[liste[i]].name==="Intrigue" ){
     //        if (this.state.file.nodes[liste[i]].outputs.choice1.connections.length===0 || this.state.file.nodes[liste[i]].outputs.choice2.connections.length===0){
@@ -124,8 +133,7 @@ class Jeu extends React.Component{
     //      this.props.history.push('/MesHistoires');
     //     }
     //    }
-  }    
-    }
+
     componentDidMount(){
         // update();
     }

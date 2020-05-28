@@ -297,7 +297,8 @@ export const exportEditorData = () => {
 			text: "Il doit n'y avoir qu'un seul debut",
 		})
 	}else{
-		if (idStart == ""){
+		console.log(idStart)
+		if (typeof(idStart) === "undefined" || idStart==""){
 			Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
@@ -385,7 +386,7 @@ export const saveEditorData = (event) => {
 			text: "Il doit n'y avoir qu'un seul debut",
 		})
 	}else{
-		if (idStart == ""){
+		if (typeof(idStart) === "undefined" || idStart==""){
 			Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
