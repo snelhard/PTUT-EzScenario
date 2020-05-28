@@ -1,9 +1,7 @@
 import React from "react";
-import '../App.css';
 import { initEditor, exportEditorData, loadEditorData, saveEditorData, resetEditor} from "../rete/editor";
 import { read } from "fs";
 
-// import "./styles.css";
 
 class Editor extends React.Component {
   constructor(props) {

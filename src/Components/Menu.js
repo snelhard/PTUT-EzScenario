@@ -10,7 +10,8 @@ import {
 // import Personnage from './Personnage';
 import Jeu from './Jeu';
 import Editor from './Editor';
-import MesHistoires from './MesHistoires';
+// import MesHistoires from './MesHistoires';
+import MesHistoires from './MesHistoiresCopie';
 
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
@@ -27,14 +28,14 @@ export default function BasicExample() {
       <div>
       
         <ul className="navBar">
-          <li>
+          <li><i className="fas fa-home navIcon"></i>
             <Link to="/">Accueil</Link>
           </li>
-          <li>
+          <li><i className="fas fa-book-open navIcon"></i>
               <Link to="/meshistoires">Mes histoires</Link>
           </li>
-          <li>
-            <Link to="/editeur">Création d'une histoire</Link>
+          <li><i className="fas fa-pen-nib navIcon"></i>
+            <Link to="/editeur">Création d'histoire</Link>
           </li>
         </ul>
 
@@ -60,6 +61,9 @@ export default function BasicExample() {
             </Route>
             <Route path="/meshistoires">
                 <MesHistoires />
+            </Route>
+            <Route>
+              <Menu />
             </Route>
           </Switch>
         </div>

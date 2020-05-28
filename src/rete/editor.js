@@ -456,7 +456,7 @@ export const resetEditor = () => {
 	}).then((result) => {
 		if (result.value) {
 			localStorage.setItem('Current', "");
-			window.location.reload(true);
+			editor.fromJSON({ "id": "demo@0.1.0", "nodes": { "1": { "id": 1, "data": { "titre": "" }, "inputs": {}, "outputs": {}, "position": [-419.80039837027675, -61.903379254543886], "name": "Start" } } });
 		} else {
 			Swal.fire("Annulé", "Reprise de l'histoire dans l'editeur", "error")
 		}
