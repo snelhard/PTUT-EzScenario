@@ -31,14 +31,12 @@ export default function BasicExample() {
             <Link to="/">Accueil</Link>
           </li>
           <li>
-              <Link to="/meshistoires">Mes Histoires</Link>
+              <Link to="/meshistoires">Mes histoires</Link>
           </li>
           <li>
-            <Link to="/editeur">Création histoire</Link>
+            <Link to="/editeur">Création d'une histoire</Link>
           </li>
         </ul>
-
-        {/* <hr /> */}
 
         {/*
           A <Switch> looks through all its children <Route>
@@ -72,7 +70,7 @@ export default function BasicExample() {
 function Menu() {
     return (
       <div>
-        <h1>Bienvenue</h1>
+        <h1>Bienvenue sur Ez-Scenario !</h1>
       </div>
     );
   }

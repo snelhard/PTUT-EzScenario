@@ -104,8 +104,8 @@ class MesHistoires extends React.Component{
 
     supprimer(key){
         Swal.fire({
-            title: 'Êtes vous sur de vouloir le supprimer ? ',
-            text: "Ce sera impossible de revenir en arrière",
+            title: 'Êtes-vous sûr(e) de vouloir le supprimer ? ',
+            text: "Il vous sera impossible de revenir en arrière !",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -134,10 +134,10 @@ class MesHistoires extends React.Component{
             <div className="AjouterHistoire">
                 <h1>Mes histoires</h1>
                 <hr class="divider light my-4"></hr>
-                <h1>Ajouter un nouvelle Histoire</h1>
+                <h1>Ajouter un nouvelle histoire</h1>
                 <input type="file" name="files[]" id="fileUpload" accept=".json" onChange={e => this.UploadJsonFile(e)}/>
                 <div className="ListeHistoire" >
-                <h1>Vous avez actuellement {this.state.nbHistoire} Histoires </h1>
+                <h1>Vous avez actuellement {this.state.nbHistoire} histoire(s) </h1>
                 <table>
                     {localStorage.getItem('List').split(',').map(json => {
                         if (json!=="")

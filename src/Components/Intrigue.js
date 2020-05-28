@@ -22,7 +22,7 @@ class Intrigue extends React.Component{
     handleSubmit(event) {
         event.preventDefault();
         var rep = "";
-        if(this.state.value===this.props.details.data.reponse)
+        if(Number(this.state.value)==this.props.details.data.reponse)
             rep=0;
         else
             rep=1;
