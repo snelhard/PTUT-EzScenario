@@ -37,8 +37,6 @@ class MyReactControl extends React.Component {
       typeof(this.props.getData('choix5')) == 'undefined' ? this.enFonctionDuNbChoix() : this.props.getData('choix5')],
      },
     );
-
-    
   }
 
   onChange(event) {
