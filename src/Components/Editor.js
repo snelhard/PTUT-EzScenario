@@ -24,7 +24,7 @@ class Editor extends React.Component {
   render() {
     return (
       <div>
-      <h1>Bienvenue dans l'éditeur d'histoire</h1>
+      <h1 class="main-title">Bienvenue dans l'éditeur d'histoire</h1>
       <hr class="divider light my-4"></hr>
       <h1>Éditeur</h1>
       <button onClick={() => exportEditorData()}>Exporter</button>

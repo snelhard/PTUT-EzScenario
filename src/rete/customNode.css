@@ -1,11 +1,12 @@
 .editor{
     text-align: left;
-    width: 98%;
+    width: 90%;
     height: 70vh;
     background: #f9f9f9;
     border: 1px solid #e4e4e4;
     box-sizing: border-box;
-    margin: 1rem;
+    margin: auto;
+    margin-top: 25px;
 }
 .node{
     background: #52525D;

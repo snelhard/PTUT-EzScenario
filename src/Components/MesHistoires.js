@@ -132,7 +132,7 @@ class MesHistoires extends React.Component{
     render() {
         return (
             <div className="AjouterHistoire">
-                <h1>Mes histoires</h1>
+                <h1 class="main-title">Mes histoires</h1>
                 <hr class="divider light my-4"></hr>
                 <h1>Ajouter un nouvelle histoire</h1>
                 <input type="file" name="files[]" id="fileUpload" accept=".json" onChange={e => this.UploadJsonFile(e)}/>
