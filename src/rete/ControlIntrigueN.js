@@ -10,13 +10,11 @@ class MyReactControl extends React.Component {
       texte: this.props.getData('texte'),
       enigme: this.props.getData('enigme'),
       reponse: this.props.getData('reponse')
-      //contenu: this.props.contenu
     });
   }
   onChange(event) {
     let target = event.target.name;
     let value = event.target.value;
-    console.log(target + " " + value)
     this.update(target, value);
   }
   update(target, value){
@@ -49,7 +47,6 @@ export class MyControlIntrigueN extends Control {
       texte,
       enigme,
       reponse,
-     // putData:() => this.putData("texte",this.props.name)
       putData: (id,data) => this.putData(id, data),
       getData: (field) => this.getData(field)
     };

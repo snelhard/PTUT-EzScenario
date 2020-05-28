@@ -3,8 +3,6 @@ import '../App.css';
 
 class Qcm extends React.Component{
 
-    componentDidMount(){
-    }
 
     render() {
         return (
@@ -21,10 +19,7 @@ class Qcm extends React.Component{
             </div>
         )
     }
-
     remonterChoix =(idChoix) => {
-        console.log(idChoix);
-        console.log()
         if(this.props.details.data["check"+idChoix]){
             this.props.renvoiIdSuivant(0);
         } else {

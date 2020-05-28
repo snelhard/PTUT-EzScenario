@@ -9,6 +9,11 @@ import {
     withRouter
   } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import {
+    alerteErreur,
+    alertevalidation
+        } from './alerte'
+
 class Jeu extends React.Component{
     state = {
         currentScene: {
@@ -16,22 +21,66 @@ class Jeu extends React.Component{
         firstScene :{
         }
     }
-
+    
     constructor(props){
         super(props);
-
+        //le fichier JSON du jeu prend le fichier du current
         this.state.file=JSON.parse(localStorage.getItem('Current')).file;
-        console.log(this.state)
-        //for(this.state.file)
-        this.state.firstScene=this.state.file.nodes[1];       
-        this.state.currentScene = this.state.file.nodes[this.state.firstScene.outputs.out.connections[0].node];
-        console.log(this.state.firstScene);
-        console.log(this.state.firstScene.outputs.out.connections[0].node);
-        this.gererSauvegarde();
+        var nbNodes=0;
+        var Start=0;
+        let liste=[];
+        //parcourir le fichier JSON pour recuperer le nombre d'id des nodes et leur valeur
         
-        // this.sceneConatainer = React.createRef();
-    }
+        JSON.parse(JSON.stringify(this.state.file.nodes),(key,value)=> {
+          if(key==="id"){
+            nbNodes+=1;
+            liste.push(value);
+          } 
+        });     
 
+        //Pour toute les nodes
+        for(var i=0;i<nbNodes;i++){
+            //Si la nodes a pour nom Start
+            if(this.state.file.nodes[liste[i]].name==="Start"){
+                Start+=1;
+                //Sauvegarde la block Start en tant que premiere scene
+                this.state.firstScene=this.state.file.nodes[liste[i]];
+                //Verifie que le block start a une suite
+                if(this.state.file.nodes[liste[i]].outputs.out.connections.length===0){
+                    alerteErreur('Oops...','Le block de start doit avoir une suite pour pouvoir etre joué')
+                    this.props.history.push('/MesHistoires');
+                }
+            }   
+           
+          
+        //Stock la chaine de sortie d'un block
+        var tableauDeConnexions = JSON.stringify(this.state.file.nodes[liste[i]].outputs)
+        let nbChoix = 0
+        //parcour les caracteres et verifie si c'est un choice alors on augmente le nombre de choix qu'a le block
+        for (let index = 0; index < tableauDeConnexions.length - 5; index++) {
+            if ((tableauDeConnexions[index] === 'c') 
+            && (tableauDeConnexions[index+1] === 'h') 
+            && (tableauDeConnexions[index+2] === 'o')
+            && (tableauDeConnexions[index+3] === 'i')
+            && (tableauDeConnexions[index+4] === 'c')
+            && (tableauDeConnexions[index+5] === 'e')){
+                nbChoix++;
+            }
+        }
+        //Si le block n'est pas une fin et qu'elle n'a pas de choix alors on retourne une erreur
+        if(this.state.file.nodes[liste[i]].name!=="Fin"){
+            if(nbChoix!=0){
+                if(this.renderSwitch(nbChoix,liste[i]).connections.length===0){
+                    alerteErreur('Oops...','Vos blocks doivent avoir une suite pour pouvoir etre joués');
+                    this.props.history.push('/MesHistoires');
+                }
+            }
+        }              
+         this.state.currentScene = this.state.file.nodes[this.state.firstScene.outputs.out.connections[0].node];
+         this.gererSauvegarde();
+        }
+    }
+    //Switch des choice en fonction du nombre ce choix d'un block  
     renderSwitch(param,i) {
         switch(param) {
           case 1:
@@ -47,94 +96,12 @@ class Jeu extends React.Component{
             
         }
       }
-
-  UNSAFE_componentWillMount(){   
-  //Verification robustesse
-  var nbNodes=0;
-  var Start=0;
-  let liste=[];
-  JSON.parse(JSON.stringify(this.state.file.nodes),(key,value)=> {
-    if(key==="id"){
-      nbNodes+=1;
-      liste.push(value);
-    } 
-  });     
-  var tableauDeConnexions="a"
-
-  for(var i=0;i<nbNodes;i++){
-    if(this.state.file.nodes[liste[i]].name==="Start"){
-        Start+=1;
-        this.state.firstScene=this.state.file.nodes[liste[i]];       
-        this.state.currentScene = this.state.file.nodes[this.state.firstScene.outputs.out.connections[0].node];
-    }
-
-    var tableauDeConnexions = JSON.stringify(this.state.file.nodes[liste[i]].outputs)
-   // console.log(tableauDeConnexions +" tableau de connexion   ")
-    let nbChoix = 0
-
-    for (let index = 0; index < tableauDeConnexions.length - 5; index++) {
-        if ((tableauDeConnexions[index] === 'c') 
-        && (tableauDeConnexions[index+1] === 'h') 
-        && (tableauDeConnexions[index+2] === 'o')
-        && (tableauDeConnexions[index+3] === 'i')
-        && (tableauDeConnexions[index+4] === 'c')
-        && (tableauDeConnexions[index+5] === 'e')){
-            nbChoix++;
-        }
-    }
-       // console.log(nbChoix + " nb choix")
-        if(this.state.file.nodes[liste[i]].name==="Fin"){
-
-        }else{
-            //choix+nbchoix
-            if(nbChoix!=0){
-               // console.log(this.renderSwitch(nbChoix,liste[i])+ "test")
-                if(this.renderSwitch(nbChoix,liste[i]).connections.length===0){
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                       text: 'Vos blocks doivent avoir une suite pour pouvoir etre joués',
-                      })
-                                      this.props.history.push('/MesHistoires');
-                                    }
-            }
-                
-              
-         
-        
-    }
-        
-    //    if (this.state.file.nodes[liste[i]].name==="Scene"  || this.state.file.nodes[liste[i]].name==="Intrigue" ){
-    //        if (this.state.file.nodes[liste[i]].outputs.choice1.connections.length===0 || this.state.file.nodes[liste[i]].outputs.choice2.connections.length===0){
-    //         Swal.fire({
-    //             icon: 'error',
-    //             title: 'Oops...',
-    //             text: 'Vos blocks intrigue ou scene doivent avoir une suite pour pouvoir etre jouée',
-    //           })
-    //          this.props.history.push('/MesHistoires');
-    //        }
-    //    }
-    //    if (this.state.file.nodes[liste[i]].name==="Message"){
-    //     if (this.state.file.nodes[liste[i]].outputs.choice1.connections.length===0){
-    //         Swal.fire({
-    //             icon: 'error',
-    //             title: 'Oops...',
-    //             text: 'Vos Messages doivent avoir un suite pour pouvoir etre jouée',
-    //           })
-    //      this.props.history.push('/MesHistoires');
-    //     }
-    //    }
-  }    
-    }
-    componentDidMount(){
-        // update();
-    }
-
     componentWillUnmount() {
         localStorage.setItem('Current',"");
     }
     
     render() {
+        //En fonction du nom du block on affiche son composant
         let Current;
         if(this.state.currentScene.name==="Scene"){
             Current  = <Scene renvoiIdSuivant={this.changerScene} details={this.state.currentScene}/> 
@@ -155,52 +122,44 @@ class Jeu extends React.Component{
             
         return (
             <div className="JeuContainer">
-            <h1>~ {this.state.firstScene.data.titre} ~</h1>
-            {Current}
-        
-            {/* { this.mountScene } */}
-
-            <div ref={this.sceneConatainer} />
-            {/* <Scene renvoiIdSuivant={this.changerScene} details={this.state.currentScene}/> */}
-
-            {/* <button onClick={ this.mountScene }>TEST</button> */}
+                <h1>~ {this.state.firstScene.data.titre} ~</h1>
+                {Current}
+                <div ref={this.sceneConatainer} />
             </div>
             )
         }
 
-          
+        //Est appelé quand on clic sur un des choix
         changerScene = (idScene) => {
-           
+     
+            var sceneSuivante;
+            switch (idScene) {
+                case 0:
+                    sceneSuivante =this.state.file.nodes[this.state.currentScene.outputs.choice1.connections[0].node];
+                   break;
+                case 1:
+                    sceneSuivante =this.state.file.nodes[this.state.currentScene.outputs.choice2.connections[0].node];
+                   break;
+                case 2:
+                    sceneSuivante =this.state.file.nodes[this.state.currentScene.outputs.choice3.connections[0].node];
+                    break;
+                case 3:
+                    sceneSuivante =this.state.file.nodes[this.state.currentScene.outputs.choice4.connections[0].node];
+                    break;
+                case 4:
+                    sceneSuivante =this.state.file.nodes[this.state.currentScene.outputs.choice5.connections[0].node];
+                    break;
+                default:
+                   break;
+           }
+           //MaJ de la currentScene avec la nouvelle scene
+            this.setState({currentScene: sceneSuivante});
+            //gestion sauvegarde
+            if (sceneSuivante.name!== "Fin")
+                this.Sauvegarder(sceneSuivante);
+            else
+                this.supprimerSauvegarde();
             
-            
-            var sceneSuivante=this.currentScene;
-           
-            if (idScene===0) {
-                sceneSuivante =this.state.file.nodes[this.state.currentScene.outputs.choice1.connections[0].node];
-                // console.log(this.state.currentScene.outputs.choice1.connections[0].node)
-            }
-            if (idScene===1){
-                 sceneSuivante =this.state.file.nodes[this.state.currentScene.outputs.choice2.connections[0].node];
-                //  console.log(this.state.currentScene.outputs.choice2.connections[0].node)
-            }
-            if (idScene===2){
-                sceneSuivante =this.state.file.nodes[this.state.currentScene.outputs.choice3.connections[0].node];
-                // console.log(this.state.currentScene.outputs.choice3.connections[0].node)
-           }
-           if (idScene===3){
-                sceneSuivante =this.state.file.nodes[this.state.currentScene.outputs.choice4.connections[0].node];
-                // console.log(this.state.currentScene.outputs.choice4.connections[0].node)
-           }
-           if (idScene===4){
-                sceneSuivante =this.state.file.nodes[this.state.currentScene.outputs.choice5.connections[0].node];
-                // console.log(this.state.currentScene.outputs.choice5.connections[0].node)
-           }
-        
-           this.setState({currentScene: sceneSuivante});
-           if (sceneSuivante.name!== "Fin")
-            this.Sauvegarder(sceneSuivante);
-           else
-            this.supprimerSauvegarde();
         }
 
         Sauvegarder (sceneSuivante) {
@@ -219,16 +178,7 @@ class Jeu extends React.Component{
             // Vérifie qu'une sauvegarde existe est qu'elle n'est pas vide
             if(localStorage.getItem(KEY)!=="" && localStorage.getItem(KEY)!==null) {
                 // Affiche un message comme quoi une sauvegarde existe déjà et propose à l'utilisateur de faire un choix
-                Swal.fire({
-                    title: 'Une sauvegarde pour cette histoire existe déjà...',
-                    text: "Voulez vous reprendre la sauvegarde déjà existante ?",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Reprendre',
-                    cancelButtonText: 'Supprimer'
-                  }).then((result) => {
+                alertevalidation( 'Une sauvegarde pour cette histoire existe déjà...',"Voulez vous reprendre la sauvegarde déjà existante ?","Reprendre","Supprimer").then((result) => {
                     if (result.value) {
                         // Récupère les éléments de sauvegarde stocké dans local storage et crée un tableau
                         var tab = localStorage.getItem(KEY).split(',');

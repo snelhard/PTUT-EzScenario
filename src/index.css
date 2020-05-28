@@ -1,11 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #54392d;
 }
+
+/* Accueil */
+header.masthead{
+  padding-top: 10rem;
+  padding-bottom: calc(10rem - 4.5rem);
+  background-image: linear-gradient(to bottom, rgba(92, 77, 66, 0.849) 0%, rgba(92, 77, 66, 0.712) 100%), url("../src/Magic_Boys_Book_448510_1920x1080.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+  height: 100vh;
+  min-height: 40rem;
+  padding-top: 4.5rem;
+  padding-bottom: 0;
+}
+
+header.masthead h1 {
+  font-size: 3.5rem;
+}
+
+.text-white-75 {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+header.masthead p {
+  font-family: "Merriweather", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1.15rem;
+  font-weight: 200;
+}
+
+.font-weight-bold {
+  font-weight: 700 !important;
+}
+
+.mb-5, .my-5 {
+  margin-bottom: 3rem !important;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.col-lg-8{
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.page-section {
+  padding: 8rem 0;
+}
+
+.h-100 {
+  height: 100% !important;
+}
+
+.align-self-end {
+  align-self: flex-end !important;
+}
+/* Accueil > bouton "jouer" */
+.btn-xl {
+  padding: 1.25rem 2.25rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 10rem;
+}
+
+.btn {
+  font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #a2a198;
+  border-color: #f4623a;
+  text-decoration: none;
+}
+/* Accueil > "présentation du jeu" */
+.container{
+  max-width: 815px;
+  margin: auto;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.text-center {
+  text-align: center ;
+}
+
+.mt-0, .my-0 {
+  margin-top: 0 ;
+}
+
+h2, .h2 {
+  font-size: 4rem;
+  font-family: 'Parisienne', cursive;
+  font-weight: 500;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.text-white-50 {
+  color: rgba(255, 255, 255, 0.5);
+  font-family: "Merriweather", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.mb-4, .my-4 {
+  margin-bottom: 1.5rem;
+}
+
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -17,8 +145,8 @@ textarea{
 }
 
 .main-container{
-  padding: 20px;
-  max-width: 1200px;
+  /* padding: 20px; */
+  /* max-width: 1200px; */
   margin: auto;
 }
 
@@ -71,12 +199,17 @@ textarea{
   flex-wrap: wrap;
 }
 
+/* Navbar */
 .navBar{
-  background-color: #444444;
+  background-color: #a7a599;
+  box-shadow: 0 0.5rem 1rem #0000007d;
   display: flex;
-  padding: 0px 37px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  /* padding: 0px 37px; */
   margin: 0;
   list-style-type: none;
+  justify-content: center;
 }
 
 .navBar > li {
@@ -90,12 +223,28 @@ textarea{
 }
 
 .navBar > li > a {
+  font-family: italic large serif;
+  font-weight: 700;
+  font-size: 1.2rem;
   text-decoration: none;
-  color: white;
+  color: rgb(255, 255, 255);
+  padding: 0 1.5rem;
 }
 .navIcon{
   margin-right: 7px;
   color: white;
+}
+
+/* divider */
+hr.divider{
+  max-width: 3.25rem;
+  border-width: 0.2rem;
+  /* margin-bottom: 5rem; */
+  border-color: #fff;
+}
+
+.main-container{
+  text-align: center;
 }
 
 .JeuContainer{
@@ -148,6 +297,16 @@ button:not(#bouton) {
 
 button:hover:not(#bouton) {
   background: #9c9c9c;
+}
+
+h1{
+  color: #fff;
+}
+
+.main-title{
+  font-size: 4rem;
+  font-family: 'Parisienne', cursive;
+  font-weight: 500;
 }
 
 /* input[type="file"] {

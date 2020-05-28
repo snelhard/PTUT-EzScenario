@@ -8,6 +8,7 @@ import {
   } from "react-router-dom";
   import Jeu from './Jeu';
   import Swal from 'sweetalert2'
+  import {alerteValidation, alertevalidation} from './alerte'
 class MesHistoires extends React.Component{
 
     state={
@@ -15,19 +16,17 @@ class MesHistoires extends React.Component{
     }
     constructor(props){
         super(props);
+        //gestion local storage
         if (localStorage.getItem('List') ==null) localStorage.setItem('List',""); 
         this.state.nbHistoire=localStorage.getItem('List').split(',').length-1;   
     }
 
-
     UploadJsonFile(e) {
-                var FILE_KEY;
-                var reader = new FileReader();
-                // fire processUpload when the user uploads a file.
+        var FILE_KEY;
+        var reader = new FileReader();
+         // fire processUpload when the user uploads a file.
                 handleFileUpload(e);
                 // Log any previously saved file.
-                console.log('previous save: ', retrieveSave());
-
                 // Setup file reading
                 
                 reader.onload = handleFileRead;
@@ -55,7 +54,6 @@ class MesHistoires extends React.Component{
 
                 function handleFileRead(event) {
                     var save = JSON.parse(event.target.result);
-                    console.log(save) // {hp: 32, maxHp: 50, mp: 11, maxMp: 23}
                     addKey();
                     window.localStorage.setItem(FILE_KEY, JSON.stringify(save));
                 }
@@ -68,20 +66,14 @@ class MesHistoires extends React.Component{
 
     downloadFile(key) {
         var FILE_KEY = key;
-        
-        console.log('current save: ', retrieveSave());
-
         function retrieveSave() {
             return JSON.parse(localStorage.getItem(FILE_KEY))
         }
-        
         const element = document.createElement("a");
         // Définie le contenu qui va être dans le fichier JSON
         var debug = {file: retrieveSave().file};
-
         // crée le fichier json avec le contenu
         const file = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});
-
         // Ouverture du lecteur
         var reader = new FileReader();
         // Attend que le fichier à fini de charger
@@ -91,28 +83,18 @@ class MesHistoires extends React.Component{
             // Analyse une chaîne de caractères JSON et construit la valeur JavaScript ou l'objet décrit par cette chaîne
             const contenu = JSON.parse(text);
             // renvoie le contenu affecté à nom dans le json
-            console.log(contenu.nom)
             
         });
         // Renvoyer le resultat de la lecture du fichier sous forme txt
         reader.readAsText(file);
         element.href = URL.createObjectURL(file);
-        element.download = "myFile.json";
+        element.download = FILE_KEY;
         document.body.appendChild(element); // Required for this to work in FireFox
         element.click();
     }
 
     supprimer(key){
-        Swal.fire({
-            title: 'Êtes-vous sûr(e) de vouloir le supprimer ? ',
-            text: "Il vous sera impossible de revenir en arrière !",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Supprimer',
-            cancelButtonText: 'Annuler'
-          }).then((result) => {
+        alertevalidation('Êtes-vous sûr(e) de vouloir le supprimer ? ',"Il vous sera impossible de revenir en arrière !","Supprimer","Annuler").then((result) => {
             if (result.value) {
                 var list = localStorage.getItem('List');
                 var tab = list.split(',');
@@ -132,6 +114,8 @@ class MesHistoires extends React.Component{
     render() {
         return (
             <div className="AjouterHistoire">
+                <h1 class="main-title">Mes histoires</h1>
+                <hr class="divider light my-4"></hr>
                 <h1>Ajouter un nouvelle histoire</h1>
                 <input type="file" name="files[]" id="fileUpload" accept=".json" onChange={e => this.UploadJsonFile(e)}/>
                 <div className="ListeHistoire" >
