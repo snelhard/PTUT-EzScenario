@@ -11,8 +11,8 @@ import { MyControlStart} from "./ControlStart";
 import { MyControlFin} from "./ControlFin";
 import { MyControlMessage} from "./ControlMessage";
 import { MyControlQcm} from "./ControlQcm";
-import Swal from 'sweetalert2'
-
+import Swal from 'sweetalert2';
+import { alerteErreur,alertevalidation} from '../Components/alerte'
 // import ConnectionReroutePlugin from 'rete-connection-reroute-plugin';
 
 var defaultSocket = new Rete.Socket("");
@@ -21,7 +21,7 @@ class StoryBlock extends Rete.Component {
 	constructor() {
 		super("Scene");
 	}
-
+	//saisir le nombre de choix d'une scene
 	async saisieValeur() {
 		const { value: ValeurSaisie } = await Swal.fire({
 			title: 'Nombre de choix (entre 2 et 5)',
@@ -37,12 +37,10 @@ class StoryBlock extends Rete.Component {
 		}
 	}
 
-
+	//Construire la scene avec un nombre de choix/récupere la scene avec les choix 
 	async builder(node) {
-
 		const lesInputs = node.inputs;
 		const lesOutputs = node.outputs;
-
 		const testChoix1 = node.data.choix1
 		const testChoix2 = node.data.choix2
 		const testChoix3 = node.data.choix3
@@ -61,9 +59,8 @@ class StoryBlock extends Rete.Component {
 		}
 		
 
-		if (nbSorties===99) {
-			nbSortiesint=0
-			if (typeof(testChoix1) != "undefined") {
+			if (typeof(testChoix1) != "undefined" && nbSorties==99) {
+				nbSortiesint=0
 				nbSortiesint++
 				if (typeof(testChoix2) != "undefined") {
 					nbSortiesint++
@@ -78,22 +75,15 @@ class StoryBlock extends Rete.Component {
 					}
 				}
 			}
-		}
-
-		let listeOutput = [];
-		for (let i = 0; i < nbSortiesint; i++) {
-			listeOutput.push( 
-				new Rete.Output("choice"+(i+1), "Choix"+(i+1), defaultSocket, false)
-			);
-		}
-
+		//ajoute une entrée à notre scene
 		var inp = new Rete.Input("input", "", defaultSocket, true);
 		var ctrl = new MyControl(this.editor, "Paramètres de la scène", nbSortiesint, "", "", "");
-
 		node.addInput(inp)
-		for (let i = 0; i < listeOutput.length; i++) {
-				node.addOutput(listeOutput[i]);
+		//ajoute le nombre de sortie en fonction du nomnre de choix
+		for (let i = 0; i < nbSortiesint; i++) {
+			node.addOutput(new Rete.Output("choice"+(i+1), "Choix"+(i+1), defaultSocket, false))
 		}
+		//Ajoute au block scene les champs du control
 		node.addControl(ctrl);
 		return node;
 	}
@@ -183,7 +173,7 @@ export const initEditor = function (container) {
 	editor = new Rete.NodeEditor("demo@0.1.0", container);
 	init();
 }
-
+//Gestion de l'editeur via rete.js
 const init = async () => {
 
 	var components = [new StartBlock(), new StoryBlock(),new MessageBlock(), new IntrigueNBlock(), new QcmBlock(), new endBlock()];
@@ -193,7 +183,6 @@ const init = async () => {
 		component: MyNewNode,
 	});
 	editor.use(ContextMenuPlugin);
-	// editor.use(ConnectionReroutePlugin);
 
 	engine = new Rete.Engine("demo@0.1.0");
 
@@ -204,11 +193,9 @@ const init = async () => {
 
 	editor.on("process nodecreated noderemoved connectioncreated connectionremoved nodedraged",
 		async () => {
-			// console.log("process");
 			await engine.abort();
 			const data = editor.toJSON();
-			// await engine.process(data);
-			// console.log(data);
+
 		}
 	);
 
@@ -217,23 +204,12 @@ const init = async () => {
 		editor.nodes.map(n => n.update())
 	});
 
-	editor.on('nodeselect', node => {
-		console.log("Selected Node :");
-		console.log(node);
-	});
-
-	// editor.on('destroy', () => {
-	// console.log("dest");
-	// editor.destroy();
-	// engine.destroy();
-	// });
+	//Si on ne vient pas de mes histoires alors on affichera juste un block Start
 	if (localStorage.getItem('Current') ==null || localStorage.getItem('Current')=="") {
 		editor.fromJSON({ "id": "demo@0.1.0", "nodes": { "1": { "id": 1, "data": { "titre": "" }, "inputs": {}, "outputs": {}, "position": [-419.80039837027675, -61.903379254543886], "name": "Start" } } });
 	} else {
 		var json = JSON.parse(localStorage.getItem('Current')); // Parse du JSON
-		console.log(json);
 		var editorData = json.file;
-		console.log(editorData)
 		editor.fromJSON(editorData);
 	}
 	editor.on('zoom', ({ source }) => {
@@ -241,11 +217,10 @@ const init = async () => {
 	});
 
 	editor.view.resize();
-	console.log(editor.nodes);
 	AreaPlugin.zoomAt(editor);
 	editor.trigger("process");
 }
-
+//Bouton export
 export const exportEditorData = () => {
 
 	function retrieveSave() {
@@ -270,20 +245,21 @@ export const exportEditorData = () => {
 		// Analyse une chaîne de caractères JSON et construit la valeur JavaScript ou l'objet décrit par cette chaîne
 		const contenu = JSON.parse(text);
 		// renvoie le contenu affecté à nom dans le json
-		console.log(contenu.nom)
 
 	});
 	// Renvoyer le resultat de la lecture du fichier sous forme txt
+	//renvoyer le nombre de block avec leur id dans une liste
 	var nbNodes=0;
-	  let liste=[];
-	  let Start=0;
-	  let idStart=""
+	let liste=[];
+	let Start=0;
+	let idStart=""
   	JSON.parse(JSON.stringify(debug.file.nodes),(key,value)=> {
 		if(key==="id"){
 		nbNodes+=1;
 		liste.push(value);
 		} 
 	 }); 
+	 //Recherche dans la liste le block start
 	 for(var i=0;i<nbNodes;i++){
 		if(debug.file.nodes[liste[i]].name==="Start"){
 			Start+=1
@@ -291,23 +267,14 @@ export const exportEditorData = () => {
 		}
 	} 
 	if(Start>=2 || Start==0){
-		Swal.fire({
-			icon: 'error',
-			title: 'Oops...',
-			text: "Il doit n'y avoir qu'un seul debut",
-		})
+		alerteErreur('Oops',"Il doit n'y avoir qu'un seul debut");
 	}else{
-		console.log(idStart)
 		if (typeof(idStart) === "undefined" || idStart==""){
-			Swal.fire({
-				icon: 'error',
-				title: 'Oops...',
-				text: 'Vous avez oublié de donner un nom à votre histoire !',
-			  })
+			alerteErreur('Oops','Vous avez oublié de donner un nom à votre histoire !');
 		} else {
 			reader.readAsText(file);
 			element.href = URL.createObjectURL(file);
-			element.download = idStart + "_-_Story_file.json";
+			element.download = idStart + "_Story_file.json";
 			document.body.appendChild(element); // Required for this to work in FireFox
 			element.click();
 		}
@@ -315,11 +282,10 @@ export const exportEditorData = () => {
 	
 
 }
-
+//Chargement
 export const loadEditorData = (event) => {
 	var files = event.target.files;
 	var json;
-	// console.log(files);
 	for (var i = 0, f; f = files[i]; i++) {
 		var reader = new FileReader();
 
@@ -328,7 +294,6 @@ export const loadEditorData = (event) => {
 				try {
 					json = JSON.parse(e.target.result); // Parse du JSON
 					var editorData = json.file;
-					// console.log(JSON.stringify(editorData));
 					editor.fromJSON(editorData); // Fonction qui exploite les données du JSON pour les mettre dans l'éditeur (blocs, titres, énigmes...)
 				} catch (ex) {
 					console.log("Exception lors du parse du JSON = ", ex); // Exception levée en cas d'erreur de parse, ou d'envoi de fichier incorrect (non-JSON)
@@ -338,7 +303,7 @@ export const loadEditorData = (event) => {
 		reader.readAsText(f); // Lit le contenu du fichier f passé en paramètre grâce au FileReader
 	}
 }
-
+//Sauvegarde
 export const saveEditorData = (event) => {
 	var FILE_KEY;
 	function addKey() {
@@ -380,37 +345,18 @@ export const saveEditorData = (event) => {
 		}
 	} 
 	if(Start>=2 || Start==0){
-		Swal.fire({
-			icon: 'error',
-			title: 'Oops...',
-			text: "Il doit n'y avoir qu'un seul debut",
-		})
+		alerteErreur('Oops',"Il doit n'y avoir qu'un seul debut");
 	}else{
 		if (typeof(idStart) === "undefined" || idStart==""){
-			Swal.fire({
-				icon: 'error',
-				title: 'Oops...',
-				text: 'Vous avez oublié de donner un nom à votre histoire !',
-			  })
+			alerteErreur('Oops','Vous avez oublié de donner un nom à votre histoire !');
 		} else {
 	// Si l'utilisateur a rentré un titre
-		console.log(debug)
 		FILE_KEY=idStart + "_-_Story_file.json";
 
 		if (localStorage.getItem(FILE_KEY)!== "" && localStorage.getItem(FILE_KEY)!== null){
-			Swal.fire({
-				title: 'Une histoire portant ce nom existe déjà',
-				text: "Voulez-vous quand même sauvegarder votre histoire ?",
-				icon: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#3085d6',
-				cancelButtonColor: '#d33',
-				confirmButtonText: 'Sauvegarder',
-				cancelButtonText: 'Annuler'
-			  }).then((result) => {
+			alertevalidation( 'Une sauvegarde pour cette histoire existe déjà...',"Voulez vous reprendre la sauvegarde déjà existante ?","Reprendre","Supprimer").then((result) => {
 				if (result.value) {
 					localStorage.setItem(FILE_KEY,JSON.stringify(debug));
-					console.log(debug)
 					addKey();
 					document.body.appendChild(element); // Required for this to work in FireFox
 					element.click();
@@ -441,23 +387,12 @@ export const saveEditorData = (event) => {
 
 	}
 }		
-
+//Effacer
 export const resetEditor = () => {
-	Swal.fire({
-		title: "Êtes vous sûr?",
-		text: "Vous perderez l'histoire présente dans l'editeur !",
-		icon: "warning",
-		showConfirmButton: true,
-		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-  	cancelButtonColor: '#d33',
-		confirmButtonText: 'Confimer',
-		cancelButtonText:'Annuler',
-		dangerMode: true,
-	}).then((result) => {
+	alertevalidation( "Êtes vous sûr?","Vous perdrez l'histoire présente dans l'editeur !","Confimer","Annuler").then((result) => {
 		if (result.value) {
 			localStorage.setItem('Current', "");
-			window.location.reload(true);
+			editor.fromJSON({ "id": "demo@0.1.0", "nodes": { "1": { "id": 1, "data": { "titre": "" }, "inputs": {}, "outputs": {}, "position": [-419.80039837027675, -61.903379254543886], "name": "Start" } } });
 		} else {
 			Swal.fire("Annulé", "Reprise de l'histoire dans l'editeur", "error")
 		}

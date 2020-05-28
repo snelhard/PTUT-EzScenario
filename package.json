@@ -1,15 +1,27 @@
 {
   "name": "ez-scenario",
   "version": "0.1.0",
+  "description": "Story creation",
+  "author": "Le fun basique",
+  "build": {
+    "appId": "story.create"
+  },
+  "homepage": "./",
   "private": true,
   "proxy": "http://localhost:3001",
   "secure": false,
+  "main": "public/electron.js",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "@types/jest": "^25.2.2",
     "@types/react": "^16.9.35",
+    "axios": "^0.19.2",
+    "bootstrap": "^4.0.0-beta.3",
+    "cross-env": "^7.0.2",
+    "electron-is-dev": "^1.2.0",
     "fs": "0.0.1-security",
     "history": "^4.10.1",
     "jshint": "^2.11.1",
@@ -22,6 +34,7 @@
     "react-scripts": "3.4.0",
     "react-string-replace": "^0.4.4",
     "reactjs-popup": "^1.5.0",
+    "reactstrap": "^8.4.1",
     "rete": "^1.4.3-rc.1",
     "rete-area-plugin": "^0.2.1",
     "rete-connection-plugin": "^0.9.0",
@@ -35,7 +48,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "set CI=true &&react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron-builder": "electron-builder",
+    "electron-build": "npm run react-build && npm run electron-builder",
+    "electron-start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -53,8 +69,13 @@
     ]
   },
   "devDependencies": {
+    "concurrently": "^5.2.0",
+    "electron": "^9.0.0",
+    "electron-builder": "^22.7.0",
+    "electron-packager": "^14.2.1",
     "json-loader": "^0.5.7",
     "react-redux": "^7.2.0",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "wait-on": "^5.0.0"
   }
 }

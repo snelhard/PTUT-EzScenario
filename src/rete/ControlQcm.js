@@ -1,7 +1,5 @@
 import React from "react";
-// import { Control } from "rete";
 import Rete from "rete";
-
 class MyReactControl extends React.Component {
   state = {};
   componentDidMount() {
@@ -22,7 +20,6 @@ class MyReactControl extends React.Component {
   onChange(event) {
     let target = event.target.name;
     let value = event.target.value;
-    console.log(target + " : " + value);
     this.update(target, value);
   }
   update(target, value){
@@ -34,7 +31,6 @@ class MyReactControl extends React.Component {
   onChangeCheckbox(event) {
     let target = event.target.name;
     let value = !this.state[target]
-    console.log("value = " + value);
     this.setState({
         [target]: value
       }, () => this.props.putData(target, value));

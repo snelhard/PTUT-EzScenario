@@ -5,11 +5,6 @@ import {
   } from 'react-router-dom';
 
 class Message extends React.Component{
-
-    // componentDidMount(){
-    //     console.log(this.props.details);
-    // }
-
     render() {
         return (
             <div className="sceneJeu">
@@ -20,9 +15,7 @@ class Message extends React.Component{
             </div>
         )
     }
-
     remonterChoix =(idChoix) => {
-        // console.log(idChoix)
         this.props.renvoiIdSuivant(idChoix);
     }
 }

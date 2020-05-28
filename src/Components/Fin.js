@@ -6,15 +6,8 @@ import {
 
 class Fin extends React.Component{
 
-    componentDidMount(){
-        // console.log(this.props.details);
-    }
 
     render() {
-        // let buttonQuitter;
-        // if (!(this.props.details.ListeChoix && this.props.details.ListeChoix.length)) {
-        //     buttonQuitter = <button onClick={() => this.props.history.push('/')}>Quitter</button>;
-        // }
         return (
             <div className="finJeu">
                 <h2 className="finJeuTitre" data-testid="titre">{this.props.details.data.titre}</h2>

@@ -230,6 +230,10 @@ textarea{
   color: rgb(255, 255, 255);
   padding: 0 1.5rem;
 }
+.navIcon{
+  margin-right: 7px;
+  color: white;
+}
 
 /* divider */
 hr.divider{
@@ -326,3 +330,6 @@ h1{
   border: 2px dashed #e4e4e4;
   background: #f7f7f7;
 } */
+
+
+/* PLAY */

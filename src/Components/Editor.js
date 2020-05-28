@@ -1,9 +1,7 @@
 import React from "react";
-import '../App.css';
 import { initEditor, exportEditorData, loadEditorData, saveEditorData, resetEditor} from "../rete/editor";
 import { read } from "fs";
 
-// import "./styles.css";
 
 class Editor extends React.Component {
   constructor(props) {
@@ -12,30 +10,29 @@ class Editor extends React.Component {
   }
 
   componentDidMount() {
-    console.log("didMount");
+        //quand on arrive dans le composant ça initialise l'editeur si il y a un current
     initEditor(this.editorContainer.current);
   }
 
   componentWillUnmount() {
-    console.log("unmounting");
+    //quand on quitte le composant ça vide le current
     localStorage.setItem('Current',"");
   }
 
   render() {
+    //HTML
     return (
       <div>
-      <h1 class="main-title">Bienvenue dans l'éditeur d'histoire</h1>
-      <hr class="divider light my-4"></hr>
-      <h1>Éditeur</h1>
-      <button onClick={() => exportEditorData()}>Exporter</button>
-      <button onClick={() => saveEditorData()}>Sauvegarder</button>
-      <input type="file" onChange={loadEditorData} accept=".json" />
-      {/* <input id="upload" name="upload" type="file" onChange={loadEditorData} accept=".json"/>
-      <label for="upload" className="custom-file-upload"> IMPORTER HISTOIRE  </label> */}
-      <button onClick={() => resetEditor()}>Effacer</button>
-      <div className="editor">
-        <div ref={this.editorContainer} />
-      </div>
+        <h1>Bienvenue dans l'éditeur d'histoire</h1>
+        <hr class="divider light my-4"></hr>
+        <h1>Éditeur</h1>
+        <button onClick={() => exportEditorData()}>Exporter</button>
+        <button onClick={() => saveEditorData()}>Sauvegarder</button>
+        <input type="file" onChange={loadEditorData} accept=".json" />
+        <button onClick={() => resetEditor()}>Effacer</button>
+        <div className="editor">
+          <div ref={this.editorContainer} />
+        </div>
       </div>
     );
   }

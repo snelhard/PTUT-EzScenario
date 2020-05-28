@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+# building
+/dist
+
 # production
 /build
 

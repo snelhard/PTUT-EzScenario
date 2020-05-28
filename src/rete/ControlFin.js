@@ -11,11 +11,8 @@ class MyReactControl extends React.Component {
     });
   }
   onChange(event) {
-    // this.props.emitter.trigger("process");
     let target = event.target.name;
     let value = event.target.value;
-    console.log(target + " " + value)
-    
     this.update(target, value);
   }
   update(target, value){
@@ -44,7 +41,6 @@ export class MyControlFin extends Control {
       id: key,
       titre,
       texte,
-     // putData:() => this.putData("texte",this.props.name)
       putData: (id,data) => this.putData(id, data),
       getData: (field) => this.getData(field)
     };

@@ -13,7 +13,6 @@ class MyReactControl extends React.Component {
   onChange(event) {
     let target = event.target.name;
     let value = event.target.value;
-    console.log(target + " " + value)
     this.update(target, value);
   }
   update(target, value){
@@ -40,7 +39,6 @@ export class MyControlStart extends Control {
       emitter,
       id: key,
       titre,
-     // putData:() => this.putData("texte",this.props.name)
       putData: (id,data) => this.putData(id, data),
       getData: (field) => this.getData(field)
     };
