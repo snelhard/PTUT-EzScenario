@@ -9,10 +9,8 @@ export class MyNode extends Node {
     return (
       <div className={`node start ${selected}`}>
         <div className="title">{node.name}</div>
-        {/* Outputs */}
         {outputs.map(output => (
           <div className="output" key={output.key}>
-            {/* <div className="output-title">{output.name}</div> */}
             <Socket
               type="output"
               socket={output.socket}
@@ -21,7 +19,6 @@ export class MyNode extends Node {
             />
           </div>
         ))}
-        {/* Controls */}
         {controls.map(control => (
           <Control
             className="control"
@@ -30,7 +27,6 @@ export class MyNode extends Node {
             innerRef={bindControl}
           />
         ))}
-        {/* Inputs */}
         {inputs.map(input => (
           <div className="input" key={input.key}>
             <Socket
@@ -39,9 +35,7 @@ export class MyNode extends Node {
               io={input}
               innerRef={bindSocket}
             />
-            {/* {!input.showControl() && (
-              <div className="input-title">{input.name}</div>
-            )} */}
+        
             {input.showControl() && (
               <Control
                 className="input-control"

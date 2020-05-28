@@ -18,11 +18,13 @@ class Scene extends React.Component{
             return this.props.details.data.choix4;
           case 4:
             return this.props.details.data.choix5;
-            
+          default:
+            break;
         }
       }
 
     render() {
+        //parcour les caracteres et verifie si c'est un choix alors on augmente le nombre de choix qu'a le block
         var tableauDeConnexions = JSON.stringify(this.props.details.data)
             let nbChoix = 0
             for (let index = 0; index < tableauDeConnexions.length - 4; index++) {
@@ -34,7 +36,7 @@ class Scene extends React.Component{
                     nbChoix++;
                 }
             }
-        
+            //Permet d'afficher le bon nombre de choix 
             let ListeChoix = []
             for (let index = 0; index < nbChoix; index++) {
                 ListeChoix.push(
@@ -48,7 +50,6 @@ class Scene extends React.Component{
                 );
                 
             }
-
         return (
             <div className="sceneJeu">
                 <h2 className="sceneJeuTitre" data-testid="titre">{this.props.details.data.titre}</h2>
@@ -59,9 +60,7 @@ class Scene extends React.Component{
             </div>
         )
     }
-
     remonterChoix =(idChoix) => {
-        // console.log(idChoix)
         this.props.renvoiIdSuivant(idChoix);
     }
 }

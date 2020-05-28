@@ -40,7 +40,6 @@ class MyReactControl extends React.Component {
   }
 
   onChange(event) {
-    // this.props.emitter.trigger("process");
     let target = event.target.name;
     let value = event.target.value;
     this.update(target, value);
@@ -100,7 +99,6 @@ export class MyControl extends Rete.Control {
       listeChoix,
       putData: (id, data) => this.putData(id, data),
       getData: (field) => this.getData(field)
-      // putData: () => this.putData.apply(this, arguments)
     };
   }
 }

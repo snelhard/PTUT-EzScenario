@@ -11,17 +11,18 @@ class Intrigue extends React.Component{
         super(props);
         this.state = {value: ''};
     
-        this.handleChange = this.handleChange.bind(this);
+        this.update = this.update.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(event) {
+    update(event) {
         this.setState({value: event.target.value});
     }
-    
+    //Verifier si la reponse est la bonne
     handleSubmit(event) {
+        //ne pas recharger la page
         event.preventDefault();
-        var rep = "";
+        var rep;
         if(Number(this.state.value)==this.props.details.data.reponse)
             rep=0;
         else
@@ -37,12 +38,9 @@ class Intrigue extends React.Component{
                 <div className="choixContainerJeu">
                     <form onSubmit={this.handleSubmit}>
                         <p className="intrigueJeuQuestion" data-testid="enigme">{this.props.details.data.enigme}</p>
-                        {/* <label>Réponse</label> */}
-                        <input type="number" value={this.state.value} onChange={this.handleChange} data-testid="reponseInput"/>
+                        <input type="number" value={this.state.value} onChange={this.update} data-testid="reponseInput"/>
                         <input type="submit" value="Valider" data-testid="buttonSubmit"/>
                     </form>
-
-                    {/* {buttonQuitter} */}
                 </div>
             </div>
         )

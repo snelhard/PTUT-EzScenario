@@ -10,7 +10,6 @@ export class MyNewNode extends Node {
     return (
       <div className={`node ${selected}`}>
         <div className="title">{node.name}</div>
-        {/* Outputs */}
         {outputs.map(output => (
           <div className="output" key={output.key}>
             <div className="output-title">{output.name}</div>
@@ -22,7 +21,6 @@ export class MyNewNode extends Node {
             />
           </div>
         ))}
-        {/* Controls */}
         {controls.map(control => (
           <Control
             className="control"
@@ -31,7 +29,6 @@ export class MyNewNode extends Node {
             innerRef={bindControl}
           />
         ))}
-        {/* Inputs */}
         {inputs.map(input => (
           <div className="input" key={input.key}>
             <Socket
