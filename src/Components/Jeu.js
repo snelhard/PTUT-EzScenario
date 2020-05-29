@@ -49,6 +49,8 @@ class Jeu extends React.Component{
                 if(this.state.file.nodes[liste[i]].outputs.out.connections.length===0){
                     alerteErreur('Oops...','Le block de start doit avoir une suite pour pouvoir etre joué')
                     this.props.history.push('/MesHistoires');
+                }else{
+                    this.state.currentScene = this.state.file.nodes[this.state.firstScene.outputs.out.connections[0].node];
                 }
             }   
            
@@ -64,9 +66,8 @@ class Jeu extends React.Component{
             && (tableauDeConnexions[index+3] === 'i')
             && (tableauDeConnexions[index+4] === 'c')
             && (tableauDeConnexions[index+5] === 'e')){
-                nbChoix++;
+                nbChoix+=1;
             }
-        }
         //Si le block n'est pas une fin et qu'elle n'a pas de choix alors on retourne une erreur
         if(this.state.file.nodes[liste[i]].name!=="Fin"){
             if(nbChoix!=0){
@@ -75,8 +76,8 @@ class Jeu extends React.Component{
                     this.props.history.push('/MesHistoires');
                 }
             }
+        }
         }              
-         this.state.currentScene = this.state.file.nodes[this.state.firstScene.outputs.out.connections[0].node];
          this.gererSauvegarde();
         }
     }
