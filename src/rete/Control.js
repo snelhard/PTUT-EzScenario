@@ -6,16 +6,7 @@ class MyReactControl extends React.Component {
   state = {
   };
   
-  enFonctionDuNbChoix() {
-    const nbChoix = this.props.titre;
-    if (nbChoix == 0) {
-      return null;
-    } else {
-      for (let index = 0; index < nbChoix; index++) {
-        this.update('choix'+(index+1), '')
-      }
-    }
-  }
+ 
 
   componentDidMount() {
 
@@ -30,13 +21,14 @@ class MyReactControl extends React.Component {
     this.setState({
       titre: this.props.getData('titre'),
       texte: this.props.getData('texte'),
-      listeChoix: [typeof(this.props.getData('choix1')) == 'undefined' ? this.enFonctionDuNbChoix() : this.props.getData('choix1'), 
-      typeof(this.props.getData('choix2')) == 'undefined' ? this.enFonctionDuNbChoix() : this.props.getData('choix2'), 
-      typeof(this.props.getData('choix3')) == 'undefined' ? this.enFonctionDuNbChoix() : this.props.getData('choix3'),
-      typeof(this.props.getData('choix4')) == 'undefined' ? this.enFonctionDuNbChoix() : this.props.getData('choix4'),
-      typeof(this.props.getData('choix5')) == 'undefined' ? this.enFonctionDuNbChoix() : this.props.getData('choix5')],
+      listeChoix: [this.props.getData('choix1'), 
+                    this.props.getData('choix2'), 
+                    this.props.getData('choix3'),
+                    this.props.getData('choix4'),
+                    this.props.getData('choix5')],
      },
     );
+
   }
 
   onChange(event) {
@@ -57,7 +49,6 @@ class MyReactControl extends React.Component {
   }
 
   render() {
-
     const nbChoix = this.props.titre;
     var lesChoix = [];
     for (let index = 1; index <= nbChoix; index++) {
