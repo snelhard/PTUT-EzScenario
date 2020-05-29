@@ -122,7 +122,7 @@ class Jeu extends React.Component{
         }
             
         return (
-            <div className="bookContainer addedNavSpace">
+            <div className="bookContainer">
                 {/* <img src={img} className="book"/> */}
                 <div className="bookContent">
                     {/* <h1 className="storyTitle">~ {this.state.firstScene.data.titre} ~</h1> */}

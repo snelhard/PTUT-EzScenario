@@ -17,7 +17,7 @@ class MyReactControl extends React.Component {
         Tab[index].name
       )
     }
-
+    console.log(this.props.getData('choix1'))
     this.setState({
       titre: this.props.getData('titre'),
       texte: this.props.getData('texte'),

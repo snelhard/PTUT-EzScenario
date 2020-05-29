@@ -1,8 +1,8 @@
 {
   "name": "ez-scenario",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Story creation",
-  "author": "Le fun basique",
+  "author": "Team Butron",
   "build": {
     "appId": "story.create"
   },

@@ -82,7 +82,9 @@ function Menu() {
                     </div>
                     <div class="col-lg-8 align-self-baseline">
                         <p class="text-white-75 font-weight-light mb-5">Nous vous proposons des aventures interactives basées sur les célèbres "Livres dont vous êtes le héros".</p>
-                        <a class="btn btn-primary btn-xl js-scroll-trigger" href="/meshistoires">JOUER</a>
+                        <Link to="/meshistoires">
+                          <a class="btn btn-primary btn-xl js-scroll-trigger">JOUER</a>
+				                </Link>
                     </div>
                 </div>
             </div>
