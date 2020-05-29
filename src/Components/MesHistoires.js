@@ -129,7 +129,7 @@ class MesHistoires extends React.Component{
         // Renvoyer le resultat de la lecture du fichier sous forme txt
         reader.readAsText(file);
         element.href = URL.createObjectURL(file);
-        element.download = "myFile.json";
+        element.download = FILE_KEY;
         document.body.appendChild(element); // Required for this to work in FireFox
         element.click();
     }
