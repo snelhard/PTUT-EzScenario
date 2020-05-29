@@ -1,6 +1,6 @@
 # :closed_book: PTUT-EzScenario
 
-![Exemple classique d'une histoire interactive (souce :https://heterogenoustasks.wordpress.com/2015/01/26/standard-patterns-in-choice-based-games/)](https://heterogenoustasks.files.wordpress.com/2015/01/gauntlet.png)
+![Exemple classique d'une histoire interactive (source :https://heterogenoustasks.wordpress.com/2015/01/26/standard-patterns-in-choice-based-games/)](https://heterogenoustasks.files.wordpress.com/2015/01/gauntlet.png)
 
 Le **“livre dont vous êtes le héros”** est un genre
 littéraire qui a connu son âge d’or dans les années 80. La particularité de ce genre littéraire est qu’il propose un récit interactif, sur lequel le lecteur peut agir directement. Le lecteur est confronté à des choix à effectuer, et doit se rendre à la page indiquée correspondante au choix.
@@ -11,3 +11,6 @@ scénaristiques, c’est-à-dire les choix que le lecteur peut effectuer. D’au
 ## Technologies
 * [React](https://www.reactjs.org)
 * [ElectronJs](https://www.electronjs.org/)
+
+##Architecture: 
+(https://ibb.co/FHwVx03)
