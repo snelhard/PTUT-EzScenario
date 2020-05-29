@@ -61,7 +61,6 @@ class MyReactControl extends React.Component {
     const nbChoix = this.props.titre;
     var lesChoix = [];
     for (let index = 1; index <= nbChoix; index++) {
-      typeof (this.state.listeChoix) != "undefined" ? console.log("Le type de la donnée : "+typeof(this.state.listeChoix[index-1])) : console.log("c'est vide !");
       lesChoix.push(
         <div>
           <label>choix {index}</label>
