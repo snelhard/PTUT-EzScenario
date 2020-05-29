@@ -563,3 +563,10 @@ h1{
   justify-content: space-around;
   flex-wrap: wrap;
 }
+
+.noMargin {
+  margin: 0 !important;
+}
+.addedMargin{
+  margin: 10px;
+}

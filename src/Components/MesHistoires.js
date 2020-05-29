@@ -165,7 +165,7 @@ class MesHistoires extends React.Component{
         let listeHistoires = localStorage.getItem('List').split(',');
         return (
             <div className="AjouterHistoire addedNavSpace">
-                <h1>Ajouter un nouvelle histoire</h1>
+                <h1>Ajouter une nouvelle histoire</h1>
                 <input type="file" name="files[]" id="fileUpload" accept=".json" onChange={e => this.handleUpload(e)}/>
                 <div className="listeHistoire">
                     <h1>Vous avez actuellement {this.state.nbHistoire} {this.state.nbHistoire > 1 ? "histoires" : "histoire"}</h1>
@@ -175,10 +175,10 @@ class MesHistoires extends React.Component{
                         return (
                         <div className="storyCard">
                             <p>{json.replace('.json', '').replace('-_Story_file', '').replace('_', ' ')}</p>
-                            <Link to="/jeu"> <button onClick={() => this.setCurrent(json)}><i class="fas fa-play"></i></button></Link>
-                            <Link to="/editeur"><button onClick={() => this.setCurrent(json)}><i class="fas fa-pen"></i></button></Link>
-                            <button onClick={() => this.downloadFile(json)}><i class="fas fa-file-download"></i></button>
-                            <button onClick={() => this.supprimer(json)}><i class="fas fa-trash"></i></button>
+                            <Link to="/jeu" className="addedMargin"> <button onClick={() => this.setCurrent(json)} className="noMargin"><i class="fas fa-play"></i></button></Link>
+                            <Link to="/editeur" className="addedMargin"><button onClick={() => this.setCurrent(json)} className="noMargin"><i class="fas fa-pen"></i></button></Link>
+                            <button onClick={() => this.downloadFile(json)} className=" "><i class="fas fa-file-download"></i></button>
+                            <button onClick={() => this.supprimer(json)} className=" "><i class="fas fa-trash"></i></button>
                         </div>
                         );
                     })}
