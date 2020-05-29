@@ -80,7 +80,10 @@ class MesHistoires extends React.Component{
 
     updateStateAdd(FILE_KEY){
         let histoires = [...this.state.histoires];
+        // histoires.splice(-1,1);
         histoires.push(FILE_KEY);
+        histoires = histoires.filter(word => word != "")
+        console.log(histoires);
         this.setState({
             nbHistoire: this.state.nbHistoire + 1,
             histoires: histoires
@@ -159,15 +162,16 @@ class MesHistoires extends React.Component{
     
 
     render() {
+        let listeHistoires = localStorage.getItem('List').split(',');
         return (
             <div className="AjouterHistoire addedNavSpace">
                 <h1>Ajouter un nouvelle histoire</h1>
                 <input type="file" name="files[]" id="fileUpload" accept=".json" onChange={e => this.handleUpload(e)}/>
                 <div className="listeHistoire">
                     <h1>Vous avez actuellement {this.state.nbHistoire} {this.state.nbHistoire > 1 ? "histoires" : "histoire"}</h1>
-                    
                     <div className="storyList">
-                    {this.state.histoires.map(json => {
+                    {listeHistoires.map(json => {
+                        console.log("aled")
                         return (
                         <div className="storyCard">
                             <p>{json.replace('.json', '').replace('-_Story_file', '').replace('_', ' ')}</p>
