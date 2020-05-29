@@ -8,44 +8,59 @@ import {
 import Jeu from './Jeu';
 import Editor from './Editor';
 // import MesHistoires from './MesHistoires';
-import MesHistoires from './MesHistoiresCopie';
+import MesHistoires from './MesHistoires';
 
 
 export default function BasicExample() {
   return (
     <Router>
-      <div>
-        <ul className="navBar">
-          <li><i className="fas fa-home navIcon"></i>
-            <Link to="/">Accueil</Link>
-          </li>
-          <li>
-            <Link to="/meshistoires">Mes histoires</Link>
-          </li>
-          <li><i className="fas fa-pen-nib navIcon"></i>
-            <Link to="/editeur">Création d'histoire</Link>
-          </li>
-        </ul>
+      	<div style={{width:'100%',height:'100%'}}>
+			<ul className="navBar">
+				<Link to="/">
+					<li className="navItem">
+						<i className="fas fa-home navIcon"></i>
+						Accueil
+					</li>
+				</Link>
+				<Link to="/meshistoires">
+				<li className="navItem">
+					<i className="fas fa-book-open navIcon"></i>
+					Mes histoires
+				</li>
+				</Link>
+				<Link to="/editeur">
+				<li className="navItem">
+					<i className="fas fa-pen-nib navIcon"></i>
+					Création d'histoire
+				</li>
+				</Link>
+			</ul>
 
-        <div className="main-container">
-          <Switch>
-            <Route exact path="/">
-              <Menu />
-            </Route>
-            <Route path="/editeur">
-              <Editor />
-            </Route>
-            <Route path="/jeu">
-              <Jeu />
-            </Route>
-            <Route path="/meshistoires">
-              <MesHistoires />
-            </Route>
-            <Route>
-              <Menu />
-            </Route>
-          </Switch>
-        </div>
+			<Switch>
+			<Route exact path="/">
+				<div className="main-container">
+				<Menu />
+				</div>
+			</Route>
+			<Route path="/editeur">
+					<Editor />
+			</Route>
+			<Route path="/jeu">
+				<div className="jeu-container">
+					<Jeu />
+				</div>
+			</Route>
+			<Route path="/meshistoires">
+				<div className="main-container">
+					<MesHistoires />
+				</div>
+			</Route>
+			<Route>
+				<div className="main-container">
+					<Menu />
+				</div>
+			</Route>
+        </Switch>
         
       </div>
     </Router>

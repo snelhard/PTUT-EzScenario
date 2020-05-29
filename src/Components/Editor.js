@@ -11,7 +11,7 @@ class Editor extends React.Component {
 
   componentDidMount() {
         //quand on arrive dans le composant ça initialise l'editeur si il y a un current
-    initEditor(this.editorContainer.current);
+	initEditor(this.editorContainer.current);
   }
 
   componentWillUnmount() {
@@ -22,14 +22,20 @@ class Editor extends React.Component {
   render() {
     //HTML
     return (
-      <div>
-        <h1>Bienvenue dans l'éditeur d'histoire</h1>
-        <hr class="divider light my-4"></hr>
-        <h1>Éditeur</h1>
-        <button onClick={() => exportEditorData()}>Exporter</button>
-        <button onClick={() => saveEditorData()}>Sauvegarder</button>
-        <input type="file" onChange={loadEditorData} accept=".json" />
-        <button onClick={() => resetEditor()}>Effacer</button>
+      <div className="editorWindow">
+        <div className="toolBar">
+          <button onClick={() => exportEditorData()}><i class="fas fa-file-download"></i>Exporter</button>
+          <button onClick={() => saveEditorData()}><i class="fas fa-save"></i>Sauvegarder</button>
+          {/* <input type="file" onChange={loadEditorData} accept=".json" /> */}
+          <input className="hideme" id="upload" name="upload" type="file" onChange={loadEditorData} accept=".json"/>
+          <label for="upload" className="custom-file-upload"><i class="fas fa-file-upload"></i>Importer</label>
+
+          <button onClick={() => resetEditor()}><i class="fas fa-trash-alt"></i>Effacer</button>
+        </div>
+        {/* <h1>Bienvenue dans l'éditeur d'histoire</h1> */}
+        {/* <hr class="divider light my-4"></hr> */}
+        {/* <h1>Éditeur</h1> */}
+        
         <div className="editor">
           <div ref={this.editorContainer} />
         </div>

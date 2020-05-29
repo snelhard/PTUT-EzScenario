@@ -32,14 +32,16 @@ class Intrigue extends React.Component{
 
     render() {
         return (
-            <div className="sceneJeu">
-                <h2 className="intrigueJeuTitre" data-testid="titre">{this.props.details.data.titre}</h2>
-                <p className="intrigueJeuTexte" data-testid="texte">{this.props.details.data.texte}</p>
-                <div className="choixContainerJeu">
-                    <form onSubmit={this.handleSubmit}>
-                        <p className="intrigueJeuQuestion" data-testid="enigme">{this.props.details.data.enigme}</p>
-                        <input type="number" value={this.state.value} onChange={this.update} data-testid="reponseInput"/>
-                        <input type="submit" value="Valider" data-testid="buttonSubmit"/>
+            <div className="bookPages">
+                <div className="page left">
+                    <h2 className="titreScene" data-testid="titre">{this.props.details.data.titre}</h2>
+                    <p className="texteScene" data-testid="texte">{this.props.details.data.texte}</p>
+                </div>
+                <div className="page right">
+                    <p className="enigmeScene" data-testid="enigme">{this.props.details.data.enigme}</p>
+                    <form onSubmit={this.handleSubmit} style={{width : "100%"}}>
+                        <input className="engimeInput" type="number" value={this.state.value} onChange={this.update} data-testid="reponseInput"/>
+                        <button className="enigmeButton" type="submit" value="Valider" data-testid="buttonSubmit"><i class="fas fa-check"></i></button>
                     </form>
                 </div>
             </div>

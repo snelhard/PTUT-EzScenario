@@ -40,7 +40,7 @@ class Scene extends React.Component{
             let ListeChoix = []
             for (let index = 0; index < nbChoix; index++) {
                 ListeChoix.push(
-                    <button 
+                    <button className="choix"
                         onClick={() => this.remonterChoix(index)} 
                         data-testid={"choix"+index+1}>
                         {
@@ -51,10 +51,12 @@ class Scene extends React.Component{
                 
             }
         return (
-            <div className="sceneJeu">
-                <h2 className="sceneJeuTitre" data-testid="titre">{this.props.details.data.titre}</h2>
-                <p className="sceneJeuTexte" data-testid="texte">{this.props.details.data.texte}</p>
-                <div className="choixContainerJeu">
+            <div className="bookPages">
+                <div className="page left">
+                    <h2 className="titreScene" data-testid="titre">{this.props.details.data.titre}</h2>
+                    <p className="texteScene" data-testid="texte">{this.props.details.data.texte}</p>
+                </div>
+                <div className="page right">
                     {ListeChoix}
                 </div>
             </div>

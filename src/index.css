@@ -1,4 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Indie+Flower&family=Permanent+Marker&display=swap'); */
+
+@font-face{
+  font-family: 'Parisienne';
+  src: url("../src/fonts/Parisienne/Parisienne-Regular.ttf");
+}
+@font-face{
+  font-family: 'Permanent Marker';
+  src: url("../src/fonts/Permanent_Marker/PermanentMarker-Regular.ttf");
+}
+@font-face{
+  font-family: 'Indie Flower';
+  src: url("../src/fonts/Indie_Flower/IndieFlower-Regular.ttf");
+}
+@font-face{
+  font-family: 'Chelsea Market';
+  src: url("../src/fonts/Chelsea_Market/ChelseaMarket-Regular.ttf");
+}
+
+#root{
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
 
 body {
   margin: 0;
@@ -201,37 +225,47 @@ textarea{
 
 /* Navbar */
 .navBar{
+  position: absolute;
+  width: 100vw;
+  top: 0px;
   background-color: #a7a599;
   box-shadow: 0 0.5rem 1rem #0000007d;
   display: flex;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  /* padding-top: 1rem;
+  padding-bottom: 1rem; */
   /* padding: 0px 37px; */
   margin: 0;
   list-style-type: none;
   justify-content: center;
 }
-
-.navBar > li {
-  padding: 20px;
-  font-weight: 500;
-  transition: all .03s ease;
+.navBar > a {
+  text-decoration: none;
+}
+.addedNavSpace{
+  padding-top: 4.7rem;
 }
 
-.navBar > li:hover {
+.navItem {
+  padding: 26px 20px;
+  font-weight: 500;
+  transition: all .03s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
+}
+
+.navItem:hover {
   background-color: #696969;
 }
 
-.navBar > li > a {
+.navItem {
   font-family: italic large serif;
   font-weight: 700;
   font-size: 1.2rem;
   text-decoration: none;
   color: rgb(255, 255, 255);
-  padding: 0 1.5rem;
+  text-decoration: none;
 }
 .navIcon{
-  margin-right: 7px;
+  margin-right: 9px;
   color: white;
 }
 
@@ -245,41 +279,6 @@ hr.divider{
 
 .main-container{
   text-align: center;
-}
-
-.JeuContainer{
-  text-align: center;
-}
-
-.sceneJeu{
-  display: flex;
-  flex-direction: column;
-  background-color: #eaeaea;
-  align-items: center;
-  padding: 20px;
-  border-radius: 4px;
-  border: 0.5px #0000001c solid;
-  filter: drop-shadow(1px 1px 2px #00000028);
-}
-
-.sceneJeuTitre{
-  margin: 0px 0px 18px 0px;
-}
-.sceneJeuTexte{
-  margin: 0px 0px 18px 0px;
-}
-.choixContainerJeu{
-  width: 62%;
-  justify-content: space-evenly;
-  display: flex;
-  background-color: #cecece;
-  padding: 10px;
-  border-radius: 5px;
-  border: 0.5px #0000001c solid;
-  filter: drop-shadow(1px 1px 2px #00000028);
-}
-.choixContainerJeu > button:not(:last-child) {
-  margin-right: 20px;
 }
 
 button:not(#bouton) {
@@ -309,11 +308,208 @@ h1{
   font-weight: 500;
 }
 
-/* input[type="file"] {
+/* PLAY */
+.jeu-container{
+  width: 100%;
+  height: 100%;
+  background-image: url("../src/img/wood.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bookContainer{
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../src/img/book.png");
+    width: 1123px;
+    background-position: center;
+    height: 64vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.book{
+  width: auto;
+  padding: 0 20%;
+  height: 64vh;
+}
+
+.bookContent{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.storyTitle{
+  margin: 0;
+}
+.bookPages{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+}
+.page{
+  height: 52vh;
+  width: 39vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.left{
+  margin-right: 71px;
+  justify-content: flex-start;
+}
+.right{
+  
+}
+
+.sceneJeu{
+  display: flex;
+  flex-direction: column;
+  background-color: #eaeaea;
+  align-items: center;
+  padding: 20px;
+  border-radius: 4px;
+  border: 0.5px #0000001c solid;
+  filter: drop-shadow(1px 1px 2px #00000028);
+}
+
+/* .sceneJeuTitre{
+  margin: 0px 0px 18px 0px;
+} */
+/* .sceneJeuTexte{
+  margin: 0px 0px 18px 0px;
+} */
+.choixContainerJeu{
+  width: 62%;
+  justify-content: space-evenly;
+  display: flex;
+  background-color: #cecece;
+  padding: 10px;
+  border-radius: 5px;
+  border: 0.5px #0000001c solid;
+  filter: drop-shadow(1px 1px 2px #00000028);
+}
+/* .choixContainerJeu > button:not(:last-child) {
+  margin-right: 20px;
+} */
+
+/* FIN */
+.titreScene{
+  font-family: 'Permanent Marker';
+  font-size: 3rem;
+  margin: 0 0 30px 0;
+  width: 100%;
+  line-height: 36px;
+}
+.texteScene{
+  margin: 0;
+  font-size: 1.2rem;
+  width: 100%;
+  font-family: 'Indie Flower';
+  font-weight: 800;
+}
+.enigmeScene{
+  font-family: Parisienne;
+  font-size: 2rem;
+  margin: 0 0 30px 0;
+  line-height: 36px;
+  text-align: center;
+}
+.choix{
+  background: #44444400 !important;
+  color: black !important;
+  font-size: 23px !important;
+  font-weight: 100 !important;
+  font-family: Permanent Marker !important;
+  transition: .1s all ease;
+}
+.choix:hover{
+  transform: scale(1.1);
+}
+.engimeInput{
+  font-family: Permanent Marker;
+  letter-spacing: 5px;
+  font-size: 27px;
+  background-color: #0000001f;
+  width: 100%;
+}
+.enigmeButton{
+  margin: 0px !important;
+  margin-top: 10px !important;
+  background: #4444442e !important;
+  color: #1f1f1f !important;
+  padding: 1px 6px !important;
+  font-size: 31px !important;
+  width: 100% !important;
+}
+.questionScene{
+  font-family: Parisienne;
+  font-size: 2rem;
+  margin: 0;
+  margin-top: 50px;
+  line-height: 36px;
+  text-align: center;
+}
+
+.histoireRow{
+  background-color: white;
+}
+
+.listeHistoire{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.storyList{
+
+}
+
+
+/* EDITOR */
+.editorWindow{
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.toolBar{
+  background-color: #dedede;
+  margin-top: 4vh;
+  border-radius: 4px;
+  padding: 5px 25px;
+  position: absolute;
+  top: 4rem;
+  z-index: 9999;
+}
+.toolBar > button > i{
+  /* font-size: 20px; */
+  margin-right: 7px;
+}
+.editor{
+  width: 100% !important;
+  height: 100% !important;
+  background: #f9f9f9 !important;
+  margin-top: 4.7rem !important;
+}
+.hideme {
   display: none;
 }
 .custom-file-upload {
-  border: 2px dashed #c3c3c3;
+  /* border: 2px dashed #c3c3c3;
   display: inline-block;
   margin: 10px;
   background: #ececec;
@@ -324,12 +520,42 @@ h1{
   font-size: 14px;
   font-weight: 600;
   border-radius: 3px;
-  box-sizing: border-box;
+  box-sizing: border-box; */
+  margin: 10px;
+  background: #444444;
+  color: white;
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  border-width: 0px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.custom-file-upload > i {
+  margin-right: 7px;
 }
 .custom-file-upload:hover {
-  border: 2px dashed #e4e4e4;
-  background: #f7f7f7;
-} */
+  /* border: 2px dashed #e4e4e4;
+  background: #f7f7f7; */
+  background: #9c9c9c;
+}
 
-
-/* PLAY */
+/* Mes histoires */
+.storyCard{
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.storyCard > p {
+  margin: 0;
+}
+.storyCard:last-child{
+  display: none;
+}
+.storyList{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}

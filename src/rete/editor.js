@@ -354,7 +354,7 @@ export const saveEditorData = (event) => {
 		FILE_KEY=idStart + "_-_Story_file.json";
 
 		if (localStorage.getItem(FILE_KEY)!== "" && localStorage.getItem(FILE_KEY)!== null){
-			alertevalidation( 'Une sauvegarde pour cette histoire existe déjà...',"Voulez vous reprendre la sauvegarde déjà existante ?","Reprendre","Supprimer").then((result) => {
+			alertevalidation( 'Une sauvegarde pour cette histoire existe déjà...',"Voulez vous ecraser la sauvegarde déjà existante ?","Valider","Supprimer").then((result) => {
 				if (result.value) {
 					localStorage.setItem(FILE_KEY,JSON.stringify(debug));
 					addKey();

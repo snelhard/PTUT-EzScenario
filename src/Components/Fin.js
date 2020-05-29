@@ -9,10 +9,14 @@ class Fin extends React.Component{
 
     render() {
         return (
-            <div className="finJeu">
-                <h2 className="finJeuTitre" data-testid="titre">{this.props.details.data.titre}</h2>
-                <p className="finJeuTexte" data-testid="texte">{this.props.details.data.texte}</p>
-                <button onClick={() => this.props.history.push('/MesHistoires')} data-testid="button">Retour à mes histoires</button>
+            <div className="bookPages">
+                <div className="page left">
+                    <h2 className="titreScene" data-testid="titre">{this.props.details.data.titre}</h2>
+                    <p className="texteScene" data-testid="texte">{this.props.details.data.texte}</p>
+                </div>
+                <div className="page right">
+                    <button className="choix" onClick={() => this.props.history.push('/MesHistoires')} data-testid="button">Quitter</button>
+                </div>
             </div>
         )
     }

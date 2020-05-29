@@ -11,7 +11,7 @@ function createWindow () {
       nodeIntegration: true,
       // devTools: false
     },
-    // icon: `file://${path.join(__dirname, "../build/logoez.png")}`
+    // icon: `file://${path.join(__dirname, "./src/img/logoez.png")}`
   });
   win.setMenuBarVisibility(false)
   win.maximize()

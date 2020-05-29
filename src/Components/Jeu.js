@@ -49,6 +49,8 @@ class Jeu extends React.Component{
                 if(this.state.file.nodes[liste[i]].outputs.out.connections.length===0){
                     alerteErreur('Oops...','Le block de start doit avoir une suite pour pouvoir etre joué')
                     this.props.history.push('/MesHistoires');
+                }else{
+                    this.state.currentScene = this.state.file.nodes[this.state.firstScene.outputs.out.connections[0].node];
                 }
             }   
            
@@ -76,8 +78,8 @@ class Jeu extends React.Component{
                 }
             }
         }              
-         this.state.currentScene = this.state.file.nodes[this.state.firstScene.outputs.out.connections[0].node];
-         this.gererSauvegarde();
+        // this.state.currentScene = this.state.file.nodes[this.state.firstScene.outputs.out.connections[0].node];
+        this.gererSauvegarde();
         }
     }
     //Switch des choice en fonction du nombre ce choix d'un block  
@@ -121,10 +123,13 @@ class Jeu extends React.Component{
         }
             
         return (
-            <div className="JeuContainer">
-                <h1>~ {this.state.firstScene.data.titre} ~</h1>
-                {Current}
-                <div ref={this.sceneConatainer} />
+            <div className="bookContainer addedNavSpace">
+                {/* <img src={img} className="book"/> */}
+                <div className="bookContent">
+                    {/* <h1 className="storyTitle">~ {this.state.firstScene.data.titre} ~</h1> */}
+                    {Current}
+                    {/* <div ref={this.sceneConatainer} /> */}
+                </div>
             </div>
             )
         }
